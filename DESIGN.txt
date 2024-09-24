@@ -1,0 +1,28 @@
+
+About the ontologies:
+ - Restricted to OWL 2 EL, see https://www.w3.org/TR/owl2-profiles/#OWL_2_EL
+ - Only define the concepts and relations that we think will really be used.
+ - Each ontology should have at most three taxonomy levels.
+   => Every single module should *introduce* concepts at at most three taxonomy levels, it can *use* more. This does not include the concepts reused from other ontologies (DOLCE, Metadata4Ing), or naturally those defined in other modules to which a module connects.
+ - Define relations only one way, use the one is best suitable for formulating restrictions within OWL EL.
+   => Normally, this means that the greater or whole entity should be be the subject and the smaller/part/participant entity should be the object. This is because EL does not allow inverse relations, and the greater-to-smaller direction is more frequently used in restrictions.
+ - Prefer higher-level relations to more specific relations, don't reproduce the taxonomy (conceptual hierarchy) through a matching hierarchy of relations. When we need to be more specific and have the choice, let us be specific through concepts rather than through relations.
+
+About compliance and alignment:
+ - Compliance and backward compatibility with PIMS-II
+ - Concepts in the present ontologies take "mso-em" prefix; if they are not taken over from PIMS-II but referenced, use "pims-ii" prefix.
+ - Use rdfs:subClassOf and rdfs:subPropertyOf only in reference to DOLCE and mso-em itself. Don't use skos:broader/narrower.
+ - Where it can be done, use skos:exactMatch for alignment with DOLCE, Metadata4Ing (where it is aligned with PIMS-II from previous work), and PIMS-II.
+ - Use skos:closeMatch where appropriate for D-SI, EMMO, GPO, Metadata4Ing (where it is not aligned with PIMS-II), schema.org, and any of the legacy ontologies other than PIMS-II.
+
+Style:
+ - skos:prefLabel as normal text, with camel case as IRI and skos:altLabel
+   => For concepts, begin the pref label with a capital letter (in the first word only); the camel-case alt label and IRI begins with a capital letter. Example: The IRI pims-ii:PurposefulAction corresponds to skos:altLabel "PurposefulAction"@en; the skos:prefLabel is "Purposeful action"@en, with a space and with only the first word capitalized.
+      => In use in textual descriptions, the capitalized version refers to the class. Example: "The class Purposeful action is a subclass of Action." When refering to instances of the classes, use lower case. Example: "Every purposeful action is an action." (But: "Every instance of Purposeful action is an instance of Action.")
+   => For relations, the pref label is all in lower case; the camel-case alt label and IRI begins with a lower-case letter. Example: The IRI pims-ii:isDoneBy corresponds to skos:altLabel "isDoneBy"@en; the skos:prefLabel is "is done by"@en, all in lower-case.
+   
+Referencing:
+ - When one mso-em module references (uses) concepts or relations from another, only "lower" modules should use concepts from "higher" modules, referring to linear order according to the list below.
+   => dol-inclusions.ttl (highest module, does not make "hard" use any concepts/relations from other modules)
+   => agent.ttl (only uses the DOL inclusions in a "hard" way, such as subClassOf)
+   => ...

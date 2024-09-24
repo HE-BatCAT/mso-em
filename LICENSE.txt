@@ -1,0 +1,8 @@
+MSO-EM: Ontologies for modelling, simulation, optimization (MSO) and epistemic metadata (EM).
+
+(C)2024 by the BatCAT consortium in collaboration with the Knowledge Graph Alliance.
+Licensed under Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0). 
+
+The license does not cover the content of the "legacy" folder which is included on the repository for development purposes only.
+
+A copy of DOLCE Lite is included in the "dolce-lite" folder for reference purposes. This is naturally not part of the present work, and this license therefore does not extend to it either.
