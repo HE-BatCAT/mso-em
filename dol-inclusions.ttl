@@ -17,8 +17,8 @@
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-08/dol-inclusions.ttl>;
    dcterms:title "MSO-EM module 'dol-inclusions' (concepts and relations reused from DOLCE Lite)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'dol-inclusions': Version dated August 2024"^^xs:string;
-   dcterms:issued "2024-08-16"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'dol-inclusions': Version dated September 2024"^^xs:string;
+   dcterms:issued "2024-09-24"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0001-5568-2684>;  # Aldo Gangemi, did the ontology engineering for DOLCE Lite
@@ -33,6 +33,13 @@
 #######################################################################
 # DOLCE Lite concepts, made to conform with our formatting guidelines #
 #######################################################################
+
+dol:abstract a owl:Class;
+   skos:prefLabel "Abstract"@en;
+   rdfs:label     "Abstract"@en;
+   skos:altLabel "Abstract"@en;
+   skos:definition "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves."@en;
+   rdfs:comment    "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves."@en.
 
 dol:endurant a owl:Class;
    skos:prefLabel "Endurant"@en;
@@ -110,6 +117,14 @@ dol:quality a owl:Class;
    skos:example "Qualities are the basic entities we can perceive or measure: shapes, colors, sizes, sounds, smells, as well as weights, lengths,  electrical charges ..."@en;
    skos:scopeNote "The qualities are 'inherent' in an object, but can change over time"@en.
 
+dol:set a owl:Class;
+   skos:prefLabel "Set"@en;
+   rdfs:label     "Set"@en;
+   skos:altLabel "Set"@en;
+   rdfs:subClassOf dol:abstract;
+   skos:definition "set, i.e., a mathematical set"@en;
+   rdfs:comment    "set, i.e., a mathematical set"@en.
+
 
 ########################################################################
 # DOLCE Lite relations, made to conform with our formatting guidelines #
@@ -124,6 +139,14 @@ dol:constant-participant a owl:ObjectProperty;
    rdfs:range dol:endurant;
    skos:definition "(x [has] constant participant y) means that anytime x is present, x has participant y. In other words, all parts of x have a same participant"@en;
    rdfs:comment    "(x [has] constant participant y) means that anytime x is present, x has participant y. In other words, all parts of x have a same participant"@en.
+
+dol:generic-constituent a owl:ObjectProperty;
+   skos:prefLabel "generic constituent"@en;
+   rdfs:label     "generic constituent"@en;
+   skos:altLabel "genericConstituent"@en;
+   rdfs:subPropertyOf dol:immediate-relation;
+   skos:definition "(x [has] generic constituent y) means that y is in some way constitutive to x."@en;
+   rdfs:comment    "(x [has] generic constituent y) means that y is in some way constitutive to x."@en.
 
 dol:has-quality a owl:ObjectProperty;
    skos:prefLabel "has quality"@en;
