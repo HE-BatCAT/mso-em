@@ -1,0 +1,128 @@
+###############################################################
+##                                                           ##
+##  PHYSICALISTIC INTERPRETATION OF MODELLING & SIMULATION:  ##
+##         INTEROPERABILITY INFRASTRUCTURE (PIMS-II)         ##
+##                                                           ##
+##                VERSION II.1.9b (ALIGNMENT)                ##
+##                     DATED 2022-08-16                      ##
+##                                                           ##
+##   INNOVATIONSZENTRUM FÜR PROZESSDATENTECHNIK (INPRODAT)   ##
+##                                                           ##
+###############################################################
+
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix emmo: <http://emmo.info/emmo#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
+
+@prefix pims-ii: <http://www.molmod.info/semantics/pims-ii.ttl#>.
+
+<http://www.molmod.info/semantics/emmo-pims-ii-alignment.ttl> a owl:Ontology;
+   dcterms:title "EMMO alignment with PIMS-II"^^xs:string;
+   owl:versionInfo "version II.1.9b"^^xs:string;
+   dcterms:modified "2022-08-16"^^xs:date;
+   dcterms:publisher "Innovation Centre for Process Data Technology (Inprodat e.V.)"^^xs:string;
+   dcterms:license "GNU Lesser General Public License (LGPL) version 3"^^xs:string;
+   dcterms:creator "Martin Thomas Horsch (ORCID 0000-0002-9464-6739)"^^xs:string;
+   dcterms:references
+      <http://www.molmod.info/semantics/pims-ii.ttl>,
+      <http://www.molmod.info/semantics/pims-ii-latex-symbols.tex>.
+
+##################
+# EMMO ALIGNMENT #
+##################
+
+# holistic
+#
+emmo:EMMO_43e9a05d_98af_41b4_92f6_00f79a09bfce a owl:Class;
+   skos:prefLabel "emmo:Process"^^xs:string;
+   skos:closeMatch pims-ii:Process.
+
+emmo:EMMO_ae2d1a96_bfa1_409a_a7d2_03d69e8a125a a owl:ObjectProperty;
+   skos:prefLabel "emmo:hasParticipant"^^xs:string;
+   skos:closeMatch [owl:inverseOf pims-ii:isParticipantIn].
+emmo:EMMO_c5aae418_1622_4d02_93c5_21159e28e6c1 a owl:ObjectProperty;
+   skos:prefLabel "emmo:hasProperParticipant"^^xs:string;
+   skos:closeMatch [owl:inverseOf pims-ii:isProperParticipantIn].
+
+# math
+#
+emmo:EMMO_21f56795_ee72_4858_b571_11cfaa59c1a8 a owl:Class;
+   skos:prefLabel "emmo:Number"^^xs:string;
+   skos:closeMatch pims-ii:Number.
+emmo:EMMO_1eed0732_e3f1_4b2c_a9c4_b4e75eeb5895 a owl:Class;
+   skos:prefLabel "emmo:Variable"^^xs:string;
+   skos:closeMatch pims-ii:Variable.
+
+# mereotopology
+#
+emmo:EMMO_2d2ecd97_067f_4d0e_950c_d746b7700a31 a owl:Class;
+   skos:prefLabel "emmo:Collection"^^xs:string;
+   skos:closeMatch pims-ii:MereotopologicalCollective.
+emmo:EMMO_802d3e92_8770_4f98_a289_ccaaab7fdddf a owl:Class;
+   skos:prefLabel "emmo:EMMO"^^xs:string;
+   skos:closeMatch pims-ii:Object.
+emmo:EMMO_eb3a768e_d53e_4be9_a23b_0714833c36de a owl:Class;
+   skos:prefLabel "emmo:Item"^^xs:string;
+   skos:closeMatch pims-ii:Item.
+
+emmo:EMMO_6703954e_34c4_4a15_a9e7_f313760ae1a8 a owl:ObjectProperty;
+   skos:prefLabel "emmo:connected"^^xs:string;
+   skos:closeMatch pims-ii:isSpatiotemporallyConnectedWith.
+emmo:EMMO_517dfaf9_4970_41ac_81ee_d031627d2c7c a owl:ObjectProperty;
+   skos:prefLabel "emmo:disconnected"^^xs:string;
+   skos:closeMatch pims-ii:isSpatiotemporallyDisconnectedFrom.
+emmo:EMMO_d893d373_b579_4867_841e_1c2b31a8d2c6 a owl:ObjectProperty;
+   skos:prefLabel "emmo:hasOverlapWith"^^xs:string;
+   skos:closeMatch pims-ii:overlapsWith.
+emmo:EMMO_17e27c22_37e1_468c_9dd7_95e137f73e7f a owl:ObjectProperty;
+   skos:prefLabel "emmo:hasPart"^^xs:string;
+   skos:closeMatch pims-ii:hasImproperPart.
+emmo:EMMO_6b7276a4_4b9d_440a_b577_0277539c0fc4 a owl:ObjectProperty;
+   skos:prefLabel "emmo:hasMember"^^xs:string;
+   skos:closeMatch [owl:inverseOf pims-ii:isMereotopologicalMemberOf].
+emmo:EMMO_9380ab64_0363_4804_b13f_3a8a94119a76 a owl:ObjectProperty;
+   skos:prefLabel "emmo:hasProperPart"^^xs:string;
+   skos:closeMatch pims-ii:hasProperPart.
+
+# metrology
+#
+emmo:EMMO_b081b346_7279_46ef_9a3d_2c088fcd79f4 a owl:Class;
+   skos:prefLabel "emmo:MeasurementUnit"^^xs:string;
+   skos:closeMatch pims-ii:MeasurementUnit.
+emmo:EMMO_f658c301_ce93_46cf_9639_4eace2c5d1d5 a owl:Class;
+   skos:prefLabel "emmo:Quantity"^^xs:string;
+   skos:closeMatch pims-ii:QuantityValue.
+
+# models
+#
+emmo:EMMO_22522299_4091_4d1f_82a2_3890492df6db a owl:Class;
+   skos:prefLabel "emmo:Experiment"^^xs:string;
+   skos:closeMatch pims-ii:ExperimentalWorkflow.
+
+# properties
+#
+emmo:EMMO_463bcfda_867b_41d9_a967_211d4d437cfb a owl:Class;
+   skos:prefLabel "emmo:Measurement"^^xs:string;
+   skos:closeMatch pims-ii:Measurement.
+emmo:EMMO_10a5fd39_06aa_4648_9e70_f962a9cb2069 a owl:Class;
+   skos:prefLabel "emmo:Observation"^^xs:string;
+   skos:closeMatch pims-ii:Observation.
+emmo:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba a owl:Class;
+   skos:prefLabel "emmo:Property"^^xs:string;
+   skos:closeMatch pims-ii:Property.
+
+# semiotics
+#
+emmo:EMMO_35d2e130_6e01_41ed_94f7_00b333d46cf9 a owl:Class;
+   skos:prefLabel "emmo:Conventional"^^xs:string;
+   skos:closeMatch pims-ii:Conventional.
+emmo:EMMO_008fd3b2_4013_451f_8827_52bceab11841 a owl:Class;
+   skos:prefLabel "emmo:Semiosis"^^xs:string;
+   skos:closeMatch pims-ii:Semiosis.
+
+emmo:EMMO_60577dea_9019_4537_ac41_80b0fb563d41 a owl:ObjectProperty;
+   skos:prefLabel "emmo:hasSign"^^xs:string;
+   skos:closeMatch pims-ii:hasRepresentamen.

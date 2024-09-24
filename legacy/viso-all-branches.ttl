@@ -1,0 +1,3774 @@
+########################################################################################
+#                                                                                      #
+#                         VIMMP SOFTWARE ONTOLOGY - VISO                               #
+#                                                                                      #
+# NOTE: this file is obtained concatenating four files, namely "viso-general.ttl"      #
+# (-> "viso") and its branches "viso-atomistic-mesoscopic.ttl" (-> "viso-am"),         #
+# "viso-electronic.ttl" (-> "viso-el"), "viso-continuum.ttl" (-> "viso-co").           #
+# The structure is such that each branch only requires "viso", and can be loaded       #
+# independently of the other two siblings.                                             #
+#                                                                                      #                                                                              
+# Authors of viso-general and its branches viso-am, viso-el, viso-co:                  #
+#                                                                                      #
+# Silvia Chiacchiera, Martin T. Horsch (STFC/UKRI, Daresbury Laboratory, UK)           #
+# Michael A. Seaton, Ilian T. Todorov (STFC/UKRI, Daresbury Laboratory, UK)            #
+# Mara Chiricotto, Joshua D. Elliott (University of Manchester, UK)                    #
+# Gianluca Boccardo (Politecnico di Torino, Italy)                                     #
+#                                                                                      #
+# version: 1.0.6                                                                       #
+# date: 27 August 2021                                                                 #
+#                                                                                      #
+########################################################################################
+
+########################################################################################
+#                                                                                      #
+#                             VISO-GENERAL                                             #
+#              UPPER PART OF VIMMP SOFTWARE ONTOLOGY - VISO                            #
+#                                                                                      #
+# Authors of viso-general:                                                             #
+#                                                                                      #
+# Silvia Chiacchiera, Martin T. Horsch (STFC/UKRI, Daresbury Laboratory, UK)           #
+# Michael A. Seaton, Ilian T. Todorov (STFC/UKRI, Daresbury Laboratory, UK)            #
+# Mara Chiricotto, Joshua D. Elliott (University of Manchester, UK)                    #
+# Gianluca Boccardo (Politecnico di Torino, Italy)                                     #
+#                                                                                      #
+# version 1.0.4, date: 26 November 2020                                                #
+########################################################################################
+
+@prefix viso: <https://purl.vimmp.eu/semantics/viso/viso-general.ttl#>.
+
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
+@prefix osmo: <https://purl.vimmp.eu/semantics/osmo/osmo.ttl#>.
+@prefix evmpo: <https://emmc.eu/semantics/evmpo/evmpo.ttl#>.
+@prefix swo: <http://www.ebi.ac.uk/swo/>.
+@prefix swo-license: <http://www.ebi.ac.uk/swo/license/>.
+@prefix vov: <https://purl.vimmp.eu/semantics/vov/vov.ttl#>. 
+@prefix viprs: <https://purl.vimmp.eu/semantics/alignment/viprs.ttl#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vcl: <https://purl.vimmp.eu/semantics/alignment/vcl.ttl#>.
+
+<https://purl.vimmp.eu/semantics/viso/viso-general.ttl#> a owl:Ontology.
+
+# For SWO:
+# Permanent URL, leading to version 1.7:  http://purl.obolibrary.org/obo/swo.owl
+# URL for version 1.7: https://raw.githubusercontent.com/allysonlister/swo/master/release/swo-inferred.owl
+
+############################  Ontology header  #########################################
+
+<https://purl.vimmp.eu/semantics/viso/viso-general.ttl#> dcterms:title "VISO - VImmp Software Ontology"^^xs:string;
+  owl:versionInfo "version 1.0.4"^^xs:string;
+  dcterms:modified "2020-11-26"^^xs:string;
+#  owl:imports <https://emmc.eu/semantics/evmpo/evmpo.ttl#>;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string;
+  dcterms:creator "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string;
+  dcterms:creator "Michael A. Seaton (ORCID 0000-0002-4708-573X)"^^xs:string;
+  dcterms:creator "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string;
+  dcterms:creator "Mara Chiricotto (ORCID 0000-0003-1609-5254)"^^xs:string;
+  dcterms:creator "Joshua D. Elliott (ORCID 0000-0002-0729-246X)"^^xs:string;
+  dcterms:creator "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string;
+  dcterms:contributor "Welchy Leite Cavalcanti"^^xs:string;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string;			     
+  dcterms:license "VISO is provided under a GNU Lesser General Public License (LGPL) version 3 (https://www.gnu.org/licenses/lgpl-3.0.html)."^^xs:string;
+  dcterms:description """The aim of VISO is to characterize software tools in the area of materials modelling, 
+especially their features (i.e., capabilities), intended both at the model and solver level, but also their 
+technical requirements, compatibility with other tools and licensing aspects."""^^xs:string;
+  dcterms:bibliographicCitation "10.1021/acs.jced.9b00739"^^xs:string;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon 2020 research and 
+innovation programme under grant agreement no. 760907, Virtual Materials Marketplace (VIMMP)."""^^xs:string.
+
+##############  (1) agent ########################################
+
+viso:agent a owl:Class;
+  rdfs:subClassOf evmpo:interpreter;
+  rdfs:comment "An entity (individual, group, institution) that can potentially act on a virtual marketplace."^^xs:string;
+  owl:equivalentClass evmpo:agent.
+
+####
+
+# NOTE: EVMPO and VICO have a much richer sublcass structure for "agent", this
+# is a simpflied version for what is needed here, and that is redundant
+# if EVMPO/VICO are loaded
+
+viso:human_agent rdfs:subClassOf viso:agent;
+  owl:equivalentClass evmpo:human_agent.
+
+viso:institution rdfs:subClassOf viso:agent;
+  owl:disjointWith viso:human_agent;
+  owl:equivalentClass evmpo:institution.
+  
+##############  (2) software  ####################################
+
+viso:software a owl:Class;
+  rdfs:comment "A computer program. Can be a software tool, a compiler (lower level, closer to the hardware) or an operating system."^^xs:string;
+  rdfs:subClassOf evmpo:software_infrastructure;
+  rdfs:subClassOf evmpo:information_content_entity.
+  
+viso:software_tool a owl:Class; 
+  rdfs:subClassOf viso:software.
+
+viso:compiler a owl:Class; 
+  rdfs:subClassOf viso:software.
+
+viso:operating_system a owl:Class; 
+  rdfs:subClassOf viso:software.
+
+viso:software owl:disjointUnionOf (viso:software_tool viso:compiler viso:operating_system). 
+
+viso:windows a owl:Class; 
+  rdfs:subClassOf viso:operating_system. 
+
+viso:linux a owl:Class; 
+  rdfs:subClassOf viso:operating_system.
+
+viso:macos a owl:Class; 
+  rdfs:subClassOf viso:operating_system.
+
+viso:operating_system owl:disjointUnionOf (viso:windows viso:linux viso:macos).
+
+viso:simulation_engine a owl:Class;
+   rdfs:subClassOf viso:software_tool;
+   rdfs:comment "A tool that solves the governing equations."^^xs:string.
+   
+viso:pre_processing_tool a owl:Class;
+   rdfs:subClassOf viso:software_tool;
+   rdfs:comment "A tool that helps in setting up a simulation (e.g., to generate the initial configuration)."^^xs:string.
+
+viso:post_processing_tool a owl:Class;
+   rdfs:subClassOf viso:software_tool;
+   rdfs:comment """A tool that processes the raw data obtained solving the governing equations. 
+   		Note that this splitting between solving and processing is a logical one (cf. RoMM),
+		it does not necessarily imply the existence of a separate piece of software. 
+		In fact, some of these post-processing functionalities are often embedded in the simulation engine itself 
+		(e.g., the calculation of the system energy in a MD simulation is typically done on the fly by the solver itself)."""^^xs:string.
+
+viso:visualizer a owl:Class;
+   rdfs:subClassOf viso:post_processing_tool;
+      rdfs:comment "A tool to read and visualize data (with no changes or additions to the data, cf. RoMM)."^^xs:string.
+
+viso:converter a owl:Class;
+   rdfs:subClassOf viso:post_processing_tool;
+      rdfs:comment """A tool that changes the data without altering the physical state itself
+                (e.g., it changes the numerical representation of a state, cf. RoMM)."""^^xs:string.
+
+viso:extractor a owl:Class;
+   rdfs:subClassOf viso:post_processing_tool;
+      rdfs:comment """A tool that enriches the dataset/state description by further information 
+      		   calculated based on the information already contained in the state. 
+		   Examples include averaging, interpolation and the calculation of physical quantities (cf. RoMM)."""^^xs:string.
+
+viso:software_tool owl:unionOf (viso:simulation_engine viso:pre_processing_tool  viso:post_processing_tool).
+
+##############  (3a) license and (3b) license clause  ####################################
+
+viso:license a owl:Class;
+  rdfs:comment "Regulation of the right to use, modify and distribute something, in this case software."^^xs:string;
+  rdfs:comment "Software license, as characterized in the Software Ontology (SWO)"^^xs:string;
+  rdfs:subClassOf evmpo:legal_document;
+  owl:equivalentClass swo:SWO_0000002. # <-> SWO 'software licence' 
+swo:SWO_0000002 rdfs:subClassOf evmpo:legal_document.
+
+viso:license_clause a owl:Class;
+  rdfs:comment "License clause, as characterized in the Software Ontology (SWO)"^^xs:string;
+  rdfs:subClassOf evmpo:information_content_entity;
+  owl:equivalentClass swo:SWO_9000005. # <-> SWO 'licence clause' 
+swo:SWO_9000005 rdfs:subClassOf evmpo:information_content_entity.
+
+# definition of individuals (and Zontal codelist) for license. Generated from SWO via the Owlready2 python module.
+
+viso:INDIVIDUAL_OF_SWO_1000006 a viso:license, vcl:codelist_license, swo-license:SWO_1000006;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Academic_Free_License_version_3"^^xs:string, "Academic_Free_License_version_3"@en;
+  skos:prefLabel "Academic Free License version 3"^^xs:string.
+swo-license:SWO_1000006 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000005 a viso:license, vcl:codelist_license, swo-license:SWO_1000005;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Apache_License_Version_2.0"^^xs:string, "Apache_License_Version_2.0"@en;
+  skos:prefLabel "Apache License Version 2.0"^^xs:string.
+swo-license:SWO_1000005 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000056 a viso:license, vcl:codelist_license, swo-license:SWO_1000056;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Artistic_License"^^xs:string, "Artistic_License"@en;
+  skos:prefLabel "Artistic License"^^xs:string.
+swo-license:SWO_1000056 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_9000082 a viso:license, vcl:codelist_license, swo-license:SWO_9000082;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Artistic_License_1.0"^^xs:string, "Artistic_License_1.0"@en;
+  skos:prefLabel "Artistic License 1.0"^^xs:string.
+swo-license:SWO_9000082 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000057 a viso:license, vcl:codelist_license, swo-license:SWO_1000057;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Artistic_License_2.0"^^xs:string, "Artistic_License_2.0"@en;
+  skos:prefLabel "Artistic License 2.0"^^xs:string.
+swo-license:SWO_1000057 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000050 a viso:license, vcl:codelist_license, swo-license:SWO_1000050;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY_2.0"^^xs:string, "CC_BY_2.0"@en;
+  skos:prefLabel "CC BY 2.0"^^xs:string.
+swo-license:SWO_1000050 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000067 a viso:license, vcl:codelist_license, swo-license:SWO_1000067;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY_2.0_UK"^^xs:string, "CC_BY_2.0_UK"@en;
+  skos:prefLabel "CC BY 2.0 UK"^^xs:string.
+swo-license:SWO_1000067 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000072 a viso:license, vcl:codelist_license, swo-license:SWO_1000072;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY_2.1_JP"^^xs:string, "CC_BY_2.1_JP"@en;
+  skos:prefLabel "CC BY 2.1 JP"^^xs:string.
+swo-license:SWO_1000072 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000073 a viso:license, vcl:codelist_license, swo-license:SWO_1000073;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY_2.5"^^xs:string, "CC_BY_2.5"@en;
+  skos:prefLabel "CC BY 2.5"^^xs:string.
+swo-license:SWO_1000073 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000075 a viso:license, vcl:codelist_license, swo-license:SWO_1000075;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY_3.0"^^xs:string, "CC_BY_3.0"@en;
+  skos:prefLabel "CC BY 3.0"^^xs:string.
+swo-license:SWO_1000075 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000074 a viso:license, vcl:codelist_license, swo-license:SWO_1000074;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY_3.0_AU"^^xs:string, "CC_BY_3.0_AU"@en;
+  skos:prefLabel "CC BY 3.0 AU"^^xs:string.
+swo-license:SWO_1000074 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000076 a viso:license, vcl:codelist_license, swo-license:SWO_1000076;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY_3.0_US"^^xs:string, "CC_BY_3.0_US"@en;
+  skos:prefLabel "CC BY 3.0 US"^^xs:string.
+swo-license:SWO_1000076 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000065 a viso:license, vcl:codelist_license, swo-license:SWO_1000065;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY_4.0"^^xs:string, "CC_BY_4.0"@en;
+  skos:prefLabel "CC BY 4.0"^^xs:string.
+swo-license:SWO_1000065 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000079 a viso:license, vcl:codelist_license, swo-license:SWO_1000079;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC_3.0"^^xs:string, "CC_BY-NC_3.0"@en;
+  skos:prefLabel "CC BY-NC 3.0"^^xs:string.
+swo-license:SWO_1000079 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000080 a viso:license, vcl:codelist_license, swo-license:SWO_1000080;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC_4.0"^^xs:string, "CC_BY-NC_4.0"@en;
+  skos:prefLabel "CC BY-NC 4.0"^^xs:string.
+swo-license:SWO_1000080 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000083 a viso:license, vcl:codelist_license, swo-license:SWO_1000083;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC-ND_2.5"^^xs:string, "CC_BY-NC-ND_2.5"@en;
+  skos:prefLabel "CC BY-NC-ND 2.5"^^xs:string.
+swo-license:SWO_1000083 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000084 a viso:license, vcl:codelist_license, swo-license:SWO_1000084;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC-ND_2.5_CH"^^xs:string, "CC_BY-NC-ND_2.5_CH"@en;
+  skos:prefLabel "CC BY-NC-ND 2.5 CH"^^xs:string.
+swo-license:SWO_1000084 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000081 a viso:license, vcl:codelist_license, swo-license:SWO_1000081;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC-ND_3.0"^^xs:string, "CC_BY-NC-ND_3.0"@en;
+  skos:prefLabel "CC BY-NC-ND 3.0"^^xs:string.
+swo-license:SWO_1000081 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000085 a viso:license, vcl:codelist_license, swo-license:SWO_1000085;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC-ND_4.0"^^xs:string, "CC_BY-NC-ND_4.0"@en;
+  skos:prefLabel "CC BY-NC-ND 4.0"^^xs:string.
+swo-license:SWO_1000085 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000086 a viso:license, vcl:codelist_license, swo-license:SWO_1000086;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC-SA_2.5"^^xs:string, "CC_BY-NC-SA_2.5"@en;
+  skos:prefLabel "CC BY-NC-SA 2.5"^^xs:string.
+swo-license:SWO_1000086 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000089 a viso:license, vcl:codelist_license, swo-license:SWO_1000089;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC-SA_2.5_IN"^^xs:string, "CC_BY-NC-SA_2.5_IN"@en;
+  skos:prefLabel "CC BY-NC-SA 2.5 IN"^^xs:string.
+swo-license:SWO_1000089 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000087 a viso:license, vcl:codelist_license, swo-license:SWO_1000087;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC-SA_3.0"^^xs:string, "CC_BY-NC-SA_3.0"@en;
+  skos:prefLabel "CC BY-NC-SA 3.0"^^xs:string.
+swo-license:SWO_1000087 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000088 a viso:license, vcl:codelist_license, swo-license:SWO_1000088;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC-SA_3.0_US"^^xs:string, "CC_BY-NC-SA_3.0_US"@en;
+  skos:prefLabel "CC BY-NC-SA 3.0 US"^^xs:string.
+swo-license:SWO_1000088 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000090 a viso:license, vcl:codelist_license, swo-license:SWO_1000090;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-NC-SA_4.0"^^xs:string, "CC_BY-NC-SA_4.0"@en;
+  skos:prefLabel "CC BY-NC-SA 4.0"^^xs:string.
+swo-license:SWO_1000090 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000077 a viso:license, vcl:codelist_license, swo-license:SWO_1000077;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-ND_3.0"^^xs:string, "CC_BY-ND_3.0"@en;
+  skos:prefLabel "CC BY-ND 3.0"^^xs:string.
+swo-license:SWO_1000077 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000078 a viso:license, vcl:codelist_license, swo-license:SWO_1000078;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-ND_4.0"^^xs:string, "CC_BY-ND_4.0"@en;
+  skos:prefLabel "CC BY-ND 4.0"^^xs:string.
+swo-license:SWO_1000078 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000052 a viso:license, vcl:codelist_license, swo-license:SWO_1000052;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-SA_2.0"^^xs:string, "CC_BY-SA_2.0"@en;
+  skos:prefLabel "CC BY-SA 2.0"^^xs:string.
+swo-license:SWO_1000052 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000091 a viso:license, vcl:codelist_license, swo-license:SWO_1000091;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-SA_2.1_JP"^^xs:string, "CC_BY-SA_2.1_JP"@en;
+  skos:prefLabel "CC BY-SA 2.1 JP"^^xs:string.
+swo-license:SWO_1000091 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000092 a viso:license, vcl:codelist_license, swo-license:SWO_1000092;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-SA_3.0"^^xs:string, "CC_BY-SA_3.0"@en;
+  skos:prefLabel "CC BY-SA 3.0"^^xs:string.
+swo-license:SWO_1000092 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000093 a viso:license, vcl:codelist_license, swo-license:SWO_1000093;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-SA_3.0_US"^^xs:string, "CC_BY-SA_3.0_US"@en;
+  skos:prefLabel "CC BY-SA 3.0 US"^^xs:string.
+swo-license:SWO_1000093 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000094 a viso:license, vcl:codelist_license, swo-license:SWO_1000094;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC_BY-SA_4.0"^^xs:string, "CC_BY-SA_4.0"@en;
+  skos:prefLabel "CC BY-SA 4.0"^^xs:string.
+swo-license:SWO_1000094 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000049 a viso:license, vcl:codelist_license, swo-license:SWO_1000049;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "CC0_1.0"^^xs:string, "CC0_1.0"@en;
+  skos:prefLabel "CC0 1.0"^^xs:string.
+swo-license:SWO_1000049 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000001 a viso:license, vcl:codelist_license, swo-license:SWO_1000001;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Creative_Commons"^^xs:string, "Creative_Commons"@en;
+  skos:prefLabel "Creative Commons"^^xs:string.
+swo-license:SWO_1000001 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000097 a viso:license, vcl:codelist_license, swo-license:SWO_1000097;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "DbCL_v1.0"^^xs:string, "DbCL_v1.0"@en;
+  skos:prefLabel "DbCL v1.0"^^xs:string.
+swo-license:SWO_1000097 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000147 a viso:license, vcl:codelist_license, swo-license:SWO_1000147;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Design_Science_License"^^xs:string, "Design_Science_License"@en;
+  skos:prefLabel "Design Science License"^^xs:string.
+swo-license:SWO_1000147 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_9000084 a viso:license, vcl:codelist_license, swo-license:SWO_9000084;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "EPL_v1"^^xs:string, "EPL_v1"@en;
+  skos:prefLabel "EPL v1"^^xs:string.
+swo-license:SWO_9000084 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000137 a viso:license, vcl:codelist_license, swo-license:SWO_1000137;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Fee-Based_Commercial_License"^^xs:string, "Fee-Based_Commercial_License"@en;
+  skos:prefLabel "Fee-Based Commercial License"^^xs:string.
+swo-license:SWO_1000137 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000007 a viso:license, vcl:codelist_license, swo-license:SWO_1000007;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "FreeBSD"^^xs:string, "FreeBSD"@en;
+  skos:prefLabel "FreeBSD"^^xs:string.
+swo-license:SWO_1000007 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000069 a viso:license, vcl:codelist_license, swo-license:SWO_1000069;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_AGPL"^^xs:string, "GNU_AGPL"@en;
+  skos:prefLabel "GNU AGPL"^^xs:string.
+swo-license:SWO_1000069 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000070 a viso:license, vcl:codelist_license, swo-license:SWO_1000070;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_AGPL_v3"^^xs:string, "GNU_AGPL_v3"@en;
+  skos:prefLabel "GNU AGPL v3"^^xs:string.
+swo-license:SWO_1000070 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000004 a viso:license, vcl:codelist_license, swo-license:SWO_1000004;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_GPL"^^xs:string, "GNU_GPL"@en;
+  skos:prefLabel "GNU GPL"^^xs:string.
+swo-license:SWO_1000004 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000044 a viso:license, vcl:codelist_license, swo-license:SWO_1000044;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_GPL_Compatible_License_Type"^^xs:string, "GNU_GPL_Compatible_License_Type"@en;
+  skos:prefLabel "GNU GPL Compatible License Type"^^xs:string.
+swo-license:SWO_1000044 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000047 a viso:license, vcl:codelist_license, swo-license:SWO_1000047;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_GPL_v2"^^xs:string, "GNU_GPL_v2"@en;
+  skos:prefLabel "GNU GPL v2"^^xs:string.
+swo-license:SWO_1000047 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000046 a viso:license, vcl:codelist_license, swo-license:SWO_1000046;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_GPL_v3"^^xs:string, "GNU_GPL_v3"@en;
+  skos:prefLabel "GNU GPL v3"^^xs:string.
+swo-license:SWO_1000046 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_9000080 a viso:license, vcl:codelist_license, swo-license:SWO_9000080;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_LGPL"^^xs:string, "GNU_LGPL"@en;
+  skos:prefLabel "GNU LGPL"^^xs:string.
+swo-license:SWO_9000080 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000071 a viso:license, vcl:codelist_license, swo-license:SWO_1000071;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_LGPL_v2.1"^^xs:string, "GNU_LGPL_v2.1"@en;
+  skos:prefLabel "GNU LGPL v2.1"^^xs:string.
+swo-license:SWO_1000071 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000068 a viso:license, vcl:codelist_license, swo-license:SWO_1000068;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_LGPL_v3"^^xs:string, "GNU_LGPL_v3"@en;
+  skos:prefLabel "GNU LGPL v3"^^xs:string.
+swo-license:SWO_1000068 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000043 a viso:license, vcl:codelist_license, swo-license:SWO_1000043;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "GNU_Project_Free_License_Type"^^xs:string, "GNU_Project_Free_License_Type"@en;
+  skos:prefLabel "GNU Project Free License Type"^^xs:string.
+swo-license:SWO_1000043 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_9000086 a viso:license, vcl:codelist_license, swo-license:SWO_9000086;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "LPPL"^^xs:string, "LPPL"@en;
+  skos:prefLabel "LPPL"^^xs:string.
+swo-license:SWO_9000086 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000054 a viso:license, vcl:codelist_license, swo-license:SWO_1000054;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "LPPL_v1.2"^^xs:string, "LPPL_v1.2"@en;
+  skos:prefLabel "LPPL v1.2"^^xs:string.
+swo-license:SWO_1000054 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000053 a viso:license, vcl:codelist_license, swo-license:SWO_1000053;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "LPPL_v1.3c"^^xs:string, "LPPL_v1.3c"@en;
+  skos:prefLabel "LPPL v1.3c"^^xs:string.
+swo-license:SWO_1000053 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000009 a viso:license, vcl:codelist_license, swo-license:SWO_1000009;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "License_without_restrictions_on_derivatives"^^xs:string, "License_without_restrictions_on_derivatives"@en;
+  skos:prefLabel "License without restrictions on derivatives"^^xs:string.
+swo-license:SWO_1000009 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_9000074 a viso:license, vcl:codelist_license, swo-license:SWO_9000074;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "MIT_License"^^xs:string, "MIT_License"@en;
+  skos:prefLabel "MIT License"^^xs:string.
+swo-license:SWO_9000074 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_9000088 a viso:license, vcl:codelist_license, swo-license:SWO_9000088;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "MPL"^^xs:string, "MPL"@en;
+  skos:prefLabel "MPL"^^xs:string.
+swo-license:SWO_9000088 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000003 a viso:license, vcl:codelist_license, swo-license:SWO_1000003;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "MPL_v1.1"^^xs:string, "MPL_v1.1"@en;
+  skos:prefLabel "MPL v1.1"^^xs:string.
+swo-license:SWO_1000003 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_9000085 a viso:license, vcl:codelist_license, swo-license:SWO_9000085;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Modified_BSD"^^xs:string, "Modified_BSD"@en;
+  skos:prefLabel "Modified BSD"^^xs:string.
+swo-license:SWO_9000085 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000055 a viso:license, vcl:codelist_license, swo-license:SWO_1000055;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "MPL_v2.0"^^xs:string, "MPL_v2.0"@en;
+  skos:prefLabel "MPL v2.0"^^xs:string.
+swo-license:SWO_1000055 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000140 a viso:license, vcl:codelist_license, swo-license:SWO_1000140;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Non-Commercial_No-Fee_License"^^xs:string, "Non-Commercial_No-Fee_License"@en;
+  skos:prefLabel "Non-Commercial No-Fee License"^^xs:string.
+swo-license:SWO_1000140 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000100 a viso:license, vcl:codelist_license, swo-license:SWO_1000100;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "ODC-By_v1.0"^^xs:string, "ODC-By_v1.0"@en;
+  skos:prefLabel "ODC-By v1.0"^^xs:string.
+swo-license:SWO_1000100 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000096 a viso:license, vcl:codelist_license, swo-license:SWO_1000096;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "ODbL_v1.0"^^xs:string, "ODbL_v1.0"@en;
+  skos:prefLabel "ODbL v1.0"^^xs:string.
+swo-license:SWO_1000096 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_9000087 a viso:license, vcl:codelist_license, swo-license:SWO_9000087;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "OPL_v1.0"^^xs:string, "OPL_v1.0"@en;
+  skos:prefLabel "OPL v1.0"^^xs:string.
+swo-license:SWO_9000087 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000095 a viso:license, vcl:codelist_license, swo-license:SWO_1000095;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Open_Data_Commons"^^xs:string, "Open_Data_Commons"@en;
+  skos:prefLabel "Open Data Commons"^^xs:string.
+swo-license:SWO_1000095 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000008 a viso:license, vcl:codelist_license, swo-license:SWO_1000008;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Open_source_software_license"^^xs:string, "Open_source_software_license"@en;
+  skos:prefLabel "Open source software license"^^xs:string.
+swo-license:SWO_1000008 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000101 a viso:license, vcl:codelist_license, swo-license:SWO_1000101;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "PDDL_v1.0"^^xs:string, "PDDL_v1.0"@en;
+  skos:prefLabel "PDDL v1.0"^^xs:string.
+swo-license:SWO_1000101 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000002 a viso:license, vcl:codelist_license, swo-license:SWO_1000002;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Proprietary_commercial_software_license"^^xs:string, "Proprietary_commercial_software_license"@en;
+  skos:prefLabel "Proprietary commercial software license"^^xs:string.
+swo-license:SWO_1000002 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000103 a viso:license, vcl:codelist_license, swo-license:SWO_1000103;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "Vendor-specific_License"^^xs:string, "Vendor-specific_License"@en;
+  skos:prefLabel "Vendor-specific License"^^xs:string.
+swo-license:SWO_1000103 rdfs:subClassOf swo:SWO_0000002.
+
+viso:INDIVIDUAL_OF_SWO_1000061 a viso:license, vcl:codelist_license, swo-license:SWO_1000061;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "free_to_use_license"^^xs:string, "free_to_use_license"@en;
+  skos:prefLabel "free to use license"^^xs:string.
+swo-license:SWO_1000061 rdfs:subClassOf swo:SWO_0000002.
+
+# the generic license
+viso:INDIVIDUAL_OF_SWO_0000002 a viso:license, vcl:codelist_license, swo:SWO_0000002;
+  skos:inScheme vcl:CL_LICENSE;
+  skos:notation "licence"^^xs:string, "licence"@en;
+  skos:prefLabel "licence"^^xs:string.
+
+# connection between classes and their representative individuals
+
+viso:license rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:INDIVIDUAL_OF_SWO_0000002].
+
+##############  (4) programming language #########################
+
+viso:programming_language a owl:Class;
+  rdfs:comment "A language that can be used to write software."^^xs:string;
+  rdfs:subClassOf evmpo:annotation.  
+
+viso:fortran a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:c_language a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:cpp a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:python a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:openmp a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:mpi a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:openmpi a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:cmake a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:opencl a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:cuda a owl:Class;
+  rdfs:subClassOf viso:programming_language.
+
+viso:programming_language owl:disjointUnionOf (viso:fortran viso:c_language viso:cpp viso:python viso:openmp viso:mpi viso:cmake viso:opencl viso:cuda).
+
+# definition of individuals (and Zontal codelist) for programming_language
+
+viso:FORTRAN a viso:fortran, vcl:codelist_programming_language;
+ skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+ skos:notation "Fortran"^^xs:string, "Fortran"@en;
+ skos:prefLabel "Fortran"^^xs:string.
+
+viso:FORTRAN90 a viso:fortran, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "Fortran90"^^xs:string, "Fortran90"@en;
+  skos:prefLabel "Fortran90"^^xs:string.
+
+viso:FORTRAN95 a viso:fortran, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "Fortran95"^^xs:string, "Fortran95"@en;
+  skos:prefLabel "Fortran95"^^xs:string.
+
+viso:FORTRAN2003 a viso:fortran, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "Fortran2003"^^xs:string, "Fortran2003"@en;
+  skos:prefLabel "Fortran2003"^^xs:string.
+
+viso:CPP a viso:cpp, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "C++"^^xs:string, "C++"@en;
+  skos:prefLabel "C++"^^xs:string.
+
+viso:C_LANGUAGE a viso:c_language, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "C_language"^^xs:string, "C_language"@en;
+  skos:prefLabel "C (language)"^^xs:string.
+
+viso:CMAKE a viso:cmake, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "CMake"^^xs:string, "CMake"@en;
+  skos:prefLabel "CMake"^^xs:string.
+
+viso:OPENMP a viso:openmp, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "OpenMP"^^xs:string, "OpenMP"@en;
+  skos:prefLabel "OpenMP"^^xs:string.
+
+viso:MPI a viso:mpi, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "MPI"^^xs:string, "MPI"@en;
+  skos:prefLabel "MPI"^^xs:string.
+
+viso:OPENMPI a viso:openmpi, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "OpenMPI"^^xs:string, "OpenMPI"@en;
+  skos:prefLabel "OpenMPI"^^xs:string.
+
+viso:OPENCL a viso:opencl, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "OpenCL"^^xs:string, "OpenCL"@en;
+  skos:prefLabel "OpenCL"^^xs:string.
+
+viso:CUDA a viso:cuda, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "Cuda"^^xs:string, "Cuda"@en;
+  skos:prefLabel "Cuda"^^xs:string.
+
+viso:PYTHON a viso:python, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "Python"^^xs:string, "Python"@en;
+  skos:prefLabel "Python"^^xs:string.
+
+viso:PYTHON_2.7 a viso:python, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "Python_2.7"^^xs:string, "Python_2.7"@en;
+  skos:prefLabel "Python 2.7"^^xs:string.
+
+viso:PYTHON_3 a viso:python, vcl:codelist_programming_language;
+  skos:inScheme vcl:CL_SCHEME_PROGRAMMING_LANGUAGE;
+  skos:notation "Python_3"^^xs:string, "Python_3"@en;
+  skos:prefLabel "Python 3"^^xs:string.
+
+# connection between classes and their representative individuals
+
+viso:fortran rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:FORTRAN].
+viso:cpp rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:CPP].
+viso:c_language rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:C_LANGUAGE].
+viso:cmake rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:CMAKE].
+viso:openmp rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:OPENMP].
+viso:mpi rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:MPI].
+viso:openmpi rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:OPENMPI].
+viso:opencl rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:OPENCL].
+viso:cuda rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:CUDA].
+viso:python rdfs:subClassOf [a owl:Restriction; owl:onProperty viprs:is_conceptualized_by; owl:hasValue viso:PYTHON].
+
+##############  (5) solver feature ###############################
+
+viso:solver_feature a owl:Class;
+  rdfs:comment "Capability of a software tool, intended as a numerical aspect or an algorithm which is implemented. ('solver' intended as in MODA)"^^xs:string;
+  rdfs:comment "An aspect of the numerical method used to solve the governing equations."^^xs:string;
+  rdfs:subClassOf evmpo:marketplace_related_entity.  
+
+viso:el_solver_feature a owl:Class;
+  rdfs:subClassOf viso:solver_feature;
+  owl:intersectionOf (viso:solver_feature viso:R_IS_ELECTRONIC).
+
+viso:am_solver_feature a owl:Class;
+  rdfs:subClassOf viso:solver_feature;
+  owl:intersectionOf (viso:solver_feature [a owl:Class; owl:unionOf (viso:R_IS_ATOMISTIC viso:R_IS_MESOSCOPIC)]).
+
+viso:co_solver_feature a owl:Class;
+  rdfs:subClassOf viso:solver_feature;
+  owl:intersectionOf (viso:solver_feature viso:R_IS_CONTINUUM).
+
+viso:execution_mode a owl:Class;
+  rdfs:subClassOf viso:solver_feature;
+  owl:oneOf (viso:SERIAL_EXECUTION viso:PARALLEL_EXECUTION).
+
+##############  (6) model feature ################################
+
+viso:model_feature a owl:Class; 
+  rdfs:comment "Capability of a software tool, intended as a model aspect that can be addressed. ('model' intended as in MODA)."^^xs:string;
+  rdfs:subClassOf evmpo:marketplace_related_entity.
+
+viso:el_model_feature a owl:Class;
+  rdfs:subClassOf viso:model_feature;
+  owl:intersectionOf (viso:model_feature viso:R_IS_ELECTRONIC).
+
+viso:el_materials_relation_trait a owl:Class;
+  rdfs:subClassOf viso:el_model_feature.
+
+viso:el_physical_equation_trait a owl:Class;
+  rdfs:subClassOf viso:el_model_feature.
+
+viso:el_external_condition_trait a owl:Class;
+  rdfs:subClassOf viso:el_model_feature.
+
+viso:el_materials_relation a owl:Class;
+  rdfs:subClassOf viso:el_materials_relation_trait.
+
+viso:el_physical_equation a owl:Class;
+  rdfs:subClassOf viso:el_physical_equation_trait.
+
+viso:am_model_feature a owl:Class;
+  rdfs:subClassOf viso:model_feature;
+  owl:intersectionOf (viso:model_feature [a owl:Class; owl:unionOf (viso:R_IS_ATOMISTIC viso:R_IS_MESOSCOPIC)]).
+
+viso:am_materials_relation_trait a owl:Class;
+  rdfs:subClassOf viso:am_model_feature.
+
+viso:am_physical_equation_trait a owl:Class;
+  rdfs:subClassOf viso:am_model_feature.
+
+viso:am_external_condition_trait a owl:Class;
+  rdfs:subClassOf viso:am_model_feature.
+
+viso:am_materials_relation a owl:Class;
+  rdfs:subClassOf viso:am_materials_relation_trait.
+
+viso:am_physical_equation a owl:Class;
+  rdfs:subClassOf viso:am_physical_equation_trait.
+
+viso:co_model_feature a owl:Class;
+  rdfs:subClassOf viso:model_feature;
+  owl:intersectionOf (viso:model_feature viso:R_IS_CONTINUUM).
+
+viso:co_materials_relation_trait a owl:Class;
+  rdfs:subClassOf viso:co_model_feature.
+
+viso:co_physical_equation_trait a owl:Class;
+  rdfs:subClassOf viso:co_model_feature.
+
+viso:co_external_condition_trait a owl:Class;
+  rdfs:subClassOf viso:co_model_feature.
+
+viso:co_materials_relation a owl:Class;
+  rdfs:subClassOf viso:co_materials_relation_trait.
+
+viso:co_physical_equation a owl:Class;
+  rdfs:subClassOf viso:co_physical_equation_trait.
+
+viso:physical_equation a owl:Class;
+  rdfs:subClassOf osmo:governing_equation;
+  owl:equivalentClass osmo:physical_equation;
+  owl:disjointUnionOf (viso:el_physical_equation viso:am_physical_equation viso:co_physical_equation).
+
+viso:materials_relation a owl:Class;
+  rdfs:subClassOf osmo:governing_equation;
+  owl:equivalentClass osmo:materials_relation;
+  owl:disjointUnionOf (viso:el_materials_relation viso:am_materials_relation viso:co_materials_relation).
+
+viso:materials_relation_trait a owl:Class;
+  rdfs:subClassOf evmpo:marketplace_related_entity;
+  owl:disjointUnionOf (viso:el_materials_relation_trait viso:am_materials_relation_trait viso:co_materials_relation_trait).
+
+viso:physical_equation_trait a owl:Class;
+  rdfs:subClassOf viso:model_feature;
+  owl:disjointUnionOf (viso:el_physical_equation_trait viso:am_physical_equation_trait viso:co_physical_equation_trait).
+
+viso:external_condition_trait a owl:Class;
+  rdfs:subClassOf viso:model_feature;
+  owl:disjointUnionOf (viso:el_external_condition_trait viso:am_external_condition_trait viso:co_external_condition_trait).
+
+viso:model_object a owl:Class;
+  rdfs:subClassOf viso:materials_relation_trait;
+  rdfs:comment "Type of object entering the model and carrying the degrees of freedom."^^xs:string;
+  rdfs:comment "E.g., composite or structureless, rigid or flexible, classical or quantum objects."^^xs:string.
+
+##############  (7) modeling related entity ######################
+
+viso:modeling_related_entity a owl:Class;
+  rdfs:comment"High level concept related to modelling, as statistical mechanics, the RoMM model types, fundamental physics equation, etc."^^xs:string;
+  rdfs:subClassOf evmpo:marketplace_related_entity.  
+
+viso:model_type a owl:Class;
+  rdfs:subClassOf viso:modeling_related_entity.
+
+viso:am_model_type a owl:Class;
+  rdfs:subClassOf viso:model_type;
+  owl:intersectionOf (viso:model_type [a owl:Class; owl:unionOf (viso:R_IS_ATOMISTIC viso:R_IS_MESOSCOPIC)]).
+
+viso:el_model_type a owl:Class;
+  rdfs:subClassOf viso:model_type;
+  owl:intersectionOf (viso:model_type viso:R_IS_ELECTRONIC).
+
+viso:co_model_type a owl:Class;
+  rdfs:subClassOf viso:model_type;
+  owl:intersectionOf (viso:model_type viso:R_IS_CONTINUUM).
+
+viso:model_type owl:disjointUnionOf (viso:am_model_type viso:el_model_type viso:co_model_type).
+
+##############  (8) Software update ##############################
+
+viso:software_update a owl:Class;
+   rdfs:subClassOf evmpo:process;
+   rdfs:comment "To describe (as text) the changes between versions of a software."^^xs:string;
+   rdfs:subClassOf [a owl:Restriction;
+  		   owl:onProperty viso:has_input;
+  		   owl:qualifiedCardinality 1;
+   		   owl:onClass viso:software];
+   rdfs:subClassOf [a owl:Restriction;
+  		   owl:onProperty viso:has_output;
+  		   owl:qualifiedCardinality 1;
+   		   owl:onClass viso:software];
+   rdfs:subClassOf [a owl:Restriction;
+  		   owl:onProperty viso:has_update_comment;
+ 		   owl:allValuesFrom xs:string].
+
+viso:software_tool_update a owl:Class; 
+  rdfs:subClassOf viso:software_update;
+  rdfs:comment "Allows to describe the addition/removal of features between versions of a software tool."^^xs:string;
+  rdfs:subClassOf [a owl:Restriction;
+  		   owl:onProperty viso:has_input;
+  		   owl:qualifiedCardinality 1;
+   		   owl:onClass viso:software_tool];
+   rdfs:subClassOf [a owl:Restriction;
+  		   owl:onProperty viso:has_output;
+  		   owl:qualifiedCardinality 1;
+   		   owl:onClass viso:software_tool];
+   rdfs:subClassOf [a owl:Restriction;
+   		   owl:onProperty viso:adds_feature;
+ 		   owl:allValuesFrom viso:software_tool_feature];
+   rdfs:subClassOf [a owl:Restriction;
+  		   owl:onProperty viso:removes_feature;
+ 		   owl:allValuesFrom viso:software_tool_feature];
+   rdfs:subClassOf [a owl:Restriction;
+  		   owl:onProperty viso:has_update_comment;
+ 		   owl:allValuesFrom xs:string].
+
+##############  (9) Software interface ###########################
+
+viso:software_interface a owl:Class;
+  rdfs:subClassOf evmpo:software_infrastructure; 
+  rdfs:comment "Interface between a software and a user or a client (i.e., a program or device)"^^xs:string;
+  rdfs:comment "Some sub-classes of this class are taken from the SWO software interface class (swo:SWO_9000050)"^^xs:string.
+
+viso:graphical_user_interface a owl:Class;
+  rdfs:comment "graphical user interface (GUI)"^^xs:string;
+  rdfs:subClassOf viso:software_interface;
+  owl:equivalentClass swo:SWO_9000052. # <-> "swo graphical user interface"
+swo:SWO_9000052 rdfs:subClassOf viso:software_interface.
+
+viso:command_line_interface a owl:Class;
+  rdfs:comment "command line interface (CLI)"^^xs:string;
+  rdfs:subClassOf viso:software_interface;
+  owl:disjointWith viso:graphical_user_interface;
+  owl:equivalentClass swo:SWO_9000053. # <-> "swo command line interface"
+swo:SWO_9000053 rdfs:subClassOf viso:software_interface.
+
+viso:application_programming_interface a owl:Class;
+  rdfs:comment "application programming interface (API)"^^xs:string;
+  rdfs:subClassOf viso:software_interface;
+  owl:equivalentClass swo:SWO_9000054. # <-> "swo application programming interface"
+swo:SWO_9000054 rdfs:subClassOf viso:software_interface.
+
+viso:wrapper a owl:Class;
+  rdfs:subClassOf viso:software_interface;
+  rdfs:comment """wrapper (interface): an outer (more abstract) 
+  layer as compared to an application programming interface, 
+  and usually providing a reduced and more specific set of 
+  functionalities"""^^xs:string.
+
+viso:data_interface a owl:Class; 
+  rdfs:comment "interface for data, can be file-based or stream-based"^^xs:string;
+  rdfs:subClassOf viso:software_interface.
+
+viso:file_based_io a owl:Class; 
+  rdfs:subClassOf viso:data_interface.
+
+viso:stream_based_io a owl:Class; 
+  rdfs:subClassOf viso:data_interface.
+
+# definition of individuals for software interface
+
+viso:TEXT_FILE_IO a viso:file_based_io.
+viso:BINARY_FILE_IO a viso:file_based_io.
+
+##############  (10) Classifier ###################################
+
+viso:classifier a owl:Class; 
+  rdfs:comment "A classifier (e.g., the granularity level) that is relevant for materials modelling software "^^xs:string;
+  rdfs:subClassOf evmpo:annotation.  
+
+viso:granularity_level rdfs:subClassOf viso:classifier;
+  owl:equivalentClass osmo:granularity_level;
+  owl:oneOf (osmo:ELECTRONIC osmo:ATOMISTIC osmo:MESOSCOPIC osmo:CONTINUUM).
+# NB: For convenience, I duplicate here the definitions of granularity given in OSMO
+# Can be removed if OSMO is loaded
+
+##################################################################
+
+### Datatype Properties ###
+
+####### VISO primitive (or fundamental) properties ###############
+
+# P1 - DP-Parthood #
+
+viso:parthood_dp_relation a owl:DatatypeProperty;
+  rdfs:subPropertyOf viprs:immanent_datatype_property;
+  rdfs:comment """Datatype property based on objects constitution (also in the sense of participants in a process).
+  	       It can be in both directions (i.e., having parts or being parts of something)."""^^xs:string.
+
+# P2 - DP-Dependence #
+
+viso:dependence_dp_relation a owl:DatatypeProperty;
+  rdfs:subPropertyOf viprs:immanent_datatype_property;
+  rdfs:comment """Datatype property based on any kind of dependence (e.g, functional dependence,	
+  	       legal dependence, causality, authorship). It can be in both directions 
+	       (i.e., depending on something or having dependents). """^^xs:string.
+
+# P3 - DP-Ability #
+
+viso:ability_dp_relation a owl:DatatypeProperty;
+  rdfs:subPropertyOf viprs:immanent_datatype_property;
+  rdfs:comment """Datatype property based on some functionality, capability, i.e., the potentiality to do something.
+  	       It concerns the functioning of an object. It can be in both directions 
+	       (i.e., having an ability or being an ability)."""^^xs:string.
+
+# P4 - DP-Documentation #
+
+viso:documentation_dp_relation a owl:DatatypeProperty;
+  rdfs:subPropertyOf viprs:immanent_datatype_property;
+  rdfs:comment """Datatype property based on documentation (e.g, descriptions, explanations or classifications).
+  	       It can be in both directions (i.e., having some documentation or being documentation of something)."""^^xs:string.
+
+# P5 - DP-Similarity #
+
+viso:similarity_dp_relation a owl:DatatypeProperty;
+  rdfs:subPropertyOf viprs:immanent_datatype_property;
+  rdfs:comment "Datatype property based on similarity, intended as some common aspect."^^xs:string.
+
+# P6 - Connection #
+
+viso:connection_dp_relation a owl:DatatypeProperty;
+  rdfs:subPropertyOf viprs:immanent_datatype_property;
+  rdfs:comment "Datatype property that is other than parthood, ability, dependence, similarity and documentation."^^xs:string.
+
+##################################################################
+
+viso:has_main_name a owl:DatatypeProperty;
+  a owl:FunctionalProperty;
+  rdfs:comment "identifies the main name of a software, without version information"^^xs:string;
+  rdfs:domain viso:software;
+  rdfs:range xs:string;
+  rdfs:subPropertyOf viso:documentation_dp_relation;
+  rdfs:subPropertyOf viprs:has_name.
+
+viso:has_version_identifier a owl:DatatypeProperty;
+  a owl:FunctionalProperty;
+  rdfs:comment "identifies the version of a software (can be a number or a suffix in the name)"^^xs:string;
+  rdfs:domain viso:software;
+  rdfs:range xs:string;
+  rdfs:subPropertyOf viso:documentation_dp_relation;
+  rdfs:subPropertyOf viprs:has_specifier.
+
+viso:has_release_date a owl:DatatypeProperty;
+  a owl:FunctionalProperty;
+  rdfs:domain viso:software;
+#  rdfs:range xs:date; # NB: This would be the appropriate datatype, but it is currently not recognized by FaCT++
+  rdfs:range xs:dateTime; 
+  rdfs:comment """Note: xs:date would be the appropriate datatype, we don't use it because it is currently not recognized by the FaCT++ reasoner.
+  	       Therefore, conventionally, we set the time as T00:00:00+00:00 for all individuals."""^^xs:string;
+  rdfs:subPropertyOf viso:documentation_dp_relation;
+  rdfs:subPropertyOf viprs:has_specifier.
+  
+viso:is_free a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:dependence_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:is_free_to_academic a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:dependence_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:has_a_gpu_version a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:ability_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:is_a_library a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software_tool;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:ability_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:is_open_source a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:seeAlso "https://opensource.org/osd"^^xs:string;
+  rdfs:comment """Open source means there is access to the source code, 
+  but also that the distribution terms comply with certain criteria 
+  (e.g., about re-distribution)"""^^xs:string;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:dependence_dp_relation;
+  rdfs:subPropertyOf viso:ability_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:has_a_gui a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:ability_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:has_a_manual a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:documentation_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:has_memory_requirement a owl:DatatypeProperty; 
+  rdfs:domain viso:software;
+  rdfs:range xs:string;
+  rdfs:comment "Generic memory requirement, can concern both storage and RAM"^^xs:string;
+  rdfs:subPropertyOf viso:dependence_dp_relation;
+  rdfs:subPropertyOf viprs:has_specifier.
+
+viso:has_model_classifier a owl:DatatypeProperty;
+  rdfs:domain viso:model_type;  
+  rdfs:range xs:string;
+  rdfs:subPropertyOf viso:documentation_dp_relation;
+  rdfs:subPropertyOf viprs:has_specifier.
+
+viso:has_osmo_pe_type_id a owl:DatatypeProperty;
+  rdfs:subPropertyOf viso:has_model_classifier;
+  rdfs:domain viso:model_type;  
+  rdfs:range xs:string.
+
+viso:has_update_comment a owl:DatatypeProperty;
+  rdfs:domain viso:software_update;
+  rdfs:range xs:string;
+  rdfs:subPropertyOf viso:parthood_dp_relation;
+  rdfs:subPropertyOf viso:documentation_dp_relation;
+  rdfs:subPropertyOf viprs:has_textual_content.
+
+viso:has_a_cli a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:ability_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:has_an_api a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:ability_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:has_a_wrapper a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:ability_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:has_a_data_interface a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:domain viso:software;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viso:ability_dp_relation;
+  rdfs:subPropertyOf viprs:has_flag.
+
+viso:has_accessible_exe a owl:DatatypeProperty, owl:FunctionalProperty;
+  rdfs:comment """the tool executable can be accessed. It implies there is a command line interface in the 
+  sense that the executable can be called from a terminal"""^^xs:string; 
+  rdfs:domain viso:software_tool;
+  rdfs:range xs:boolean;
+  rdfs:subPropertyOf viprs:has_flag.
+
+### Object Properties ###
+
+####### VISO primitive (or fundamental) properties ###############
+
+# P1 - Parthood #
+
+viso:parthood_relation a owl:ObjectProperty;
+  rdfs:subPropertyOf viprs:immanent_relation;  # overlap
+  rdfs:comment """Relates objects based on the their constitution (also in the sense of participants in a process).
+  	       It can be in both directions (i.e., having parts or being parts of something)."""^^xs:string.
+
+viso:has_part a owl:ObjectProperty; 
+  rdfs:comment "It concerns the constitution of an object (also in the sense of the participants of a process)."^^xs:string;
+  rdfs:subPropertyOf viso:parthood_relation, viprs:mereosemiotics_hp_ip.
+viprs:has_proper_part rdfs:subPropertyOf viso:has_part.
+
+viso:is_part_of a owl:ObjectProperty; 
+  owl:inverseOf viso:has_part;
+  rdfs:comment "It concerns the constitution of an object (also in the sense of the participants of a process)."^^xs:string;
+  rdfs:subPropertyOf viso:parthood_relation, viprs:mereosemiotics_hp_ip.
+viprs:is_proper_part_of rdfs:subPropertyOf viso:is_part_of.
+
+# P2 - Dependence #
+
+viso:dependence_relation a owl:ObjectProperty;
+  rdfs:subPropertyOf viprs:immanent_relation;
+  rdfs:comment """Relates objects with any kind of dependence (e.g, functional dependence,	
+  	       legal dependence, causality, authorship). It can be in both directions 
+	       (i.e., depending on something or having dependents). """^^xs:string.
+
+viso:depends_on a owl:ObjectProperty;
+  rdfs:comment """Refers to any kind of dependence. For example, functional dependence (e.g., a tool requires a library),	
+  	       legal dependence (e.g., a product is owned/distribued by an agent), 
+	       causality (e.g., something exists or happens after something else), authorship (e.g, a book has an author). """^^xs:string.
+
+viso:has_dependent a owl:ObjectProperty;
+  owl:inverseOf viso:depends_on;
+  rdfs:comment """Refers to any kind of dependence. For example, functional dependence (e.g., a library is required by a tool), 
+  	       legal dependence (e.g., an agent owns/distributes a product), 
+	       causality  (e.g., something exists or happens beofre something else), authorship (e.g, an author writes a book). """^^xs:string.
+
+# P3 - Ability #
+
+viso:ability_relation a owl:ObjectProperty;
+  rdfs:subPropertyOf viprs:immanent_relation;
+  rdfs:comment """Relates objects based on some functionality, capability, i.e., the potentiality to do something.
+  	       It concerns the functioning of an object. It can be in both directions (having an ability or being an ability)."""^^xs:string.
+
+viso:has_ability a owl:ObjectProperty;
+  rdfs:subPropertyOf viprs:enables_entity_containing.
+
+viso:is_ability_of a owl:ObjectProperty;
+  owl:inverseOf viso:has_ability;
+  rdfs:subPropertyOf viprs:is_proper_part_of_entity_enabled_by.
+
+# P4 - Documentation #
+
+viso:documentation_relation a owl:ObjectProperty;
+  rdfs:subPropertyOf viprs:immanent_relation;
+  rdfs:comment """Relates objects based on documentation (e.g, descriptions, explanations or classifications).
+  	       It can be in both directions (i.e., having some documentation or being documentation of something)."""^^xs:string.
+
+viso:has_documentation a owl:ObjectProperty;
+  rdfs:comment "Points to a description, explanation or classification of an object."^^xs:string;
+  rdfs:subPropertyOf viprs:has_sign.
+
+viso:is_documentation_of a owl:ObjectProperty;
+  owl:inverseOf viso:has_documentation;
+  rdfs:comment "Is a description, explanation or classification of an object."^^xs:string;
+  rdfs:subPropertyOf viprs:is_sign_for.
+
+# P5 - Similarity #
+
+viso:similarity_relation a owl:ObjectProperty;
+  rdfs:subPropertyOf viprs:immanent_relation;
+  rdfs:comment "Relates objects based on similarity, intended as some common aspect."^^xs:string.
+
+viso:is_similar_to a owl:ObjectProperty;
+#  a owl:ReflexiveProperty; # NB: Removed to avoid uninformative relations between individuals.
+  a owl:TransitiveProperty;
+  a owl:SymmetricProperty;
+  rdfs:comment """Refers to any kind of similarity, intended as some common aspect.
+  	       It is a transitive and symmetric property. We intentionally avoid reflexivity, since it would be uninformative."""^^xs:string.
+
+# P6 - Connection #
+
+viso:connection_relation a owl:ObjectProperty;
+  rdfs:subPropertyOf viprs:immanent_relation;
+  rdfs:comment "Relates objects in ways that are other than parthood, ability, dependence, similarity and documentation."^^xs:string.
+
+viso:is_connected_to a owl:ObjectProperty.
+
+##################################################################
+
+viso:depends_on rdfs:subPropertyOf viso:dependence_relation.
+viso:has_dependent rdfs:subPropertyOf viso:dependence_relation.
+
+viso:has_ability rdfs:subPropertyOf viso:ability_relation.
+viso:is_ability_of rdfs:subPropertyOf viso:ability_relation.
+
+viso:has_documentation rdfs:subPropertyOf viso:documentation_relation.
+viso:is_documentation_of rdfs:subPropertyOf viso:documentation_relation.
+
+viso:has_part rdfs:subPropertyOf viso:parthood_relation.
+viso:is_part_of rdfs:subPropertyOf viso:parthood_relation.
+
+viso:is_similar_to rdfs:subPropertyOf viso:similarity_relation.
+
+viso:is_connected_to rdfs:subPropertyOf viso:connection_relation.
+
+##################################################################
+
+viso:is_owner_of a owl:ObjectProperty;
+  rdfs:domain viso:agent;
+  rdfs:range viso:software;
+  rdfs:subPropertyOf viso:has_dependent;
+  rdfs:subPropertyOf viprs:n_loc_cor_rnoc.  
+
+viso:has_owner a owl:ObjectProperty;
+  rdfs:domain viso:software;
+  rdfs:range viso:agent;
+  owl:inverseOf viso:is_owner_of;
+  rdfs:subPropertyOf viso:depends_on;
+  rdfs:subPropertyOf viprs:n_lnoc_cor_roc.
+
+viso:is_distributor_of a owl:ObjectProperty;
+  rdfs:domain viso:agent;
+  rdfs:range viso:software;
+  owl:inverseOf viso:is_distributed_by;
+  rdfs:subPropertyOf viso:has_dependent;
+  rdfs:subPropertyOf viprs:n_loc_cor_rnoc.  
+
+viso:is_distributed_by a owl:ObjectProperty;
+  rdfs:domain viso:software;
+  rdfs:range viso:agent;
+  rdfs:subPropertyOf viso:depends_on;
+  rdfs:subPropertyOf viprs:n_lnoc_cor_roc.
+
+viso:has_license a owl:ObjectProperty;
+  rdfs:domain viso:software;
+  rdfs:range viso:license;
+  rdfs:subPropertyOf swo:has_license;
+  rdfs:subPropertyOf viso:depends_on;
+  rdfs:subPropertyOf viprs:n_lnoc_cor_roc.
+swo:has_license rdfs:subPropertyOf viprs:n_lnoc_cor_roc.
+
+viso:is_input_of a owl:ObjectProperty;
+  rdfs:domain viso:software;
+  rdfs:range viso:software_update;
+  owl:inverseOf viso:has_input;
+  rdfs:subPropertyOf viso:is_part_of.
+
+viso:is_output_of a owl:ObjectProperty;
+  rdfs:domain viso:software;
+  rdfs:range viso:software_update;
+  owl:inverseOf viso:has_output;
+  rdfs:subPropertyOf viso:is_part_of.
+
+viso:has_vimmp_contact a owl:ObjectProperty;  # NB: "internal" VIMMP property
+  rdfs:comment "points to the VIMMP human agent(s) to be contacted about the given software"^^xs:string;
+  rdfs:domain viso:software;
+  rdfs:range evmpo:human_agent;
+  rdfs:subPropertyOf viso:is_connected_to;
+  rdfs:subPropertyOf viprs:immanent_relation.
+
+viso:has_manual a owl:ObjectProperty;
+  rdfs:domain viso:software;
+  rdfs:range evmpo:training_document;
+  rdfs:subPropertyOf viso:has_documentation.
+
+viso:is_manual_of a owl:ObjectProperty; 
+  rdfs:domain evmpo:training_document;
+  rdfs:range viso:software;
+  owl:inverseOf viso:has_manual;
+  rdfs:subPropertyOf viso:is_documentation_of.
+
+viso:is_tool_for_model a owl:ObjectProperty;
+  rdfs:comment "Relates software tools and RoMM models."^^xs:string;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:model_type;
+  rdfs:subPropertyOf viso:has_ability.
+
+viso:has_feature a owl:ObjectProperty;
+  rdfs:comment "To describe the (solver and model) features of a software tool."^^xs:string;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:software_tool_feature;
+  rdfs:subPropertyOf viso:has_ability.
+
+viso:is_feature_of a owl:ObjectProperty;
+  rdfs:domain viso:software_tool_feature;
+  rdfs:range viso:software_tool;
+  owl:inverseOf viso:has_feature;
+  rdfs:subPropertyOf viso:is_ability_of.
+
+viso:uses_language a owl:ObjectProperty;
+  rdfs:domain [a owl:Class; owl:unionOf (viso:software_tool viso:software_interface)];
+  rdfs:range viso:programming_language;
+  rdfs:subPropertyOf viso:depends_on;
+  rdfs:subPropertyOf viprs:n_lnoc_or_roc.
+
+viso:is_compatible_with a owl:ObjectProperty,
+  owl:SymmetricProperty;
+  rdfs:comment "Asserts compatibility (i.e., the ability to exchange information directly, with no need to interface) between sofware tools."^^xs:string;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:software_tool;
+  rdfs:subPropertyOf viso:is_connected_to;
+  rdfs:subPropertyOf viprs:can_cooccur_with.
+
+viso:requires a owl:ObjectProperty;
+  rdfs:comment "Relates a software tool to libraries and/or operating systems."^^xs:string;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:software;
+  rdfs:subPropertyOf viso:depends_on;
+  rdfs:subPropertyOf viprs:n_lnoc_or_roc.
+
+viso:can_run_on a owl:ObjectProperty;
+  rdfs:comment "Relates a software tool to operating systems."^^xs:string;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:operating_system;
+  rdfs:subPropertyOf viso:depends_on;
+  rdfs:subPropertyOf viprs:n_lnoc_cor_roc.
+
+viso:has_not_feature a owl:ObjectProperty;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:software_tool_feature;
+  rdfs:comment "Note: this property should not be used as an alternative to a proper negation of has_feature. It was introduced to allow the reasoner to make deductions about non-features from the software_update entities. Also, it is supposed to be incompatible with (owl:propertyDisjointWith) has_feature, but the OWL language does not allow to impose this constraint"^^xs:string;
+  rdfs:subPropertyOf viprs:immanent_relation.
+
+viso:has_added_feature a owl:ObjectProperty;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:software_tool_feature;
+  rdfs:subPropertyOf viso:has_feature;
+  owl:propertyChainAxiom  (viso:is_output_of viso:adds_feature).
+
+viso:has_acted_upon_feature a owl:ObjectProperty;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:software_tool_feature;
+  rdfs:subPropertyOf viso:has_feature;
+  owl:propertyChainAxiom  (viso:is_input_of viso:removes_feature).
+
+viso:has_older_version a owl:ObjectProperty,
+  owl:TransitiveProperty;
+  rdfs:domain viso:software;
+  rdfs:range viso:software;
+  rdfs:comment "Note: this property is meant to be irreflexive (owl:IrreflexiveProperty), but the OWL language does not allow to impose this constraint"^^xs:string;
+  owl:propertyChainAxiom  (viso:is_output_of viso:has_input);
+  rdfs:subPropertyOf viso:has_other_version;
+  rdfs:subPropertyOf viso:depends_on.
+
+viso:has_newer_version a owl:ObjectProperty,
+  owl:TransitiveProperty;
+  rdfs:domain viso:software;
+  rdfs:range viso:software;
+  owl:propertyChainAxiom  (viso:is_input_of viso:has_output);
+  owl:inverseOf viso:has_older_version;
+  rdfs:subPropertyOf viso:has_other_version;
+  rdfs:subPropertyOf viso:has_dependent.
+
+viso:has_other_version a owl:ObjectProperty,
+  owl:TransitiveProperty;
+  a owl:SymmetricProperty;
+  rdfs:domain viso:software;
+  rdfs:range viso:software;
+  rdfs:subPropertyOf viso:is_similar_to;
+  rdfs:subPropertyOf viprs:shares_a_sign_with.
+
+viso:has_lost_feature a owl:ObjectProperty;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:software_tool_feature;
+  owl:propertyChainAxiom  (viso:is_output_of viso:removes_feature);
+  rdfs:subPropertyOf viso:has_not_feature.  
+  
+viso:has_missing_feature a owl:ObjectProperty;
+  rdfs:domain viso:software_tool;
+  rdfs:range viso:software_tool_feature;
+  owl:propertyChainAxiom  (viso:is_input_of viso:adds_feature);
+  rdfs:subPropertyOf viso:has_not_feature.  
+
+viso:is_modelling_twin_of a owl:ObjectProperty,
+  owl:SymmetricProperty,
+  owl:TransitiveProperty;
+  rdfs:comment "Relates two objects that (despite being possibly distinct individuals) are equivalent from the modelling point of view. For example, a DPD thermostat is equivalent to the combination of Random and Drag forces, and a hard sphere can be represented using an infinite potential."^^xs:string;
+  rdfs:subPropertyOf viso:is_similar_to;
+  rdfs:subPropertyOf viprs:immanent_relation.
+
+viso:involves a owl:ObjectProperty;
+  rdfs:domain [a owl:Class; owl:unionOf (viso:software_tool_feature viso:modeling_related_entity)];
+  rdfs:range [a owl:Class; owl:unionOf (vov:variable vov:function viso:model_object)];
+  rdfs:comment "[X involves Y] means that there is a mathematical expression or an algorithmic formulation of X that contains the variable, function or model object Y"^^xs:string;
+  rdfs:subPropertyOf viso:has_part.
+
+viso:is_involved_in a owl:ObjectProperty;
+  rdfs:domain [a owl:Class; owl:unionOf (vov:variable vov:function viso:model_object)];
+  rdfs:range [a owl:Class; owl:unionOf (viso:software_tool_feature viso:modeling_related_entity)];
+  owl:inverseOf viso:involves;
+  rdfs:subPropertyOf viso:is_part_of.
+
+viso:has_pe a owl:ObjectProperty;
+  rdfs:domain viso:model_type;  
+  rdfs:range viso:physical_equation;
+  rdfs:subPropertyOf viso:has_part.
+
+viso:is_pe_of a owl:ObjectProperty;
+  rdfs:domain viso:physical_equation;  
+  rdfs:range viso:model_type;
+  owl:inverseOf viso:has_pe;
+  rdfs:subPropertyOf viso:is_part_of.
+
+viso:is_added_by_update a owl:ObjectProperty;
+  rdfs:domain viso:software_tool_feature;
+  rdfs:range viso:software_tool_update; 
+  owl:inverseOf viso:adds_feature;
+  rdfs:subPropertyOf viso:is_part_of.
+
+viso:is_removed_by_update a owl:ObjectProperty;
+  rdfs:domain viso:software_tool_feature;
+  rdfs:range viso:software_tool_update; 
+  owl:inverseOf viso:removes_feature;
+  rdfs:subPropertyOf viso:is_part_of.
+
+viso:has_input a owl:ObjectProperty;
+  rdfs:domain viso:software_update;
+  rdfs:range viso:software;
+  rdfs:subPropertyOf viso:has_part.  # is_input_of [= is_part_of  =>  has_input [= has_part
+
+viso:has_output a owl:ObjectProperty;
+  rdfs:domain viso:software_update;
+  rdfs:range viso:software;
+  rdfs:subPropertyOf viso:has_part.  # is_output_of [= is_part_of  =>  has_output [= has_part
+
+viso:adds_feature a owl:ObjectProperty;
+  rdfs:domain viso:software_tool_update;
+  rdfs:range viso:software_tool_feature;
+  rdfs:subPropertyOf viso:has_part.
+
+viso:removes_feature a owl:ObjectProperty;
+  rdfs:domain viso:software_tool_update;
+  rdfs:range viso:software_tool_feature;
+  rdfs:subPropertyOf viso:has_part.
+
+viso:has_interface a owl:ObjectProperty;
+  rdfs:domain viso:software;
+  rdfs:range viso:software_interface;
+  rdfs:subPropertyOf viso:has_ability.
+
+viso:has_classifier a owl:ObjectProperty;
+  rdfs:domain [a owl:Class; owl:unionOf (viso:software_tool
+  	      viso:software_tool_feature viso:modeling_related_entity)];
+  rdfs:range viso:classifier;
+  rdfs:subPropertyOf viso:has_documentation.
+
+viso:has_clause a owl:ObjectProperty;
+  rdfs:domain viso:license;
+  rdfs:range viso:license_clause;
+  rdfs:subPropertyOf swo:SWO_9001002.  # <-> SWO 'has clause'
+  # rdfs:subPropertyOf viso:has_part.
+swo:SWO_9001002 rdfs:subPropertyOf viso:has_part.
+
+viso:is_mathematically_related_to a owl:ObjectProperty;
+  rdfs:comment """[X is_mathematically_related_to Y] if X and Y are related to each other by a mathematical transformation, 
+   	        such as, for example, differentiation, integration or Fourier transform."""^^xs:string;
+  rdfs:domain evmpo:marketplace_related_entity;
+  rdfs:range evmpo:marketplace_related_entity;
+  a owl:SymmetricProperty;
+  rdfs:subPropertyOf viso:is_connected_to;
+  rdfs:subPropertyOf viprs:immanent_relation.
+
+###################################################################
+#        Other relations between properties                       #
+###################################################################
+
+[a owl:Restriction;
+                   owl:onProperty viso:has_interface;
+                   owl:minQualifiedCardinality 1;
+                   owl:onClass viso:graphical_user_interface]
+		   rdfs:subClassOf
+		   [a owl:Restriction; 
+                   owl:onProperty viso:has_a_gui;
+                   owl:hasValue true].
+
+[a owl:Restriction;
+                   owl:onProperty viso:has_interface;
+                   owl:minQualifiedCardinality 1;
+                   owl:onClass viso:command_line_interface]
+		   rdfs:subClassOf
+		   [a owl:Restriction; 
+                   owl:onProperty viso:has_a_cli;
+                   owl:hasValue true].
+
+[a owl:Restriction;
+                   owl:onProperty viso:has_interface;
+                   owl:minQualifiedCardinality 1;
+                   owl:onClass viso:application_programming_interface]
+		   rdfs:subClassOf
+		   [a owl:Restriction; 
+                   owl:onProperty viso:has_an_api;
+                   owl:hasValue true].
+
+[a owl:Restriction;
+                   owl:onProperty viso:has_interface;
+                   owl:minQualifiedCardinality 1;
+                   owl:onClass viso:wrapper]
+		   rdfs:subClassOf
+		   [a owl:Restriction; 
+                   owl:onProperty viso:has_a_wrapper;
+                   owl:hasValue true].
+
+[a owl:Restriction;
+                   owl:onProperty viso:has_interface;
+                   owl:minQualifiedCardinality 1;
+                   owl:onClass viso:data_interface]
+		   rdfs:subClassOf
+		   [a owl:Restriction; 
+                   owl:onProperty viso:has_a_data_interface;
+                   owl:hasValue true].
+
+[a owl:Restriction;
+                  owl:onProperty viso:is_free;
+                  owl:hasValue true]
+		  rdfs:subClassOf [a owl:Restriction;
+                  owl:onProperty viso:is_free_to_academic;
+                  owl:hasValue true].
+
+[a owl:Restriction;
+                  owl:onProperty viso:is_free_to_academic;
+                  owl:hasValue false]
+		  rdfs:subClassOf [a owl:Restriction;
+                  owl:onProperty viso:is_free;
+                  owl:hasValue false].
+
+[a owl:Restriction;
+                   owl:onProperty viso:has_manual;
+                   owl:minCardinality 1]
+		   rdfs:subClassOf
+		   [a owl:Restriction; 
+                   owl:onProperty viso:has_a_manual;
+                   owl:hasValue true].
+
+[a owl:Restriction;
+                  owl:onProperty viso:has_accessible_exe;
+                  owl:hasValue true]
+		  rdfs:subClassOf [a owl:Restriction;
+                  owl:onProperty viso:has_a_cli;
+                  owl:hasValue true].
+
+[a owl:Restriction;
+                  owl:onProperty viso:has_a_cli;
+                  owl:hasValue false]
+		  rdfs:subClassOf [a owl:Restriction;
+                  owl:onProperty viso:has_accessible_exe;
+                  owl:hasValue false].
+
+###################################################################
+#        Some useful named restrictions                           #
+###################################################################
+
+viso:R_IS_ELECTRONIC owl:equivalentClass [a owl:Restriction;
+   owl:onProperty viso:has_classifier;
+   owl:hasValue osmo:ELECTRONIC];
+   rdfs:subClassOf vov:restriction.
+
+viso:R_IS_ATOMISTIC owl:equivalentClass [a owl:Restriction;
+   owl:onProperty viso:has_classifier;
+   owl:hasValue osmo:ATOMISTIC];
+   rdfs:subClassOf vov:restriction.
+
+viso:R_IS_MESOSCOPIC owl:equivalentClass [a owl:Restriction;
+   owl:onProperty viso:has_classifier;
+   owl:hasValue osmo:MESOSCOPIC];
+   rdfs:subClassOf vov:restriction.
+
+viso:R_IS_CONTINUUM owl:equivalentClass [a owl:Restriction;
+  owl:onProperty viso:has_classifier;
+  owl:hasValue osmo:CONTINUUM];
+   rdfs:subClassOf vov:restriction.
+   
+########################################################
+
+########################################################
+
+###  INSTANCES DEFINITION and DECLARATION OF DIFFERENCES
+
+_:C_EXECUTION_MODE rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso:PARALLEL_EXECUTION viso:SERIAL_EXECUTION).
+
+####################################################
+
+viso:software_tool_feature a owl:Class; 
+  rdfs:subClassOf evmpo:marketplace_related_entity;
+  owl:disjointUnionOf (viso:solver_feature viso:model_feature). 
+
+###################################################################
+# NB: for convenience, some EVMPO statements are duplicated here  #
+###################################################################
+
+evmpo:legal_document rdfs:subClassOf evmpo:information_content_entity.
+evmpo:training_document rdfs:subClassOf evmpo:information_content_entity.
+evmpo:information_content_entity rdfs:subClassOf evmpo:marketplace_related_entity.
+evmpo:software_infrastructure rdfs:subClassOf evmpo:marketplace_related_entity.
+evmpo:agent rdfs:subClassOf evmpo:marketplace_related_entity.
+evmpo:process rdfs:subClassOf evmpo:marketplace_related_entity.
+
+evmpo:annotation rdfs:subClassOf evmpo:marketplace_related_entity.
+
+###
+
+vov:variable rdfs:subClassOf evmpo:marketplace_related_entity.
+vov:function rdfs:subClassOf evmpo:marketplace_related_entity.
+
+###################################################################
+#           Notes on the alignment with VIPRS                     #
+###################################################################
+# Parthood: 
+#
+# viso:has_part (viso:is_part_of) is sub-property of viprs:has_proper_part (viprs:is_proper_part_of).
+#
+# Dependence:
+#
+# sub-properties of viso:dependence_relation are conceptual or individual cooccurrence necessities:
+# more precisely, those under viso:depdends_on (viso:has_dependent) are sub-properties of
+# viprs:n_lnoc_cor_roc (viprs:n_loc_cor_rnoc) or of viprs:n_lnoc_or_roc (viprs:n_loc_or_rnoc) when 
+# stronger statements can be made. 
+#
+# Ability: 
+# 
+# viso:has_ability is a sub-property of viprs:enables_entity_containing
+# viso:is_ability_of is a sub-property of viprs:is_proper_part_of_entity_enabled_by
+#
+# For example: if a tool X has a feature Y, this allows to create an entity (a workflow, a simulation)
+# that contains feature Y
+#
+# Documentation:
+#
+# viso:has_documentation (viso:is_documentation_of) is sub-property of viprs:has_sign (viprs:is_sign_for).
+#
+# Similarity, Connection: alignment done on a case-by-case basis.
+#
+# Datatype properties:
+#
+# All boolean ones fall under viprs:has_flag; for the others, the alignment is done on a case-by-case basis.
+
+########################################################################################
+#                                                                                      #
+#        Branch of VISO for (RoMM-)ATOMISTIC AND (RoMM-)MESOSCOPIC MODELS/SOLVERS      #
+#                                                                                      #
+########################################################################################
+
+@prefix viso: <https://purl.vimmp.eu/semantics/viso/viso-general.ttl#>.
+@prefix viso-am: <https://purl.vimmp.eu/semantics/viso/viso-atomistic-mesoscopic.ttl#>.
+@prefix vov: <https://purl.vimmp.eu/semantics/vov/vov.ttl#>.
+
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vcl: <https://purl.vimmp.eu/semantics/alignment/vcl.ttl#>.
+
+<https://purl.vimmp.eu/semantics/viso/viso-atomistic-mesoscopic.ttl#> a owl:Ontology.
+
+############################  Ontology header  #########################################
+
+<https://purl.vimmp.eu/semantics/viso/viso-atomistic-mesoscopic.ttl#>
+# owl:imports <https://purl.vimmp.eu/semantics/viso/viso-general.ttl#>;
+  dcterms:title "VISO-AM: Branch of VISO for (RoMM-)Atomistic and (RoMM-)Mesoscopic models/solvers"^^xs:string;
+  dcterms:modified "2021-08-27"^^xs:string;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string;
+  dcterms:creator "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string;
+  dcterms:creator "Mara Chiricotto (ORCID 0000-0003-1609-5254)"^^xs:string;
+  dcterms:creator "Michael A. Seaton (ORCID 0000-0002-4708-573X)"^^xs:string;
+  dcterms:creator "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string;
+  dcterms:creator "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string;
+  dcterms:creator "Joshua D. Elliott (ORCID 0000-0002-0729-246X)"^^xs:string;
+  dcterms:contributor "Welchy Leite Cavalcanti"^^xs:string;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string;	
+  dcterms:license "GNU Lesser General Public License (LGPL) version 3"^^xs:string;
+  dcterms:description """VISO-AM expands on the model types, model and solver features for 
+Atomisitic and Mesoscopic (as per RoMM) models."""^^xs:string;
+  dcterms:bibliographicCitation "10.1021/acs.jced.9b00739"^^xs:string;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon 2020 research and
+innovation programme under grant agreement no. 760907, Virtual Materials Marketplace (VIMMP)."""^^xs:string.
+  
+##############  Atomistic and Mesoscopic model types ##################################
+
+viso-am:molecular_dynamics a owl:Class; 
+  rdfs:subClassOf viso:am_model_type;
+  rdfs:comment "Molecular Dynamics."^^xs:string;
+  rdfs:subClassOf viso:R_IS_ATOMISTIC;
+  rdfs:subClassOf viso:R_IS_MESOSCOPIC.
+
+viso-am:molecular_mechanics a owl:Class;
+  rdfs:subClassOf viso:am_model_type;
+  rdfs:comment "Molecular Mechanics or Molecular Statics."^^xs:string;
+  rdfs:subClassOf viso:R_IS_ATOMISTIC;
+  rdfs:subClassOf viso:R_IS_MESOSCOPIC.
+      
+viso-am:molecular_monte_carlo a owl:Class; 
+  rdfs:subClassOf viso:am_model_type;
+  rdfs:comment "Molecular Monte Carlo method."^^xs:string;
+  rdfs:subClassOf viso:R_IS_ATOMISTIC;
+  rdfs:subClassOf viso:R_IS_MESOSCOPIC.
+
+viso-am:dissipative_particle_dynamics a owl:Class; 
+  rdfs:subClassOf viso:am_model_type;
+  rdfs:comment "Dissipative Particle Dynamics."^^xs:string;
+  rdfs:subClassOf viso:R_IS_MESOSCOPIC.
+
+viso-am:MD a viso-am:molecular_dynamics;
+   viso:has_osmo_pe_type_id "A.3";
+   viso:has_osmo_pe_type_id "M.3";
+   viso:has_pe viso-am:NEWTON_EQUATION.
+
+viso-am:MM a viso-am:molecular_mechanics;
+   viso:has_osmo_pe_type_id "A.2";
+   viso:has_osmo_pe_type_id "M.2".	
+   
+viso-am:MC a viso-am:molecular_monte_carlo;
+   viso:has_osmo_pe_type_id "A.4";
+   viso:has_osmo_pe_type_id "M.4";
+   viso:has_pe viso-am:PHASE_SPACE_SAMPLING_EQUATION.
+
+viso-am:DPD a viso-am:dissipative_particle_dynamics;
+  viso:has_osmo_pe_type_id "M.3";
+  viso:has_pe viso-am:NEWTON_EQUATION_PLUS_RANDOM_AND_DRAG_FORCE. 
+
+##############  Connection of model_type to model_object  #############################
+
+viso:am_model_type rdfs:subClassOf [a owl:Restriction;
+  		  owl:onProperty vov:involves_object;
+		  owl:someValuesFrom viso-am:interaction_site].
+
+##############  Atomistic and Mesoscopic solver feature ###############################
+viso-am:thermostat a owl:Class;
+  rdfs:subClassOf viso:am_solver_feature.
+
+viso-am:barostat a owl:Class;
+  rdfs:subClassOf viso:am_solver_feature.
+
+viso-am:integrator a owl:Class;
+  rdfs:subClassOf viso:am_solver_feature;
+  rdfs:comment "An algorithm to integrate Newton second law."^^xs:string.
+
+viso-am:minimization a owl:Class;
+  rdfs:subClassOf viso:am_solver_feature;
+  rdfs:comment "An algorithm for energy minimization/geometry optimization."^^xs:string.
+
+viso-am:electrostatics_solver a owl:Class;
+  rdfs:subClassOf viso:am_solver_feature.
+
+viso-am:parallelization_scheme a owl:Class;
+  rdfs:subClassOf viso:am_solver_feature.
+
+viso-am:geometric_constraint_algorithm a owl:Class;
+  rdfs:subClassOf viso:am_solver_feature.
+
+viso-am:sampling_algorithm a owl:Class;
+  rdfs:subClassOf viso:am_solver_feature.
+
+viso-am:charge_smearing a owl:Class;
+  rdfs:subClassOf viso:am_solver_feature;
+  rdfs:comment "Charge smearing is sometimes used in combination with soft potentials (e.g., dpd potential) to avoid the divergence of the interaction energy of opposite charges."^^xs:string.
+
+##############  (6) model feature ################################
+
+viso-am:NEWTON_EQUATION a viso:am_physical_equation;
+ rdfs:comment "Newton's second law of motion."^^xs:string.
+
+viso-am:NEWTON_EQUATION_PLUS_RANDOM_AND_DRAG_FORCE a viso:am_physical_equation;
+ rdfs:comment """Newton's second law of motion, with explicit terms for the DPD thermostat (random and drag force terms). The splitting into PE and MR for this case can be debated, as the thermostat affects the material transport properties. Here we choose to put in the MR part the conservative forces only."""^^xs:string.
+
+viso-am:PHASE_SPACE_SAMPLING_EQUATION a viso:am_physical_equation;
+ rdfs:comment "We indicate as Phase-Space Sampling equation any equation that allows to generate configurations (i.e., microstates) according to a given ensemble (macrostate)."^^xs:string.
+
+viso:am_external_condition_trait a owl:Class;
+  rdfs:subClassOf viso:am_model_feature.
+
+viso-am:external_field a owl:Class;
+  rdfs:subClassOf viso:am_external_condition_trait.
+
+viso-am:external_conservative_field a owl:Class;
+  rdfs:subClassOf viso-am:external_field;
+  rdfs:subClassOf [a owl:Restriction;
+      owl:onProperty viso:is_mathematically_related_to;
+      owl:minQualifiedCardinality 1;
+      owl:onClass viso-am:external_potential].
+
+viso-am:external_non_conservative_field a owl:Class;
+  rdfs:subClassOf viso-am:external_field.
+
+viso-am:external_field owl:disjointUnionOf (viso-am:external_conservative_field viso-am:external_non_conservative_field).
+
+viso-am:EXTERNAL_ELECTRIC_FIELD a viso-am:external_conservative_field.
+viso-am:EXTERNAL_GRAVITY_FIELD a viso-am:external_conservative_field.
+
+viso-am:composite_potential a owl:Class; 
+  rdfs:subClassOf viso:am_materials_relation_trait;
+  rdfs:comment """A potential that is defined by more than just one single functional form acting between a pair of species. 
+  For example, it is the sum of two or more potentials having different functional forms (e.g., a stretching potential and an angle potential) 
+  and/or it applies to at least two pairs of species with different parameters (e.g., a Mie potential between species pairs {A,A}, {A,B} and {B,B}). 
+  It can contain combination and/or exclusion rules."""^^xs:string;
+  rdfs:subClassOf [a owl:Restriction;
+    owl:onProperty viso:has_part;
+    owl:minQualifiedCardinality 2;
+    owl:onClass viso-am:potential].
+
+viso-am:potential a owl:Class; 
+  rdfs:subClassOf viso:am_materials_relation_trait;
+  rdfs:comment """The mathematical expression (functional form) of a potential energy, i.e., of the energy associated with a conservative force. 
+  It is a building block of composite potentials (cf. composite_potential class).
+  It can concern both interactions of particles between them and with the external world."""^^xs:string.
+
+viso-am:non_bonding_potential a owl:Class; 
+  rdfs:subClassOf viso-am:potential;
+  rdfs:comment """A potential defined between particles of given species, that is not associated to bonding and acts between and within molecules. It is commonly switched off for 'closest' particles. Sometimes called 'inter-molecular potential', even if this is strictly correct only for small molecules, not for bigger ones."""^^xs:string.
+
+viso-am:two_body_potential a owl:Class;
+  rdfs:subClassOf viso-am:potential.
+
+viso-am:three_body_potential a owl:Class;
+  rdfs:subClassOf viso-am:potential.
+
+viso-am:four_body_potential a owl:Class;
+  rdfs:subClassOf viso-am:potential.
+
+viso-am:bonding_potential a owl:Class;
+  rdfs:subClassOf viso-am:potential;
+  rdfs:comment "A potential defined between particles within a molecule. Sometimes called 'intra-molecular' potential."^^xs:string.
+
+viso-am:stretching_potential a owl:Class;
+  rdfs:subClassOf viso-am:bonding_potential;
+  rdfs:subClassOf viso-am:two_body_potential;	
+  rdfs:comment "Bonding two-body potential between particles within a molecule. It is a function of the inter-particle distance."^^xs:string.
+
+viso-am:angle_potential a owl:Class;
+  rdfs:subClassOf viso-am:bonding_potential;
+  rdfs:subClassOf viso-am:three_body_potential;	
+  rdfs:comment "Angular three-body potential between particles within a molecule."^^xs:string.
+
+viso-am:dihedral_potential a owl:Class;
+  rdfs:subClassOf viso-am:bonding_potential;
+  rdfs:subClassOf viso-am:four_body_potential;
+  rdfs:comment "Dihedral four-body potential between particles within a molecule. It describes the interaction arising from torsional forces in molecules. Sometimes referred to as torsion potentials."^^xs:string.
+
+viso-am:improper_potential a owl:Class;
+  rdfs:subClassOf viso-am:bonding_potential;
+  rdfs:subClassOf viso-am:four_body_potential;
+  rdfs:comment "Improper dihedral four-body potential between particles within a molecule. It is used to restrict the geometry of a molecule."^^xs:string.
+
+viso-am:electrostatic_potential a owl:Class;
+  rdfs:subClassOf viso-am:non_bonding_potential;
+  rdfs:subClassOf viso-am:two_body_potential.
+
+viso-am:mie_potential a owl:Class;
+   rdfs:subClassOf viso-am:non_bonding_potential;
+   rdfs:subClassOf viso-am:two_body_potential;
+   rdfs:comment "Mie n-m potential. It includes the Lennard-Jones potential as a special case."^^xs:string;
+   rdfs:seeAlso "Gustav Mie,'Zur kinetischen Theorie der einatomigen Körper', Annalen der Physik 11 pp. 657-697 (1903)."^^xs:string;
+   rdfs:seeAlso "J. E. Jones. On the determination of molecular fields. II. From the equation of state of a gas. Proceedings of the Royal Society of London Series A, 106(738):463–477, October 1924."^^xs:string.
+
+viso-am:buckingham_potential a owl:Class;
+   rdfs:subClassOf viso-am:non_bonding_potential;
+   rdfs:subClassOf viso-am:two_body_potential;
+   rdfs:seeAlso "R. A. Buckingham and John Edward Lennard-Jones, The classical equation of state of gaseous helium, neon and argon, Proc. R. Soc. Lond. A., 168, 1938."^^xs:string.
+
+viso-am:hard_sphere_potential a owl:Class;
+   rdfs:subClassOf viso-am:non_bonding_potential;
+   rdfs:subClassOf viso-am:two_body_potential;
+   rdfs:comment "Hard-sphere potential."^^xs:string.
+
+viso-am:dpd_potential a owl:Class;
+   rdfs:subClassOf viso-am:non_bonding_potential;
+   rdfs:comment "Potential to be used in Dissipative Particle Dynamics simulations."^^xs:string;
+   rdfs:subClassOf viso:R_IS_MESOSCOPIC.
+
+viso-am:non_bonding_potential a owl:Class;
+ owl:disjointUnionOf  (viso-am:electrostatic_potential viso-am:mie_potential viso-am:buckingham_potential viso-am:metal_potential viso-am:dpd_potential).
+
+viso-am:metal_potential a owl:Class;
+  rdfs:subClassOf viso-am:non_bonding_potential.
+  
+viso-am:external_potential a owl:Class;
+  rdfs:subClassOf viso-am:potential;
+  rdfs:subClassOf viso:am_external_condition_trait;
+  rdfs:subClassOf [a owl:Restriction;
+      owl:onProperty viso:is_mathematically_related_to;
+      owl:minQualifiedCardinality 1;
+      owl:onClass viso-am:external_conservative_field].
+
+viso-am:site_surface_potential a owl:Class;
+  rdfs:subClassOf viso-am:potential;
+  rdfs:comment "A potential for the interaction between a site and a surface (e.g., between a particle and a wall)."^^xs:string.  
+
+# Force fields
+
+viso-am:force_field a owl:Class; 
+  rdfs:comment "A Force Field (FF), despite the name, in some areas (as computational chemistry and molecular simulations) refers to the functional form and parameter sets used to calculate the potential energy of a system of particles (atoms or coarse-grained particles). Families of popular FFs exist: they are typically developed witin a community, for a class of materials and using a certain metodology."^^xs:string;
+  rdfs:comment "Called Interatomic Potential in the physics community."^^xs:string;
+  rdfs:subClassOf viso-am:composite_potential.
+
+viso-am:opls_ff a owl:Class;
+  rdfs:subClassOf viso-am:force_field;
+  rdfs:comment "Optimized Potentials for Liquid Simulations (OPLS) is a family of force fields. It contains both All-Atomistic (AA) and United-Atom (UA) force fields."^^xs:string;
+  rdfs:seeAlso "Jorgensen WL, Tirado-Rives J (1988). 'The OPLS Force Field for Proteins. Energy Minimizations for Crystals of Cyclic Peptides and Crambin'. J. Am. Chem. Soc. 110 (6): 1657–1666.'. "^^xs:string;
+  rdfs:seeAlso "Jorgensen WL, Maxwell DS, Tirado-Rives J (1996). 'Development and Testing of the OPLS All-Atom Force Field on Conformational Energetics and Properties of Organic Liquids'. J. Am. Chem. Soc. 118 (45): 11225–11236."^^xs:string.
+
+viso-am:amber_ff a owl:Class;
+  rdfs:comment "Assisted Model Building with Energy Refinement (AMBER) Force Field is a family of force fields. Not to be confused with the related software tool."^^xs:string;
+  rdfs:seeAlso "http://ambermd.org/AmberModels.php"^^xs:anyURI;
+  rdfs:subClassOf viso-am:force_field.
+
+viso-am:charmm_ff a owl:Class;
+  rdfs:comment "Chemistry at Harvard Macromolecular Mechanics (CHARMM) Force Field is a family of force fields. Not to be confused with the related software tool."^^xs:string;
+  rdfs:seeAlso "http://mackerell.umaryland.edu/charmm_ff.shtml"^^xs:anyURI;
+  rdfs:subClassOf viso-am:force_field.
+
+viso-am:gromos_ff a owl:Class;
+  rdfs:comment "GROningen MOlecular Simulation (GROMOS) Force Field is a family of force fields. Not to be confused with the related software tool."^^xs:string;
+  rdfs:seeAlso "http://www.gromos.net/page.pl?page=about"^^xs:anyURI;
+  rdfs:subClassOf viso-am:force_field.
+
+viso-am:dreiding_ff a owl:Class;
+  rdfs:subClassOf viso-am:force_field;
+  rdfs:comment "DREIDING is a generic force field for molecular simulations."^^xs:string;  		 
+  rdfs:seeAlso "Mayo, S. L., Olafson, B. D., and Goddard, W. A., 1990, J. Phys. Chem., 94, 8897"^^xs:string.
+
+viso-am:uff_ff a owl:Class;
+  rdfs:subClassOf viso-am:force_field;
+  rdfs:comment "The Universal Force Field (UFF) is a full periodic-table force field."^^xs:string;  		 
+  rdfs:seeAlso "A. K. Rappe, C. J. Casewit, K. S. Colwell, W. A. Goddard, W. M. Skiff, 'UFF, a full periodic table force field for molecular mechanics and molecular dynamics simulations', J. Am. Chem. Soc. 114, 10024-10035 (1992)."^^xs:string. 
+
+viso-am:pcff_ff a owl:Class; 
+  rdfs:comment "Polycarbonate Compatible Force Field."^^xs:string;
+  rdfs:seeAlso "Huai Sun, Stephen J. Mumby, Jon R. Maple, and Arnold T. Hagler, 'An ab Initio CFF93 All-Atom Force Field for Polycarbonates', J. Am. Chem. Soc. 116, 2978-2987 (1994)."^^xs:string; 
+  rdfs:subClassOf viso-am:force_field.
+
+viso-am:gaff_ff a owl:Class; 
+  rdfs:comment "Generalized AMBER force field."^^xs:string;  		 
+  rdfs:seeAlso "Junmei Wang, Romain M. Wolf, James W. Caldwell, Peter A. Kollman, David A. Case, 'Development and testing of a general amber force field',J. Comput. Chem. 25, 1157 (2004)."^^xs:string;  		 
+  rdfs:subClassOf viso-am:force_field.
+
+viso-am:aua_ff a owl:Class;
+  rdfs:comment "Anisotropic United Atom force field."^^xs:string;  		 
+  rdfs:seeAlso "Ungerer et al., J. Chem. Phys. 112(12), 5499-5510, 2000."^^xs:string;
+  rdfs:subClassOf viso-am:force_field.
+
+viso-am:trappe_ff a owl:Class;
+  rdfs:comment "Transferable Potentials for Phase Equilibria."^^xs:string;  		 
+  rdfs:seeAlso "Eggimann et al., Mol. Sim. 40(1-3), 101-105, 2014"^^xs:string;
+  rdfs:subClassOf viso-am:force_field.
+
+viso-am:martini_ff a owl:Class;
+  rdfs:subClassOf viso-am:force_field;
+  rdfs:comment "The Martini force field is a coarse-grained (CG) force field suited for molecular dynamics simulations of biomolecular systems."^^xs:string;
+  rdfs:seeAlso "http://cgmartini.nl/index.php"^^xs:anyURI;
+  rdfs:seeAlso "S.J. Marrink, H.J. Risselada, S. Yefimov, D.P. Tieleman, A.H. de Vries. 'The MARTINI forcefield: coarse grained model for biomolecular simulations'. J. Phys. Chem. B, 111:7812-7824, 2007."^^xs:string.
+
+viso-am:reaxff_ff a owl:Class;
+  rdfs:subClassOf viso-am:force_field;
+  rdfs:comment "ReaxFF: A Reactive Force Field for Hydrocarbons."^^xs:string;
+  rdfs:seeAlso "van Duin, ACT; Dasgupta, S; Lorant, F; Goddard, WA, 'ReaxFF:  A Reactive Force Field for Hydrocarbons.',  J. Phys. Chem. A 105, 9396-9409 (2001)"^^xs:string.
+
+##################################################################
+
+### Object Properties ###
+
+# MD - DPD specfic property (currently, MD/DPD specific. May be generalized later)
+
+viso-am:has_rule a owl:ObjectProperty;
+  rdfs:domain viso-am:composite_potential;
+  rdfs:range viso-am:rule;
+  rdfs:subPropertyOf viso:has_part.
+
+###################################################################
+# More model features #
+
+viso-am:statistical_mechanics_entity a owl:Class;
+  rdfs:subClassOf viso:modeling_related_entity.
+
+viso-am:thermodynamic_ensemble a owl:Class;
+  rdfs:subClassOf viso-am:statistical_mechanics_entity;
+  rdfs:subClassOf viso:am_external_condition_trait.
+
+viso-am:model_object a owl:Class;  
+  rdfs:subClassOf viso:am_materials_relation_trait;
+  rdfs:subClassOf viso:model_object;  
+rdfs:comment "Type of object entering the model (e.g., rigid, flexible, or structureless objects)."^^xs:string;
+  owl:disjointUnionOf (viso-am:structureless_object viso-am:composite_object).  
+
+viso-am:composite_object a owl:Class;  
+  rdfs:subClassOf viso-am:model_object;
+  rdfs:comment """A model object having as parts two or more model objects, which can be connected or not.
+  For example: a molecule made of two bonded atoms; a polymer made of bonded monomers; 
+  or an unbonded pair made of a negative and a positive ion. 
+  Such unconnected objects are sometimes defined for convenience (e.g., to ensure the populations of two 
+  species are the same)."""^^xs:string;
+  rdfs:subClassOf [a owl:Restriction;
+      owl:onProperty viso:has_part;
+      owl:minQualifiedCardinality 2;
+      owl:onClass viso-am:structureless_object].
+		  
+viso-am:connected_object a owl:Class;  
+  rdfs:subClassOf viso-am:composite_object;
+  rdfs:subClassOf [a owl:Restriction; owl:onProperty viso:has_part; owl:someValuesFrom
+  		  [a owl:Class; owl:unionOf
+  		     ([a owl:Restriction; owl:onProperty viso:is_involved_in; owl:someValuesFrom viso-am:stretching_potential]
+		     	 [a owl:Restriction; owl:onProperty viso:is_involved_in; owl:hasValue viso-am:RIGID_BOND])]].
+
+viso-am:unconnected_object a owl:Class;  
+  rdfs:subClassOf viso-am:composite_object.
+
+viso-am:rigid_object a owl:Class;  
+  rdfs:subClassOf viso-am:connected_object;
+  rdfs:subClassOf [a owl:Restriction; owl:onProperty viso:has_part; owl:someValuesFrom
+		       	 [a owl:Restriction; owl:onProperty viso:is_involved_in; owl:hasValue viso-am:RIGID_BOND]].
+
+viso-am:flexible_object a owl:Class;  
+  rdfs:subClassOf viso-am:connected_object;
+  rdfs:subClassOf [a owl:Restriction; owl:onProperty viso:has_part; owl:someValuesFrom
+    		  [a owl:Restriction; owl:onProperty viso:is_involved_in; owl:someValuesFrom viso-am:stretching_potential]].
+
+viso-am:structureless_object a owl:Class;  
+  rdfs:subClassOf viso-am:model_object.
+
+viso-am:interaction_site a owl:Class;
+  rdfs:subClassOf viso-am:structureless_object;
+  rdfs:comment """An interaction site is a point which is involved in (experiences) some interaction.
+  It can represent the center of a physical particle (an atom, a coarse-grained bead), 
+  but also be a ficticious particle."""^^xs:string;
+  rdfs:comment """For example: consider three sites, one carries a mass, one an electric charge +q, the other a charge -q. 
+  The three sites individually have no physical counterpart; however, combined together, they allow to model an object 
+  that has a mass and a charge dipole moment. """^^xs:string.
+
+
+viso-am:lj_site a owl:Class;
+  rdfs:subClassOf viso-am:interaction_site;
+    rdfs:subClassOf [a owl:Restriction;
+                     owl:onProperty viso:is_involved_in;
+		     owl:hasValue viso-am:LENNARD_JONES_12_6].
+
+viso-am:mie_site a owl:Class;
+  rdfs:subClassOf viso-am:interaction_site;
+  rdfs:subClassOf [a owl:Restriction;
+                     owl:onProperty viso:is_involved_in;
+		     owl:someValuesFrom viso-am:mie_potential].
+
+viso-am:dpd_site a owl:Class;
+  rdfs:subClassOf viso-am:interaction_site;
+  rdfs:subClassOf [a owl:Restriction;
+                     owl:onProperty viso:is_involved_in;
+		     owl:someValuesFrom viso-am:dpd_potential];
+  rdfs:comment "It is the center of a DPD bead."^^xs:string.
+
+viso-am:mass_site a owl:Class;
+  rdfs:subClassOf viso-am:interaction_site.
+
+viso-am:charge_site a owl:Class;
+  rdfs:subClassOf viso-am:interaction_site;
+  rdfs:subClassOf [a owl:Restriction;
+  		     owl:onProperty viso:is_involved_in;
+		     owl:someValuesFrom viso-am:electrostatic_potential].
+
+viso-am:charge_dipole_site a owl:Class;
+  rdfs:subClassOf viso-am:interaction_site;
+  rdfs:subClassOf [a owl:Restriction;
+                     owl:onProperty viso:is_involved_in;
+		     owl:someValuesFrom viso-am:electrostatic_potential].
+
+viso-am:charge_quadrupole_site a owl:Class;
+  rdfs:subClassOf viso-am:interaction_site;
+  rdfs:subClassOf [a owl:Restriction;
+                     owl:onProperty viso:is_involved_in;
+		     owl:someValuesFrom viso-am:electrostatic_potential].
+
+viso-am:wall_site a owl:Class;
+  rdfs:subClassOf viso-am:interaction_site;
+  rdfs:subClassOf viso:am_external_condition_trait;
+  rdfs:comment "A site that, together with others, forms a boundary wall. Such sites are typically frozen (i.e., their positions are fixed in time)."^^xs:string.
+
+viso-am:interaction_surface a owl:Class;
+  rdfs:subClassOf viso-am:structureless_object;
+  owl:disjointWith viso-am:interaction_site;
+  rdfs:comment "A surface which affects interactions, for example a wall. It is described as a continuum surface, not as a collection of sites."^^xs:string.  
+
+viso-am:interaction_plane a owl:Class;
+  rdfs:subClassOf viso-am:interaction_surface;
+  rdfs:comment "A planar surface which affects interactions, for example a planar wall."^^xs:string.  
+
+viso-am:planar_wall a owl:Class;
+  rdfs:subClassOf viso-am:interaction_plane;
+  rdfs:subClassOf viso:am_external_condition_trait;
+  rdfs:comment "A planar wall (i.e, a boundary surface). It is described as a continuum, not as a collection of sites."^^xs:string.  
+
+viso-am:geometric_constraint a owl:Class;  
+  rdfs:subClassOf viso:am_materials_relation_trait.
+
+viso-am:boundary_condition a owl:Class;
+  rdfs:subClassOf viso:am_external_condition_trait.
+  
+viso-am:rule a owl:Class;
+  rdfs:subClassOf viso:am_materials_relation_trait.
+
+viso-am:combination_rule a owl:Class;
+  rdfs:subClassOf viso-am:rule;
+  rdfs:comment "Combination rules or combining rules are equations that can be used to define the interaction parameters between unlike species combining the like-like ones. They apply to non-bonding forces."^^xs:string.
+
+viso-am:exclusion_rule a owl:Class;
+  rdfs:subClassOf viso-am:rule;
+  rdfs:comment "Exclusion rules are rules that affect the strength of non-bonding forces within a molecule. In some communities, typically 1-2, 1-3 and 1-4 interactions are switched off or scaled."^^xs:string.
+
+viso-am:non_conservative_force a owl:Class;
+  rdfs:subClassOf viso:am_materials_relation_trait;
+  rdfs:comment "Non-conservative force, typically appearing in coarse-grained models. For example, random and drag forces in Dissipative Particle Dynamics, that together act as a thermostat."^^xs:string.  
+##########   Restrictions on software tools (i.e., minimal solver needs)    ###########
+
+[a owl:Restriction; owl:onProperty viso:is_tool_for_model; owl:hasValue viso-am:MD]
+  rdfs:subClassOf [a owl:Restriction;
+      owl:onProperty viso:has_feature;
+      owl:minQualifiedCardinality 1;      
+      owl:onClass viso-am:integrator].
+
+[a owl:Restriction; owl:onProperty viso:is_tool_for_model; owl:hasValue viso-am:MM]
+  rdfs:subClassOf [a owl:Restriction;
+      owl:onProperty viso:has_feature;
+      owl:minQualifiedCardinality 1;      
+      owl:onClass viso-am:minimization].
+
+[a owl:Restriction; owl:onProperty viso:is_tool_for_model; owl:hasValue viso-am:MC]
+  rdfs:subClassOf [a owl:Restriction;
+      owl:onProperty viso:has_feature;
+      owl:minQualifiedCardinality 1;      
+      owl:onClass viso-am:sampling_algorithm].
+
+########################################################
+
+########################################################
+
+###  INSTANCES DEFINITION and DECLARATION OF DIFFERENCES
+
+# thermodynamic_ensemble 
+
+viso-am:NVE a viso-am:thermodynamic_ensemble.
+
+viso-am:NVT a viso-am:thermodynamic_ensemble.
+
+viso-am:NPT a viso-am:thermodynamic_ensemble.
+
+_:C_THERMODYNAMIC_ENSEMBLE rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:NVE viso-am:NVT viso-am:NPT).
+
+# integrator
+
+viso-am:VV a viso-am:integrator;
+  rdfs:comment "Velocity-Verlet integrator."^^xs:string.
+
+viso-am:DPD_VV a viso-am:integrator;
+  rdfs:comment "Version of Velocity-Verlet integrator adapted to the DPD thermostat."^^xs:string.
+
+viso-am:LFV a viso-am:integrator;
+  rdfs:comment "Leapfrog-Verlet integrator."^^xs:string.
+
+_:C_INTEGRATOR rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:VV viso-am:DPD_VV viso-am:LFV).
+
+# thermostat
+
+viso-am:DPD_THERMOSTAT a viso-am:thermostat.
+
+viso-am:LOWE_ANDERSEN_THERMOSTAT a viso-am:thermostat;
+  rdfs:seeAlso "C. P. Lowe. An alternative approach to dissipative particle dynamics. EPL (Europhysics Letters), 47(2):145–151, July 1999."^^xs:string.
+
+viso-am:PETERS_THERMOSTAT a viso-am:thermostat;
+  rdfs:seeAlso "E. A. J. F. Peters. Elimination of time step effects in DPD. EPL (Europhysics Letters), 66(3):311–317, May 2004."^^xs:string.
+
+viso-am:STOYANOV_GROOT_THERMOSTAT a viso-am:thermostat;
+  rdfs:seeAlso """Simeon D. Stoyanov and Robert D. Groot. From molecular dynamics to hydrodynamics: A novel Galilean
+invariant thermostat. Journal of Chemical Physics, 122(11):114112, 2005."""^^xs:string.
+
+
+viso-am:BERENDSEN_THERMOSTAT a viso-am:thermostat;
+  rdfs:seeAlso """Berendsen, H. J. C., Postma, J. P. M., DiNola, A., Haak, J. R. Molecular dynamics with
+  coupling to an external bath. J. Chem. Phys. 81:3684–3690, 1984"""^^xs:string.
+
+viso-am:ANDERSEN_THERMOSTAT a viso-am:thermostat;
+  rdfs:seeAlso """Andersen, H. C. Molecular dynamics simulations at constant pressure and/or temperature.
+  J. Chem. Phys. 72:2384, 1980"""^^xs:string.
+
+viso-am:NOSE_HOOVER_THERMOSTAT a viso-am:thermostat;
+  rdfs:seeAlso """Nose, S. A molecular dynamics method for simulations in the canonical ensemble. Mol. Phys. 52:255–268, 1984
+                Hoover, W. G. Canonical dynamics: equilibrium phase-space distributions. Phys. Rev. A 31:1695–1697, 1985"""^^xs:string.
+
+viso-am:VELOCITY_RESCALE_THERMOSTAT a viso-am:thermostat;
+  rdfs:seeAlso """Bussi, G., Donadio, D., Parrinello, M. Canonical sampling through velocity rescaling. J.
+ Chem. Phys. 126:014101, 2007."""^^xs:string.
+
+
+_:C_THERMOSTAT rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:DPD_THERMOSTAT viso-am:LOWE_ANDERSEN_THERMOSTAT viso-am:PETERS_THERMOSTAT viso-am:STOYANOV_GROOT_THERMOSTAT viso-am:BERENDSEN_THERMOSTAT viso-am:ANDERSEN_THERMOSTAT  viso-am:NOSE_HOOVER_THERMOSTAT viso-am:VELOCITY_RESCALE_THERMOSTAT ).
+
+# minimization
+
+viso-am:STEEPEST_DESCENT a viso-am:minimization;
+  rdfs:comment "Steepest descent or gradient descent, not the be confused with the method to approximately compute integrals."^^xs:string;
+  rdfs:seeAlso "W. H. Press et al, Numerical recipes: The art of scientific computing, 3rd edition, Cambridge University Press, 2007."^^xs:string.
+
+viso-am:CONJUGATE_GRADIENT a viso-am:minimization;
+  rdfs:seeAlso "W. H. Press et al, Numerical recipes: The art of scientific computing, 3rd edition, Cambridge University Press, 2007."^^xs:string.
+
+viso-am:BFGS a viso-am:minimization;
+  rdfs:comment "Broyden-Fletcher-Goldfarb-Shanno (BFGS) method."^^xs:string;
+  rdfs:seeAlso "W. H. Press et al, Numerical recipes: The art of scientific computing, 3rd edition, Cambridge University Press, 2007."^^xs:string.
+
+_:C_MINIMIZATION rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:STEEPEST_DESCENT viso-am:CONJUGATE_GRADIENT viso-am:BFGS).
+
+# electrostatic_solver
+
+viso-am:DIRECT_COULOMB_SUM a viso-am:electrostatics_solver.
+
+viso-am:EWALD a viso-am:electrostatics_solver;
+  rdfs:comment "Standard Ewald summation method for electrostatics of point-like charges."^^xs:string. 
+
+viso-am:EWALD_SMEARED a viso-am:electrostatics_solver;
+  rdfs:comment "Ewald summation method for electrostatics modified to treat smeared charges."^^xs:string;
+  rdfs:seeAlso "Minerva González-Melchor, Estela Mayoral, Marı́a Eugenia Velázquez, and José Alejandre. Electro-static interactions in dissipative particle dynamics using the Ewald sums. Journal of Chemical Physics,125(22):224107, 2006."^^xs:string.
+
+viso-am:SPME a viso-am:electrostatics_solver;
+   rdfs:comment "Smooth Particle Mesh Ewald summation method for electrostatics. Applies to periodic systems."^^xs:string;
+   rdfs:seeAlso "Ulrich Essmann, Lalith Perera, Max L. Berkowitz, Tom Darden, Hsing Lee, and Lee G. Pedersen. A smooth particle mesh Ewald method. J. Chem. Phys. 103, 8577 (1995)."^^xs:string.
+
+viso-am:P3M a viso-am:electrostatics_solver;
+   rdfs:comment "Particle-particle particle-mesh summation method for electrostatics."^^xs:string.
+
+_:C_ELECTROSTATICS_SOLVER rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:DIRECT_COULOMB_SUM viso-am:EWALD viso-am:EWALD_SMEARED viso-am:SPME viso-am:P3M).
+
+# barostat
+
+viso-am:LANGEVIN_BAROSTAT a viso-am:barostat;
+  rdfs:seeAlso """Ask F. Jakobsen. Constant-pressure and constant-surface tension simulations in dissipative particle 
+dynamics. Journal of Chemical Physics, 122(12):124901, 2005."""^^xs:string.
+
+viso-am:BERENDSEN_BAROSTAT a viso-am:barostat;
+  rdfs:seeAlso """H. J. C. Berendsen, J. P. M. Postma, W. F. van Gunsteren, A. DiNola, and J. R. Haak. Molecular
+dynamics with coupling to an external bath. Journal of Chemical Physics, 81(8):3684–3690, 1984."""^^xs:string.
+
+viso-am:PARRINELLO_RAHMAN_BAROSTAT a viso-am:barostat;
+  rdfs:seeAlso "M. Parrinello and A. Rahman, J. Appl. Phys. https://doi.org/10.1063/1.328693 52, 7182 (1981)."^^xs:string.
+
+_:C_BAROSTAT rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:LANGEVIN_BAROSTAT viso-am:BERENDSEN_BAROSTAT viso-am:PARRINELLO_RAHMAN_BAROSTAT).
+
+# parallelization_scheme
+
+viso-am:DOMAIN_DECOMPOSITION a viso-am:parallelization_scheme.
+viso-am:REPLICATED_DATA a viso-am:parallelization_scheme.
+
+_:C_PARALLELIZATION_SCHEME rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:REPLICATED_DATA viso-am:DOMAIN_DECOMPOSITION).
+
+#sampling_algorithm
+
+viso-am:METROPOLIS a viso-am:sampling_algorithm;
+  rdfs:seeAlso"""N.A. Metropolis, A.W. Rosenbluth, M.N. Rosenbluth, A.H. Teller, E. Teller. 
+  Equation of state calculations by fast computing machines. J. Chem. Phys., 21, 1087 (1953)."""^^xs:string.
+viso-am:UMBRELLA_SAMPLING a viso-am:sampling_algorithm;
+  rdfs:seeAlso"""G. M. Torrie and J. P. Valleau. Nonphysical sampling distributions in Monte Carlo free-energy estimation: Umbrella sampling. 
+  J. Comput. Phys. 23, 187 (1977)."""^^xs:string.
+viso-am:WANG_LANDAU_SAMPLING a viso-am:sampling_algorithm;
+  rdfs:seeAlso"""Fugao Wang and D. P. Landau. Efficient, Multiple-Range Random Walk Algorithm to Calculate the Density of States. 
+  Phys. Rev. Lett. 86, 2050 (2001)."""^^xs:string.
+
+_:C_SAMPLING_ALGORITHM rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:METROPOLIS viso-am:UMBRELLA_SAMPLING viso-am:WANG_LANDAU_SAMPLING).
+
+#charge_smearing
+
+viso-am:GAUSSIAN_SMEARING a viso-am:charge_smearing.
+viso-am:SLATER_SMEARING a viso-am:charge_smearing.
+viso-am:LINEAR_SMEARING a viso-am:charge_smearing.
+
+_:C_CHARGE_SMEARING rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:GAUSSIAN_SMEARING viso-am:SLATER_SMEARING viso-am:LINEAR_SMEARING).
+
+# potential
+
+# Van der Waals (potential)
+# lennard_jones (potential)
+viso-am:LENNARD_JONES_12_6 a viso-am:mie_potential. 
+viso-am:BUCKINGHAM a viso-am:buckingham_potential. 
+
+# dpd_potential
+
+viso-am:GROOT_WARREN a viso-am:dpd_potential;
+  a viso-am:two_body_potential;
+  rdfs:seeAlso "Robert D. Groot and Patrick B. Warren. Dissipative particle dynamics: Bridging the gap between atomistic and mesoscopic simulation. Journal of Chemical Physics, 107(11):4423–4435, 1997."^^xs:string.
+
+viso-am:MANYBODY_DPD a viso-am:dpd_potential;
+  rdfs:comment "Density-dependent pair-wise potential for Dissipative Particle Dynamics."^^xs:string;
+  rdfs:seeAlso "I. Pagonabarraga and D. Frenkel. Dissipative particle dynamics for interacting systems. Journal of Chemical Physics, 115(11):5015–5026, 2001."^^xs:string.
+
+_:C_DPD_POTENTIAL rdf:type owl:AllDifferent;
+   owl:distinctMembers (viso-am:GROOT_WARREN viso-am:MANYBODY_DPD).
+
+# non_conservative_force
+
+viso-am:RANDOM_AND_DRAG_DPD_FORCE a viso-am:non_conservative_force;
+  viso:is_modelling_twin_of viso-am:DPD_THERMOSTAT.
+
+# electrostatic_potential
+
+viso-am:COULOMB_POTENTIAL a viso-am:electrostatic_potential;
+  rdfs:comment "Electrostatic potential between point charges."^^xs:string.
+
+viso-am:CHARGE_DIPOLE_POTENTIAL a viso-am:electrostatic_potential;
+  rdfs:comment "Electrostatic potential between a point charge and a point dipole."^^xs:string.
+
+viso-am:DIPOLE_DIPOLE_POTENTIAL a viso-am:electrostatic_potential;
+  rdfs:comment "Electrostatic potential between point charge dipoles."^^xs:string.
+
+viso-am:CHARGE_QUADRUPOLE_POTENTIAL a viso-am:electrostatic_potential;
+  rdfs:comment "Electrostatic potential between a point charge and a point charge quadrupole."^^xs:string.
+
+viso-am:DIPOLE_QUADRUPOLE_POTENTIAL a viso-am:electrostatic_potential;
+  rdfs:comment "Electrostatic potential between a point charge dipole and a point charge quadrupole."^^xs:string.
+
+viso-am:QUADRUPOLE_QUADRUPOLE_POTENTIAL a viso-am:electrostatic_potential;
+  rdfs:comment "Electrostatic potential between point charge quadrupoles."^^xs:string.
+
+_:C_ELECTROSTATIC_POTENTIAL rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:COULOMB_POTENTIAL viso-am:CHARGE_DIPOLE_POTENTIAL viso-am:DIPOLE_DIPOLE_POTENTIAL viso-am:CHARGE_QUADRUPOLE_POTENTIAL viso-am:DIPOLE_QUADRUPOLE_POTENTIAL viso-am:QUADRUPOLE_QUADRUPOLE_POTENTIAL).
+
+# metal_potential
+
+viso-am:FINNIS_SINCLAIR_POTENTIAL a viso-am:metal_potential;
+    rdfs:seeAlso"Finnis, M. W., and Sinclair, J. E., A simple empirical N-body potential for transition metals. Philos. Mag. A, 50, 45 (1984)."^^xs:string.
+
+# geometric_constraint
+
+viso-am:RIGID_BOND a viso-am:geometric_constraint.
+
+viso-am:RIGID_ANGLE a viso-am:geometric_constraint.
+
+# geometric_constraint_algorithm
+
+viso-am:SHAKE a viso-am:geometric_constraint_algorithm.
+
+viso-am:RATTLE a viso-am:geometric_constraint_algorithm.
+
+#boundary_condition
+
+viso-am:NO_BOUNDARY a viso-am:boundary_condition.
+
+viso-am:CUBIC_PERIODIC_BOUNDARY a viso-am:boundary_condition.
+
+viso-am:ORTHOROMBIC_PERIODIC_BOUNDARY a viso-am:boundary_condition.
+
+viso-am:LEES_EDWARDS_BOUNDARY_CONDITION a viso-am:boundary_condition;
+  rdfs:comment "Lees-Edwards boundary condition allows to simulate a shear flow."^^xs:string;
+  rdfs:seeAlso "A. W. Lees and S. F. Edwards. The computer study of transport processes under extreme conditions. J. Phys, C 5, 1921 (1972)."^^xs:string.
+
+# combination_rule
+
+viso-am:LORENTZ_BERTHELOT_COMBINATION_RULE a viso-am:combination_rule;
+  rdfs:seeAlso "Lorentz, H. A. (1881), Ueber die Anwendung des Satzes vom Virial in der kinetischen Theorie der Gase. Ann. Phys., 248: 127-136."^^xs:string;
+  rdfs:seeAlso "D. Berthelot, “Sur le mélange des gaz,” Comptes Rendus Hebdomadaires des Séances de l'Académie des Sciences, vol. 126, pp. 1703–1855, 1898."^^xs:string.
+   
+viso-am:GEOMETRIC_COMBINATION_RULE a viso-am:combination_rule.
+
+_:C_COMBINATION_RULE rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:LORENTZ_BERTHELOT_COMBINATION_RULE viso-am:GEOMETRIC_COMBINATION_RULE).
+
+# planar_wall
+
+viso-am:REFLECTING_PLANAR_HARD_WALL a viso-am:planar_wall;
+  rdfs:comment "When a particle tries to cross such wall, its velocity component perperdicular to the wall is reversed."^^xs:string;
+  rdfs:seeAlso "M. Revenga, I. Zúñiga, P. Español and I. Pagonabarraga. Boundary Models in DPD. Int. J. Mod. Phys. C 9, 1319 (1998)."^^xs:string;
+  rdfs:seeAlso "P. B. Warren, P. Prinsen and M. A. J. Michels. The physics of surfactant dissolution. Phil. Trans. R. Soc Lond. A 361, 665 (2003)."^^xs:string.
+
+viso-am:BOUNCE_BACK_PLANAR_HARD_WALL a viso-am:planar_wall;
+  a viso:R_IS_MESOSCOPIC;
+  rdfs:comment "When a particle tries to cross such wall, all its velocity components are reversed."^^xs:string;
+  rdfs:seeAlso "M. Revenga, I. Zúñiga, P. Español and I. Pagonabarraga. Boundary Models in DPD. Int. J. Mod. Phys. C 9, 1319 (1998)."^^xs:string.
+
+_:C_PLANAR_WALL rdf:type owl:AllDifferent;
+  owl:distinctMembers (viso-am:REFLECTING_PLANAR_HARD_WALL viso-am:BOUNCE_BACK_PLANAR_HARD_WALL).
+
+# site_surface_potential
+
+viso-am:SOFT_REPULSIVE_WALL_POTENTIAL a viso-am:site_surface_potential;
+  a viso:am_external_condition_trait;
+  rdfs:seeAlso "P. B. Warren, P. Prinsen and M. A. J. Michels. The physics of surfactant dissolution. Phil. Trans. R. Soc Lond. A 361, 665 (2003)."^^xs:string;
+  rdfs:comment "This soft repulsive potential can be used to decrease density oscillations near the wall."^^xs:string.
+
+# definition of "Zontal codelist" entries for AM software tool features (individuals and force fields). Generated using the Owlready2 python module.
+
+viso-am:BERENDSEN_BAROSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:BERENDSEN_BAROSTAT"^^xs:string, "AM:BERENDSEN_BAROSTAT"@en;
+  skos:prefLabel "AM solver feature: barostat: BERENDSEN BAROSTAT"^^xs:string.
+
+viso-am:LANGEVIN_BAROSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:LANGEVIN_BAROSTAT"^^xs:string, "AM:LANGEVIN_BAROSTAT"@en;
+  skos:prefLabel "AM solver feature: barostat: LANGEVIN BAROSTAT"^^xs:string.
+
+viso-am:PARRINELLO_RAHMAN_BAROSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:PARRINELLO_RAHMAN_BAROSTAT"^^xs:string, "AM:PARRINELLO_RAHMAN_BAROSTAT"@en;
+  skos:prefLabel "AM solver feature: barostat: PARRINELLO RAHMAN BAROSTAT"^^xs:string.
+
+viso-am:ANDERSEN_THERMOSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:ANDERSEN_THERMOSTAT"^^xs:string, "AM:ANDERSEN_THERMOSTAT"@en;
+  skos:prefLabel "AM solver feature: thermostat: ANDERSEN THERMOSTAT"^^xs:string.
+
+viso-am:BERENDSEN_THERMOSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:BERENDSEN_THERMOSTAT"^^xs:string, "AM:BERENDSEN_THERMOSTAT"@en;
+  skos:prefLabel "AM solver feature: thermostat: BERENDSEN THERMOSTAT"^^xs:string.
+
+viso-am:BFGS a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:BFGS"^^xs:string, "AM:BFGS"@en;
+  skos:prefLabel "AM solver feature: minimization: BFGS"^^xs:string.
+
+viso-am:CONJUGATE_GRADIENT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:CONJUGATE_GRADIENT"^^xs:string, "AM:CONJUGATE_GRADIENT"@en;
+  skos:prefLabel "AM solver feature: minimization: CONJUGATE GRADIENT"^^xs:string.
+
+viso-am:DIRECT_COULOMB_SUM a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:DIRECT_COULOMB_SUM"^^xs:string, "AM:DIRECT_COULOMB_SUM"@en;
+  skos:prefLabel "AM solver feature: electrostatics solver: DIRECT COULOMB SUM"^^xs:string.
+
+viso-am:DOMAIN_DECOMPOSITION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:DOMAIN_DECOMPOSITION"^^xs:string, "AM:DOMAIN_DECOMPOSITION"@en;
+  skos:prefLabel "AM solver feature: parallelization scheme: DOMAIN DECOMPOSITION"^^xs:string.
+
+viso-am:DPD_THERMOSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:DPD_THERMOSTAT"^^xs:string, "AM:DPD_THERMOSTAT"@en;
+  skos:prefLabel "AM solver feature: thermostat: DPD THERMOSTAT"^^xs:string.
+
+viso-am:DPD_VV a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:DPD_VV"^^xs:string, "AM:DPD_VV"@en;
+  skos:prefLabel "AM solver feature: integrator: DPD VV"^^xs:string.
+
+viso-am:EWALD a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:EWALD"^^xs:string, "AM:EWALD"@en;
+  skos:prefLabel "AM solver feature: electrostatics solver: EWALD"^^xs:string.
+
+viso-am:EWALD_SMEARED a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:EWALD_SMEARED"^^xs:string, "AM:EWALD_SMEARED"@en;
+  skos:prefLabel "AM solver feature: electrostatics solver: EWALD SMEARED"^^xs:string.
+
+viso-am:GAUSSIAN_SMEARING a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:GAUSSIAN_SMEARING"^^xs:string, "AM:GAUSSIAN_SMEARING"@en;
+  skos:prefLabel "AM solver feature: charge smearing: GAUSSIAN SMEARING"^^xs:string.
+
+viso-am:LFV a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:LFV"^^xs:string, "AM:LFV"@en;
+  skos:prefLabel "AM solver feature: integrator: LFV"^^xs:string.
+
+viso-am:LINEAR_SMEARING a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:LINEAR_SMEARING"^^xs:string, "AM:LINEAR_SMEARING"@en;
+  skos:prefLabel "AM solver feature: charge smearing: LINEAR SMEARING"^^xs:string.
+
+viso-am:LOWE_ANDERSEN_THERMOSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:LOWE_ANDERSEN_THERMOSTAT"^^xs:string, "AM:LOWE_ANDERSEN_THERMOSTAT"@en;
+  skos:prefLabel "AM solver feature: thermostat: LOWE ANDERSEN THERMOSTAT"^^xs:string.
+
+viso-am:METROPOLIS a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:METROPOLIS"^^xs:string, "AM:METROPOLIS"@en;
+  skos:prefLabel "AM solver feature: sampling algorithm: METROPOLIS"^^xs:string.
+
+viso-am:NOSE_HOOVER_THERMOSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:NOSE_HOOVER_THERMOSTAT"^^xs:string, "AM:NOSE_HOOVER_THERMOSTAT"@en;
+  skos:prefLabel "AM solver feature: thermostat: NOSE HOOVER THERMOSTAT"^^xs:string.
+
+viso-am:P3M a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:P3M"^^xs:string, "AM:P3M"@en;
+  skos:prefLabel "AM solver feature: electrostatics solver: P3M"^^xs:string.
+
+viso-am:PETERS_THERMOSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:PETERS_THERMOSTAT"^^xs:string, "AM:PETERS_THERMOSTAT"@en;
+  skos:prefLabel "AM solver feature: thermostat: PETERS THERMOSTAT"^^xs:string.
+
+viso-am:RATTLE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:RATTLE"^^xs:string, "AM:RATTLE"@en;
+  skos:prefLabel "AM solver feature: geometric constraint algorithm: RATTLE"^^xs:string.
+
+viso-am:REPLICATED_DATA a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:REPLICATED_DATA"^^xs:string, "AM:REPLICATED_DATA"@en;
+  skos:prefLabel "AM solver feature: parallelization scheme: REPLICATED DATA"^^xs:string.
+
+viso-am:SHAKE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:SHAKE"^^xs:string, "AM:SHAKE"@en;
+  skos:prefLabel "AM solver feature: geometric constraint algorithm: SHAKE"^^xs:string.
+
+viso-am:SLATER_SMEARING a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:SLATER_SMEARING"^^xs:string, "AM:SLATER_SMEARING"@en;
+  skos:prefLabel "AM solver feature: charge smearing: SLATER SMEARING"^^xs:string.
+
+viso-am:SPME a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:SPME"^^xs:string, "AM:SPME"@en;
+  skos:prefLabel "AM solver feature: electrostatics solver: SPME"^^xs:string.
+
+viso-am:STEEPEST_DESCENT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:STEEPEST_DESCENT"^^xs:string, "AM:STEEPEST_DESCENT"@en;
+  skos:prefLabel "AM solver feature: minimization: STEEPEST DESCENT"^^xs:string.
+
+viso-am:STOYANOV_GROOT_THERMOSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:STOYANOV_GROOT_THERMOSTAT"^^xs:string, "AM:STOYANOV_GROOT_THERMOSTAT"@en;
+  skos:prefLabel "AM solver feature: thermostat: STOYANOV GROOT THERMOSTAT"^^xs:string.
+
+viso-am:UMBRELLA_SAMPLING a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:UMBRELLA_SAMPLING"^^xs:string, "AM:UMBRELLA_SAMPLING"@en;
+  skos:prefLabel "AM solver feature: sampling algorithm: UMBRELLA SAMPLING"^^xs:string.
+
+viso-am:VELOCITY_RESCALE_THERMOSTAT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:VELOCITY_RESCALE_THERMOSTAT"^^xs:string, "AM:VELOCITY_RESCALE_THERMOSTAT"@en;
+  skos:prefLabel "AM solver feature: thermostat: VELOCITY RESCALE THERMOSTAT"^^xs:string.
+
+viso-am:VV a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:VV"^^xs:string, "AM:VV"@en;
+  skos:prefLabel "AM solver feature: integrator: VV"^^xs:string.
+
+viso-am:WANG_LANDAU_SAMPLING a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:WANG_LANDAU_SAMPLING"^^xs:string, "AM:WANG_LANDAU_SAMPLING"@en;
+  skos:prefLabel "AM solver feature: sampling algorithm: WANG LANDAU SAMPLING"^^xs:string.
+
+viso-am:GEOMETRIC_COMBINATION_RULE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:GEOMETRIC_COMBINATION_RULE"^^xs:string, "AM:GEOMETRIC_COMBINATION_RULE"@en;
+  skos:prefLabel "AM model feature: combination rule: GEOMETRIC COMBINATION RULE"^^xs:string.
+
+viso-am:LORENTZ_BERTHELOT_COMBINATION_RULE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:LORENTZ_BERTHELOT_COMBINATION_RULE"^^xs:string, "AM:LORENTZ_BERTHELOT_COMBINATION_RULE"@en;
+  skos:prefLabel "AM model feature: combination rule: LORENTZ BERTHELOT COMBINATION RULE"^^xs:string.
+
+viso-am:BUCKINGHAM a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:BUCKINGHAM"^^xs:string, "AM:BUCKINGHAM"@en;
+  skos:prefLabel "AM model feature: buckingham potential: BUCKINGHAM"^^xs:string.
+
+viso-am:CHARGE_DIPOLE_POTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:CHARGE_DIPOLE_POTENTIAL"^^xs:string, "AM:CHARGE_DIPOLE_POTENTIAL"@en;
+  skos:prefLabel "AM model feature: electrostatic potential: CHARGE DIPOLE POTENTIAL"^^xs:string.
+
+viso-am:CHARGE_QUADRUPOLE_POTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:CHARGE_QUADRUPOLE_POTENTIAL"^^xs:string, "AM:CHARGE_QUADRUPOLE_POTENTIAL"@en;
+  skos:prefLabel "AM model feature: electrostatic potential: CHARGE QUADRUPOLE POTENTIAL"^^xs:string.
+
+viso-am:COULOMB_POTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:COULOMB_POTENTIAL"^^xs:string, "AM:COULOMB_POTENTIAL"@en;
+  skos:prefLabel "AM model feature: electrostatic potential: COULOMB POTENTIAL"^^xs:string.
+
+viso-am:DIPOLE_DIPOLE_POTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:DIPOLE_DIPOLE_POTENTIAL"^^xs:string, "AM:DIPOLE_DIPOLE_POTENTIAL"@en;
+  skos:prefLabel "AM model feature: electrostatic potential: DIPOLE DIPOLE POTENTIAL"^^xs:string.
+
+viso-am:DIPOLE_QUADRUPOLE_POTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:DIPOLE_QUADRUPOLE_POTENTIAL"^^xs:string, "AM:DIPOLE_QUADRUPOLE_POTENTIAL"@en;
+  skos:prefLabel "AM model feature: electrostatic potential: DIPOLE QUADRUPOLE POTENTIAL"^^xs:string.
+
+viso-am:FINNIS_SINCLAIR_POTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:FINNIS_SINCLAIR_POTENTIAL"^^xs:string, "AM:FINNIS_SINCLAIR_POTENTIAL"@en;
+  skos:prefLabel "AM model feature: metal potential: FINNIS SINCLAIR POTENTIAL"^^xs:string.
+
+viso-am:GROOT_WARREN a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:GROOT_WARREN"^^xs:string, "AM:GROOT_WARREN"@en;
+  skos:prefLabel "AM model feature: dpd potential: GROOT WARREN"^^xs:string.
+
+viso-am:LENNARD_JONES_12_6 a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:LENNARD_JONES_12_6"^^xs:string, "AM:LENNARD_JONES_12_6"@en;
+  skos:prefLabel "AM model feature: mie potential: LENNARD JONES 12 6"^^xs:string.
+
+viso-am:MANYBODY_DPD a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:MANYBODY_DPD"^^xs:string, "AM:MANYBODY_DPD"@en;
+  skos:prefLabel "AM model feature: dpd potential: MANYBODY DPD"^^xs:string.
+
+viso-am:QUADRUPOLE_QUADRUPOLE_POTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:QUADRUPOLE_QUADRUPOLE_POTENTIAL"^^xs:string, "AM:QUADRUPOLE_QUADRUPOLE_POTENTIAL"@en;
+  skos:prefLabel "AM model feature: electrostatic potential: QUADRUPOLE QUADRUPOLE POTENTIAL"^^xs:string.
+
+viso-am:SOFT_REPULSIVE_WALL_POTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:SOFT_REPULSIVE_WALL_POTENTIAL"^^xs:string, "AM:SOFT_REPULSIVE_WALL_POTENTIAL"@en;
+  skos:prefLabel "AM model feature: am external condition trait: SOFT REPULSIVE WALL POTENTIAL"^^xs:string.
+
+viso-am:CUBIC_PERIODIC_BOUNDARY a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:CUBIC_PERIODIC_BOUNDARY"^^xs:string, "AM:CUBIC_PERIODIC_BOUNDARY"@en;
+  skos:prefLabel "AM model feature: boundary condition: CUBIC PERIODIC BOUNDARY"^^xs:string.
+
+viso-am:LEES_EDWARDS_BOUNDARY_CONDITION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:LEES_EDWARDS_BOUNDARY_CONDITION"^^xs:string, "AM:LEES_EDWARDS_BOUNDARY_CONDITION"@en;
+  skos:prefLabel "AM model feature: boundary condition: LEES EDWARDS BOUNDARY CONDITION"^^xs:string.
+
+viso-am:NO_BOUNDARY a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:NO_BOUNDARY"^^xs:string, "AM:NO_BOUNDARY"@en;
+  skos:prefLabel "AM model feature: boundary condition: NO BOUNDARY"^^xs:string.
+
+viso-am:ORTHOROMBIC_PERIODIC_BOUNDARY a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:ORTHOROMBIC_PERIODIC_BOUNDARY"^^xs:string, "AM:ORTHOROMBIC_PERIODIC_BOUNDARY"@en;
+  skos:prefLabel "AM model feature: boundary condition: ORTHOROMBIC PERIODIC BOUNDARY"^^xs:string.
+
+viso-am:BOUNCE_BACK_PLANAR_HARD_WALL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:BOUNCE_BACK_PLANAR_HARD_WALL"^^xs:string, "AM:BOUNCE_BACK_PLANAR_HARD_WALL"@en;
+  skos:prefLabel "AM model feature: planar wall: BOUNCE BACK PLANAR HARD WALL"^^xs:string.
+
+viso-am:EXTERNAL_ELECTRIC_FIELD a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:EXTERNAL_ELECTRIC_FIELD"^^xs:string, "AM:EXTERNAL_ELECTRIC_FIELD"@en;
+  skos:prefLabel "AM model feature: external conservative field: EXTERNAL ELECTRIC FIELD"^^xs:string.
+
+viso-am:EXTERNAL_GRAVITY_FIELD a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:EXTERNAL_GRAVITY_FIELD"^^xs:string, "AM:EXTERNAL_GRAVITY_FIELD"@en;
+  skos:prefLabel "AM model feature: external conservative field: EXTERNAL GRAVITY FIELD"^^xs:string.
+
+viso-am:NPT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:NPT"^^xs:string, "AM:NPT"@en;
+  skos:prefLabel "AM model feature: thermodynamic ensemble: NPT"^^xs:string.
+
+viso-am:NVE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:NVE"^^xs:string, "AM:NVE"@en;
+  skos:prefLabel "AM model feature: thermodynamic ensemble: NVE"^^xs:string.
+
+viso-am:NVT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:NVT"^^xs:string, "AM:NVT"@en;
+  skos:prefLabel "AM model feature: thermodynamic ensemble: NVT"^^xs:string.
+
+viso-am:REFLECTING_PLANAR_HARD_WALL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:REFLECTING_PLANAR_HARD_WALL"^^xs:string, "AM:REFLECTING_PLANAR_HARD_WALL"@en;
+  skos:prefLabel "AM model feature: planar wall: REFLECTING PLANAR HARD WALL"^^xs:string.
+
+viso-am:RANDOM_AND_DRAG_DPD_FORCE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:RANDOM_AND_DRAG_DPD_FORCE"^^xs:string, "AM:RANDOM_AND_DRAG_DPD_FORCE"@en;
+  skos:prefLabel "AM model feature: non conservative force: RANDOM AND DRAG DPD FORCE"^^xs:string.
+
+viso-am:RIGID_ANGLE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:RIGID_ANGLE"^^xs:string, "AM:RIGID_ANGLE"@en;
+  skos:prefLabel "AM model feature: geometric constraint: RIGID ANGLE"^^xs:string.
+
+viso-am:RIGID_BOND a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:RIGID_BOND"^^xs:string, "AM:RIGID_BOND"@en;
+  skos:prefLabel "AM model feature: geometric constraint: RIGID BOND"^^xs:string.
+
+viso-am:NEWTON_EQUATION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:NEWTON_EQUATION"^^xs:string, "AM:NEWTON_EQUATION"@en;
+  skos:prefLabel "AM model feature: am physical equation: NEWTON EQUATION"^^xs:string.
+
+viso-am:NEWTON_EQUATION_PLUS_RANDOM_AND_DRAG_FORCE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:NEWTON_EQUATION_PLUS_RANDOM_AND_DRAG_FORCE"^^xs:string, "AM:NEWTON_EQUATION_PLUS_RANDOM_AND_DRAG_FORCE"@en;
+  skos:prefLabel "AM model feature: am physical equation: NEWTON EQUATION PLUS RANDOM AND DRAG FORCE"^^xs:string.
+
+viso-am:PHASE_SPACE_SAMPLING_EQUATION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:PHASE_SPACE_SAMPLING_EQUATION"^^xs:string, "AM:PHASE_SPACE_SAMPLING_EQUATION"@en;
+  skos:prefLabel "AM model feature: am physical equation: PHASE SPACE SAMPLING EQUATION"^^xs:string.
+  
+viso-am:INDIVIDUAL_OF_REAXFF_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:reaxff_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:reaxff_ff"^^xs:string, "AM:reaxff_ff"@en;
+  skos:prefLabel "AM model feature: force field: REAXFF"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_UFF_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:uff_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:uff_ff"^^xs:string, "AM:uff_ff"@en;
+  skos:prefLabel "AM model feature: force field: UFF"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_CHARMM_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:charmm_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:charmm_ff"^^xs:string, "AM:charmm_ff"@en;
+  skos:prefLabel "AM model feature: force field: CHARMM"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_AUA_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:aua_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:aua_ff"^^xs:string, "AM:aua_ff"@en;
+  skos:prefLabel "AM model feature: force field: AUA"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_MARTINI_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:martini_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:martini_ff"^^xs:string, "AM:martini_ff"@en;
+  skos:prefLabel "AM model feature: force field: MARTINI"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_PCFF_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:pcff_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:pcff_ff"^^xs:string, "AM:pcff_ff"@en;
+  skos:prefLabel "AM model feature: force field: PCFF"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_GAFF_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:gaff_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:gaff_ff"^^xs:string, "AM:gaff_ff"@en;
+  skos:prefLabel "AM model feature: force field: GAFF"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_TRAPPE_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:trappe_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:trappe_ff"^^xs:string, "AM:trappe_ff"@en;
+  skos:prefLabel "AM model feature: force field: TRAPPE"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_GROMOS_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:gromos_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:gromos_ff"^^xs:string, "AM:gromos_ff"@en;
+  skos:prefLabel "AM model feature: force field: GROMOS"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_AMBER_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:amber_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:amber_ff"^^xs:string, "AM:amber_ff"@en;
+  skos:prefLabel "AM model feature: force field: AMBER"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_DREIDING_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:dreiding_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:dreiding_ff"^^xs:string, "AM:dreiding_ff"@en;
+  skos:prefLabel "AM model feature: force field: DREIDING"^^xs:string.
+
+viso-am:INDIVIDUAL_OF_OPLS_FF a viso-am:force_field, vcl:codelist_software_feature, viso-am:opls_ff;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "AM:opls_ff"^^xs:string, "AM:opls_ff"@en;
+  skos:prefLabel "AM model feature: force field: OPLS"^^xs:string.
+
+
+  
+  
+########################################################################################
+#                                                                                      #
+#              Branch of VISO for (RoMM-)ELECTRONIC MODELS/SOLVERS                     #
+#                                                                                      #
+########################################################################################
+
+@prefix viso: <https://purl.vimmp.eu/semantics/viso/viso-general.ttl#>.
+@prefix viso-el: <https://purl.vimmp.eu/semantics/viso/viso-electronic.ttl#>.
+
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vcl: <https://purl.vimmp.eu/semantics/alignment/vcl.ttl#>.
+
+<https://purl.vimmp.eu/semantics/viso/viso-electronic.ttl#> a owl:Ontology.
+
+############################  Ontology header  #########################################
+
+<https://purl.vimmp.eu/semantics/viso/viso-electronic.ttl#>
+# owl:imports <https://purl.vimmp.eu/semantics/viso/viso-general.ttl#>;
+  dcterms:title "VISO-EL: Branch of VISO for (RoMM-)ELectronic models/solvers"^^xs:string;
+  dcterms:modified "2021-08-13"^^xs:string;
+  dcterms:creator "Joshua D. Elliott (ORCID 0000-0002-0729-246X)"^^xs:string;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string;
+  dcterms:creator "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string;
+  dcterms:creator "Michael A. Seaton (ORCID 0000-0002-4708-573X)"^^xs:string;
+  dcterms:creator "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string;
+  dcterms:creator "Mara Chiricotto (ORCID 0000-0003-1609-5254)"^^xs:string;
+  dcterms:creator "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string;
+  dcterms:contributor "Welchy Leite Cavalcanti"^^xs:string;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string;	
+  dcterms:license "GNU Lesser General Public License (LGPL) version 3"^^xs:string;
+  dcterms:description """VISO-EL expands on the model and solver features for Electronic 
+(as per RoMM) models."""^^xs:string;
+  dcterms:bibliographicCitation "10.1021/acs.jced.9b00739"^^xs:string;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon 2020 research and
+innovation programme under grant agreement no. 760907, Virtual Materials Marketplace (VIMMP)."""^^xs:string.
+  
+##############  Electronic model types ##################################
+
+viso-el:density_functional_theory a owl:Class;
+  rdfs:subClassOf viso:el_model_type;
+  rdfs:comment "(Quantum) Density Functional Theory."^^xs:string.
+
+viso-el:DFT a viso-el:density_functional_theory;
+   viso:has_osmo_pe_type_id "EL.1";
+   viso:has_pe viso-el:KOHN_SHAM_EQUATION.
+
+###############  Electronic Model feature ###############################
+
+viso-el:wavefunction_related_feature a owl:Class;
+  rdfs:subClassOf viso:el_materials_relation_trait;
+  rdfs:comment "Model features that relate to the electronic wavefunction"^^xs:string.
+
+viso-el:hamiltonian_related_feature a owl:Class;
+  rdfs:subClassOf viso:el_materials_relation_trait;
+  rdfs:comment "Model features the constitute the construction of the electronic Hamiltonian"^^xs:string.
+
+viso-el:electron_spin a owl:Class;
+  rdfs:subClassOf viso:el_materials_relation_trait;
+  rdfs:comment "Inclusion of spin interaction in DFT"^^xs:string.
+
+viso-el:boundary_condition a owl:Class;
+  rdfs:subClassOf viso:el_external_condition_trait;
+  rdfs:comment "Boundary condition for DFT"^^xs:string.
+
+viso-el:core_electron_treatment a owl:Class;
+  rdfs:subClassOf viso-el:wavefunction_related_feature;
+  rdfs:comment "Approach for core electrons"^^xs:string.
+
+viso-el:exchange_correlation_functional a owl:Class;
+  rdfs:subClassOf viso-el:hamiltonian_related_feature;
+  rdfs:comment "Exchange correlation potentials"^^xs:string.
+
+viso-el:exchange_correlation_correction a owl:Class;
+  rdfs:subClassOf viso-el:hamiltonian_related_feature;
+  rdfs:comment "DFT functional correction schemes"^^xs:string.
+
+viso-el:electric_field a owl:Class;
+  rdfs:subClassOf viso-el:hamiltonian_related_feature;
+  rdfs:subClassOf viso:el_external_condition_trait;
+  rdfs:comment "Inclusion of electric fields in DFT"^^xs:string.
+
+## Exchange-Correlation Potentials
+viso-el:local_density_approximation a owl:Class;
+  rdfs:comment "Local Density Approximation"^^xs:string;
+  rdfs:seeAlso "Electronic Structure R. M. Martin 2004 Cambridge University Press"^^xs:string;
+  rdfs:subClassOf viso-el:exchange_correlation_functional. 
+
+viso-el:generalized_gradient_approximation a owl:Class;
+  rdfs:seeAlso "Electronic Structure R. M. Martin 2004 Cambridge University Press"^^xs:string;
+  rdfs:subClassOf viso-el:exchange_correlation_functional. 
+
+viso-el:exact_exchange a owl:Class;
+  rdfs:seeAlso "Modern Quantum Chemistry A. Szabo, N. S. Ostlund 1996 Dover books on Chemistry"^^xs:string;
+  rdfs:subClassOf viso-el:exchange_correlation_functional. 
+
+viso-el:hybrid_functional a owl:Class;
+  rdfs:seeAlso "Electronic Structure R. M. Martin 2004 Cambridge University Press"^^xs:string;
+  rdfs:subClassOf viso-el:exchange_correlation_functional.
+
+viso-el:meta_generalized_gradient_approximation a owl:Class;
+  rdfs:seeAlso "Essentials of Computational Chemistry, 2nd Ed. C. J. Cramer 2004 John Wiley & Sons."^^xs:string;
+  rdfs:subClassOf viso-el:exchange_correlation_functional.
+
+viso-el:van_der_waals_density_functional a owl:Class;
+  rdfs:seeAlso " J. Phys.: Condens. Matter 21 8 2009"^^xs:string;
+  rdfs:subClassOf viso-el:exchange_correlation_functional. 
+
+viso-el:hubbard_correction a owl:Class;
+  rdfs:seeAlso "Phys. Rev. B 44, 943 1991"^^xs:string;
+  rdfs:subClassOf viso-el:exchange_correlation_correction.
+
+viso-el:van_der_waals_correction a owl:Class;
+  rdfs:subClassOf viso-el:exchange_correlation_correction.
+
+viso-el:pseudopotential a owl:Class;
+  rdfs:seeAlso "Electronic Structure R. M. Martin 2004 Cambridge University Press"^^xs:string;
+  rdfs:subClassOf viso-el:core_electron_treatment. 
+
+viso-el:model_object a owl:Class;
+  rdfs:subClassOf viso:el_materials_relation_trait;
+  rdfs:subClassOf viso:model_object;
+  rdfs:comment "Type of object entering the model (e.g., quantum or classical)."^^xs:string;
+  owl:disjointUnionOf (viso-el:quantum_object viso-el:classical_object).
+
+viso-el:quantum_object a owl:Class;
+  rdfs:subClassOf viso-el:model_object;
+  rdfs:comment "A quantum object, i.e., an object described at a quantum mechanics level (for example, via a wavefunction)."^^xs:string;
+  rdfs:comment "For example, an object representing an electronic cloud."^^xs:string.
+
+viso-el:classical_object a owl:Class;
+  rdfs:subClassOf viso-el:model_object;
+  rdfs:comment "A classical object, i.e., an object described at a classical mechanics level."^^xs:string;
+  rdfs:comment "For example, an object representing an atomic nucleus."^^xs:string;
+  rdfs:seeAlso "See also the model_object class in VISO-AM"^^xs:string.
+
+###############  Instances of Electronic Model features ###############################
+
+viso-el:KOHN_SHAM_EQUATION a viso:el_physical_equation.
+
+viso-el:PERDEW_ZUNGER a viso-el:local_density_approximation.
+viso-el:PERDEW_WANG_92 a viso-el:local_density_approximation.
+
+viso-el:PBE a viso-el:generalized_gradient_approximation.
+viso-el:BLYP a viso-el:generalized_gradient_approximation.
+viso-el:B88 a viso-el:generalized_gradient_approximation.
+viso-el:PW91 a viso-el:generalized_gradient_approximation.
+viso-el:PBESOL a viso-el:generalized_gradient_approximation.
+
+viso-el:HARTREE_FOCK a viso-el:exact_exchange.
+
+viso-el:PBE0 a viso-el:hybrid_functional.
+viso-el:HSE06 a viso-el:hybrid_functional.
+viso-el:B3LYP a viso-el:hybrid_functional.
+viso-el:X3LYP a viso-el:hybrid_functional.
+
+viso-el:VDWDF a viso-el:van_der_waals_density_functional.
+viso-el:OPTB86 a viso-el:van_der_waals_density_functional.
+viso-el:OPTB88 a viso-el:van_der_waals_density_functional.
+
+viso-el:HUBBARD_U a viso-el:hubbard_correction.
+viso-el:HUBBARD_J a viso-el:hubbard_correction.
+
+viso-el:D3_DISPERSION a viso-el:van_der_waals_correction.
+
+viso-el:NON_SPIN_POLARIZED a viso-el:electron_spin. 
+viso-el:SPIN_POLARIZED a viso-el:electron_spin. 
+viso-el:NON_COLLINEAR_SPIN a viso-el:electron_spin.
+
+viso-el:SAWTOOTH_POTENTIAL a viso-el:electric_field. 
+viso-el:MODERN_THEORY_OF_POLARIZATION a viso-el:electric_field. 
+
+# Core electron treatment
+viso-el:EXPLICIT_CORE_ELECTRONS a viso-el:core_electron_treatment;
+  rdfs:comment "Corresponding to so-called all-electron calculations"^^xs:string.
+
+# Boundary conditions
+viso-el:OPEN_BOUNDARY_CONDITIONS a viso-el:boundary_condition. 
+viso-el:PERIODIC_BOUNDARY_CONDITIONS a viso-el:boundary_condition. 
+
+# Pseudopotentials
+viso-el:NORM_CONSERVING_PSEUDOPOTENTIAL a viso-el:pseudopotential.
+viso-el:ULTRA_SOFT_PSEUDOPOTENTIAL a viso-el:pseudopotential.
+viso-el:PROJECTOR_AUGMENTED_WAVE a viso-el:pseudopotential.
+
+##############  Electronic Solver feature ###############################
+
+viso-el:basis_set a owl:Class;
+  rdfs:subClassOf viso:el_solver_feature;
+  rdfs:seeAlso "Electronic Structure R. M. Martin 2004 Cambridge University Press"^^xs:string;
+  rdfs:comment "basis set expansion of electronic states"^^xs:string.
+
+viso-el:electron_diagonalization a owl:Class;
+  rdfs:subClassOf viso:el_solver_feature;
+  rdfs:comment "Algorithm that diagonalizes Kohn-Sham Hamiltonian"^^xs:string.
+
+viso-el:electron_mixing a owl:Class;
+  rdfs:subClassOf viso:el_solver_feature;
+  rdfs:comment "Algorithm for mixing the electron densities during SCF"^^xs:string.
+
+viso-el:electron_smearing a owl:Class;
+  rdfs:subClassOf viso:el_solver_feature;
+  rdfs:comment "Algorithm for the smearing of electronic populations"^^xs:string.
+
+viso-el:kpoint_mesh a owl:Class;
+  rdfs:subClassOf viso:el_solver_feature;
+  rdfs:comment "Algorithm for the generation of the kpoint grid"^^xs:string.
+
+viso-el:symmetry_adapted_solver a owl:Class;
+  rdfs:subClassOf viso:el_solver_feature;
+  rdfs:comment "Computation strategy based on system symmetries"^^xs:string.
+
+viso-el:ionic_relaxation a owl:Class;
+  rdfs:subClassOf viso:el_solver_feature;
+  rdfs:comment "Algorithm for optimisation of the nuclear coordinates"^^xs:string.
+
+###############  Instances of Electronic Solver features ###############################
+
+viso-el:PLANE_WAVE a viso-el:basis_set.
+viso-el:GAUSSIAN_ORBITAL a viso-el:basis_set.
+viso-el:WANNIER_FUNCTION a viso-el:basis_set.
+viso-el:SLATER_TYPE_ORBITAL a viso-el:basis_set. 
+
+# Electron Diagonalization
+viso-el:DAVIDSON a viso-el:electron_diagonalization.
+viso-el:CONJUGATE_GRADIENT a viso-el:electron_diagonalization;
+  rdfs:seeAlso "Numerical Recipes 3rd Edition: The Art of Scientific Computing 2007 Cambridge University Press"^^xs:string.
+
+# Electron Mixing
+viso-el:BROYDEN a viso-el:electron_mixing.
+viso-el:THOMAS_FERMI a viso-el:electron_mixing.
+viso-el:LOCAL_THOMAS_FERMI a viso-el:electron_mixing.
+
+# Electron Smearing
+viso-el:GAUSSIAN_SMEARING a viso-el:electron_smearing.
+viso-el:METHFESSEL_PAXTON a viso-el:electron_smearing;
+  rdfs:seeAlso "Phys. Rev. B 40 3616 1989"^^xs:string.
+viso-el:MARZARI_VANDERBILT a viso-el:electron_smearing;
+  rdfs:seeAlso "Phys. Rev. Lett. 82 3296 1999"^^xs:string.
+
+# k-point mesh
+viso-el:MONKHORST_PACK a viso-el:kpoint_mesh;
+  rdfs:seeAlso "Phys. Rev. B 16 1748 1977"^^xs:string.
+viso-el:GAMMA_POINT_ONLY a viso-el:kpoint_mesh;
+  rdfs:comment "Sample reciprocal space only at the Gamma point"^^xs:string. 
+viso-el:HIGH_SYMMETRY a viso-el:kpoint_mesh;                                                        
+  rdfs:comment "(typically user defined) kpoint path along high symmetry line"^^xs:string. 
+
+# Symmetry
+viso-el:NO_SYMMETRY a viso-el:symmetry_adapted_solver;
+   rdfs:comment "No symmetry adapted solution available or it is possible to disactivate symmetry routines"^^xs:string.
+viso-el:BRAVAIS_LATTICE a viso-el:symmetry_adapted_solver;
+   rdfs:comment "Recognises and exploits bravais lattice point groups"^^xs:string.
+viso-el:MOLECULAR_POINT_GROUPS a viso-el:symmetry_adapted_solver;
+   rdfs:comment "Recognises and exploits common molecular point groups"^^xs:string.
+
+# Ionic Relaxation
+viso-el:CONJUGATE_GRADIENT a viso-el:ionic_relaxation;
+   rdfs:seeAlso "Numerical Recipes 3rd Edition: The Art of Scientific Computing 2007 Cambridge University Press"^^xs:string.
+viso-el:BFGS a viso-el:ionic_relaxation;
+   rdfs:comment "Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm"^^xs:string;
+   rdfs:seeAlso "Numerical Recipes 3rd Edition: The Art of Scientific Computing 2007 Cambridge University Press"^^xs:string.
+
+# definition of "Zontal codelist" entries for EL software tool features (individuals). Generated using the Owlready2 python module.
+
+viso-el:GAUSSIAN_ORBITAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:GAUSSIAN_ORBITAL"^^xs:string, "EL:GAUSSIAN_ORBITAL"@en;
+  skos:prefLabel "EL solver feature: basis set: GAUSSIAN ORBITAL"^^xs:string.
+
+viso-el:PLANE_WAVE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:PLANE_WAVE"^^xs:string, "EL:PLANE_WAVE"@en;
+  skos:prefLabel "EL solver feature: basis set: PLANE WAVE"^^xs:string.
+
+viso-el:SLATER_TYPE_ORBITAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:SLATER_TYPE_ORBITAL"^^xs:string, "EL:SLATER_TYPE_ORBITAL"@en;
+  skos:prefLabel "EL solver feature: basis set: SLATER TYPE ORBITAL"^^xs:string.
+
+viso-el:WANNIER_FUNCTION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:WANNIER_FUNCTION"^^xs:string, "EL:WANNIER_FUNCTION"@en;
+  skos:prefLabel "EL solver feature: basis set: WANNIER FUNCTION"^^xs:string.
+
+viso-el:BFGS a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:BFGS"^^xs:string, "EL:BFGS"@en;
+  skos:prefLabel "EL solver feature: ionic relaxation: BFGS"^^xs:string.
+
+viso-el:BRAVAIS_LATTICE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:BRAVAIS_LATTICE"^^xs:string, "EL:BRAVAIS_LATTICE"@en;
+  skos:prefLabel "EL solver feature: symmetry adapted solver: BRAVAIS LATTICE"^^xs:string.
+
+viso-el:BROYDEN a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:BROYDEN"^^xs:string, "EL:BROYDEN"@en;
+  skos:prefLabel "EL solver feature: electron mixing: BROYDEN"^^xs:string.
+
+viso-el:CONJUGATE_GRADIENT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:CONJUGATE_GRADIENT"^^xs:string, "EL:CONJUGATE_GRADIENT"@en;
+  skos:prefLabel "EL solver feature: electron diagonalization: CONJUGATE GRADIENT"^^xs:string.
+
+viso-el:DAVIDSON a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:DAVIDSON"^^xs:string, "EL:DAVIDSON"@en;
+  skos:prefLabel "EL solver feature: electron diagonalization: DAVIDSON"^^xs:string.
+
+viso-el:GAMMA_POINT_ONLY a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:GAMMA_POINT_ONLY"^^xs:string, "EL:GAMMA_POINT_ONLY"@en;
+  skos:prefLabel "EL solver feature: kpoint mesh: GAMMA POINT ONLY"^^xs:string.
+
+viso-el:GAUSSIAN_SMEARING a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:GAUSSIAN_SMEARING"^^xs:string, "EL:GAUSSIAN_SMEARING"@en;
+  skos:prefLabel "EL solver feature: electron smearing: GAUSSIAN SMEARING"^^xs:string.
+
+viso-el:HIGH_SYMMETRY a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:HIGH_SYMMETRY"^^xs:string, "EL:HIGH_SYMMETRY"@en;
+  skos:prefLabel "EL solver feature: kpoint mesh: HIGH SYMMETRY"^^xs:string.
+
+viso-el:LOCAL_THOMAS_FERMI a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:LOCAL_THOMAS_FERMI"^^xs:string, "EL:LOCAL_THOMAS_FERMI"@en;
+  skos:prefLabel "EL solver feature: electron mixing: LOCAL THOMAS FERMI"^^xs:string.
+
+viso-el:MARZARI_VANDERBILT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:MARZARI_VANDERBILT"^^xs:string, "EL:MARZARI_VANDERBILT"@en;
+  skos:prefLabel "EL solver feature: electron smearing: MARZARI VANDERBILT"^^xs:string.
+
+viso-el:METHFESSEL_PAXTON a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:METHFESSEL_PAXTON"^^xs:string, "EL:METHFESSEL_PAXTON"@en;
+  skos:prefLabel "EL solver feature: electron smearing: METHFESSEL PAXTON"^^xs:string.
+
+viso-el:MOLECULAR_POINT_GROUPS a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:MOLECULAR_POINT_GROUPS"^^xs:string, "EL:MOLECULAR_POINT_GROUPS"@en;
+  skos:prefLabel "EL solver feature: symmetry adapted solver: MOLECULAR POINT GROUPS"^^xs:string.
+
+viso-el:MONKHORST_PACK a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:MONKHORST_PACK"^^xs:string, "EL:MONKHORST_PACK"@en;
+  skos:prefLabel "EL solver feature: kpoint mesh: MONKHORST PACK"^^xs:string.
+
+viso-el:NO_SYMMETRY a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:NO_SYMMETRY"^^xs:string, "EL:NO_SYMMETRY"@en;
+  skos:prefLabel "EL solver feature: symmetry adapted solver: NO SYMMETRY"^^xs:string.
+
+viso-el:THOMAS_FERMI a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:THOMAS_FERMI"^^xs:string, "EL:THOMAS_FERMI"@en;
+  skos:prefLabel "EL solver feature: electron mixing: THOMAS FERMI"^^xs:string.
+
+viso-el:OPEN_BOUNDARY_CONDITIONS a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:OPEN_BOUNDARY_CONDITIONS"^^xs:string, "EL:OPEN_BOUNDARY_CONDITIONS"@en;
+  skos:prefLabel "EL model feature: boundary condition: OPEN BOUNDARY CONDITIONS"^^xs:string.
+
+viso-el:PERIODIC_BOUNDARY_CONDITIONS a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:PERIODIC_BOUNDARY_CONDITIONS"^^xs:string, "EL:PERIODIC_BOUNDARY_CONDITIONS"@en;
+  skos:prefLabel "EL model feature: boundary condition: PERIODIC BOUNDARY CONDITIONS"^^xs:string.
+
+viso-el:MODERN_THEORY_OF_POLARIZATION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:MODERN_THEORY_OF_POLARIZATION"^^xs:string, "EL:MODERN_THEORY_OF_POLARIZATION"@en;
+  skos:prefLabel "EL model feature: electric field: MODERN THEORY OF POLARIZATION"^^xs:string.
+
+viso-el:SAWTOOTH_POTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:SAWTOOTH_POTENTIAL"^^xs:string, "EL:SAWTOOTH_POTENTIAL"@en;
+  skos:prefLabel "EL model feature: electric field: SAWTOOTH POTENTIAL"^^xs:string.
+
+viso-el:EXPLICIT_CORE_ELECTRONS a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:EXPLICIT_CORE_ELECTRONS"^^xs:string, "EL:EXPLICIT_CORE_ELECTRONS"@en;
+  skos:prefLabel "EL model feature: core electron treatment: EXPLICIT CORE ELECTRONS"^^xs:string.
+
+viso-el:NORM_CONSERVING_PSEUDOPOTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:NORM_CONSERVING_PSEUDOPOTENTIAL"^^xs:string, "EL:NORM_CONSERVING_PSEUDOPOTENTIAL"@en;
+  skos:prefLabel "EL model feature: pseudopotential: NORM CONSERVING PSEUDOPOTENTIAL"^^xs:string.
+
+viso-el:PROJECTOR_AUGMENTED_WAVE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:PROJECTOR_AUGMENTED_WAVE"^^xs:string, "EL:PROJECTOR_AUGMENTED_WAVE"@en;
+  skos:prefLabel "EL model feature: pseudopotential: PROJECTOR AUGMENTED WAVE"^^xs:string.
+
+viso-el:ULTRA_SOFT_PSEUDOPOTENTIAL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:ULTRA_SOFT_PSEUDOPOTENTIAL"^^xs:string, "EL:ULTRA_SOFT_PSEUDOPOTENTIAL"@en;
+  skos:prefLabel "EL model feature: pseudopotential: ULTRA SOFT PSEUDOPOTENTIAL"^^xs:string.
+
+viso-el:B3LYP a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:B3LYP"^^xs:string, "EL:B3LYP"@en;
+  skos:prefLabel "EL model feature: hybrid functional: B3LYP"^^xs:string.
+
+viso-el:B88 a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:B88"^^xs:string, "EL:B88"@en;
+  skos:prefLabel "EL model feature: generalized gradient approximation: B88"^^xs:string.
+
+viso-el:BLYP a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:BLYP"^^xs:string, "EL:BLYP"@en;
+  skos:prefLabel "EL model feature: generalized gradient approximation: BLYP"^^xs:string.
+
+viso-el:D3_DISPERSION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:D3_DISPERSION"^^xs:string, "EL:D3_DISPERSION"@en;
+  skos:prefLabel "EL model feature: van der waals correction: D3 DISPERSION"^^xs:string.
+
+viso-el:HARTREE_FOCK a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:HARTREE_FOCK"^^xs:string, "EL:HARTREE_FOCK"@en;
+  skos:prefLabel "EL model feature: exact exchange: HARTREE FOCK"^^xs:string.
+
+viso-el:HSE06 a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:HSE06"^^xs:string, "EL:HSE06"@en;
+  skos:prefLabel "EL model feature: hybrid functional: HSE06"^^xs:string.
+
+viso-el:HUBBARD_J a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:HUBBARD_J"^^xs:string, "EL:HUBBARD_J"@en;
+  skos:prefLabel "EL model feature: hubbard correction: HUBBARD J"^^xs:string.
+
+viso-el:HUBBARD_U a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:HUBBARD_U"^^xs:string, "EL:HUBBARD_U"@en;
+  skos:prefLabel "EL model feature: hubbard correction: HUBBARD U"^^xs:string.
+
+viso-el:OPTB86 a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:OPTB86"^^xs:string, "EL:OPTB86"@en;
+  skos:prefLabel "EL model feature: van der waals density functional: OPTB86"^^xs:string.
+
+viso-el:OPTB88 a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:OPTB88"^^xs:string, "EL:OPTB88"@en;
+  skos:prefLabel "EL model feature: van der waals density functional: OPTB88"^^xs:string.
+
+viso-el:PBE a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:PBE"^^xs:string, "EL:PBE"@en;
+  skos:prefLabel "EL model feature: generalized gradient approximation: PBE"^^xs:string.
+
+viso-el:PBE0 a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:PBE0"^^xs:string, "EL:PBE0"@en;
+  skos:prefLabel "EL model feature: hybrid functional: PBE0"^^xs:string.
+
+viso-el:PBESOL a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:PBESOL"^^xs:string, "EL:PBESOL"@en;
+  skos:prefLabel "EL model feature: generalized gradient approximation: PBESOL"^^xs:string.
+
+viso-el:PERDEW_WANG_92 a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:PERDEW_WANG_92"^^xs:string, "EL:PERDEW_WANG_92"@en;
+  skos:prefLabel "EL model feature: local density approximation: PERDEW WANG 92"^^xs:string.
+
+viso-el:PERDEW_ZUNGER a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:PERDEW_ZUNGER"^^xs:string, "EL:PERDEW_ZUNGER"@en;
+  skos:prefLabel "EL model feature: local density approximation: PERDEW ZUNGER"^^xs:string.
+
+viso-el:PW91 a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:PW91"^^xs:string, "EL:PW91"@en;
+  skos:prefLabel "EL model feature: generalized gradient approximation: PW91"^^xs:string.
+
+viso-el:VDWDF a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:VDWDF"^^xs:string, "EL:VDWDF"@en;
+  skos:prefLabel "EL model feature: van der waals density functional: VDWDF"^^xs:string.
+
+viso-el:X3LYP a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:X3LYP"^^xs:string, "EL:X3LYP"@en;
+  skos:prefLabel "EL model feature: hybrid functional: X3LYP"^^xs:string.
+
+viso-el:NON_COLLINEAR_SPIN a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:NON_COLLINEAR_SPIN"^^xs:string, "EL:NON_COLLINEAR_SPIN"@en;
+  skos:prefLabel "EL model feature: electron spin: NON COLLINEAR SPIN"^^xs:string.
+
+viso-el:NON_SPIN_POLARIZED a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:NON_SPIN_POLARIZED"^^xs:string, "EL:NON_SPIN_POLARIZED"@en;
+  skos:prefLabel "EL model feature: electron spin: NON SPIN POLARIZED"^^xs:string.
+
+viso-el:SPIN_POLARIZED a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:SPIN_POLARIZED"^^xs:string, "EL:SPIN_POLARIZED"@en;
+  skos:prefLabel "EL model feature: electron spin: SPIN POLARIZED"^^xs:string.
+
+viso-el:KOHN_SHAM_EQUATION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "EL:KOHN_SHAM_EQUATION"^^xs:string, "EL:KOHN_SHAM_EQUATION"@en;
+  skos:prefLabel "EL model feature: el physical equation: KOHN SHAM EQUATION"^^xs:string.
+
+
+########################################################################################
+#                                                                                      #
+#              Branch of VISO for (RoMM-)CONTINUUM MODELS/SOLVERS                      #
+#                                                                                      #
+########################################################################################
+
+@prefix viso: <https://purl.vimmp.eu/semantics/viso/viso-general.ttl#>.
+@prefix viso-co: <https://purl.vimmp.eu/semantics/viso/viso-continuum.ttl#>.
+@prefix viprs: <https://purl.vimmp.eu/semantics/alignment/viprs.ttl#>.
+@prefix vov: <https://purl.vimmp.eu/semantics/vov/vov.ttl#>.
+
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vcl: <https://purl.vimmp.eu/semantics/alignment/vcl.ttl#>.
+
+<https://purl.vimmp.eu/semantics/viso/viso-continuum.ttl#> a owl:Ontology.
+
+############################  Ontology header  #########################################
+
+<https://purl.vimmp.eu/semantics/viso/viso-continuum.ttl#>
+# owl:imports <https://purl.vimmp.eu/semantics/viso/viso-general.ttl#>;
+  dcterms:title "VISO-CO: Branch of VISO for (RoMM-)COntinuum models/solvers"^^xs:string;
+  dcterms:modified "2021-08-13"^^xs:string;
+  dcterms:creator "Gianluca Boccardo (ORCID 0000-0003-1264-8237)"^^xs:string;
+  dcterms:creator "Martin T. Horsch (ORCID 0000-0002-9464-6739)"^^xs:string;
+  dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string;
+  dcterms:creator "Michael A. Seaton (ORCID 0000-0002-4708-573X)"^^xs:string;
+  dcterms:creator "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string;
+  dcterms:creator "Mara Chiricotto (ORCID 0000-0003-1609-5254)"^^xs:string;
+  dcterms:creator "Joshua D. Elliott (ORCID 0000-0002-0729-246X)"^^xs:string;
+  dcterms:contributor "Welchy Leite Cavalcanti"^^xs:string;
+  dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string;
+  dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string;	
+  dcterms:license "GNU Lesser General Public License (LGPL) version 3"^^xs:string;
+  dcterms:description """VISO-CO expands on the model types, model and solver features for
+Continuum (as per RoMM) models."""^^xs:string;
+  dcterms:bibliographicCitation "10.1021/acs.jced.9b00739"^^xs:string;
+  rdfs:comment """The authors acknowledge funding from the European Union's Horizon 2020 research and
+innovation programme under grant agreement no. 760907, Virtual Materials Marketplace (VIMMP)."""^^xs:string.
+
+##############  Continuum model types ##################################
+
+viso-co:computational_fluid_dynamics a owl:Class;
+  rdfs:subClassOf viso:co_model_type;
+  rdfs:comment "Computational Fluid Dynamics."^^xs:string.
+
+viso-co:equation_of_state_method a owl:Class;
+  rdfs:subClassOf viso:co_model_type;
+  rdfs:comment "Equation of State Method."^^xs:string.
+
+viso-co:CFD a viso-co:computational_fluid_dynamics;
+   viso:has_osmo_pe_type_id "CO.2";
+   viso:has_pe [a viso-co:transport_equation].
+
+viso-co:EOS_METHOD a viso-co:equation_of_state_method;
+   viso:has_osmo_pe_type_id "CO.5";
+   viso:has_pe [a viso-co:equation_of_state].
+
+##############  Continuum Model feature ###############################
+#######################################################################
+#######################################################################
+
+viso-co:continuum_domain a owl:Class;
+  rdfs:subClassOf viso:co_materials_relation_trait;
+  rdfs:subClassOf viso:co_physical_equation_trait.
+
+viso-co:domain_3d a owl:Class;
+  rdfs:subClassOf viso-co:continuum_domain;
+  rdfs:comment "3D description of the problem."^^xs:string.
+
+viso-co:domain_2d a owl:Class;
+  rdfs:subClassOf viso-co:continuum_domain;
+  rdfs:comment "2D description of the problem."^^xs:string.
+
+viso-co:domain_1d a owl:Class;
+  rdfs:subClassOf viso-co:continuum_domain;
+  rdfs:comment "1D description of the problem."^^xs:string.
+
+viso-co:boundary_condition a owl:Class;
+  rdfs:subClassOf viso:co_external_condition_trait.
+
+viso-co:external_force a owl:Class;
+  rdfs:subClassOf viso:co_external_condition_trait.
+
+viso-co:neumann_bc a owl:Class;
+  rdfs:subClassOf viso-co:boundary_condition;
+  rdfs:comment "Boundary condition where the value of a quantity is set on the specified boundary."^^xs:string.
+
+viso-co:dirichlet_bc a owl:Class;
+  rdfs:subClassOf viso-co:boundary_condition;
+rdfs:comment "Boundary condition where the value of a quantity is set on the specified boundary."^^xs:string.
+
+## Physical Equations
+
+# PE for CFD
+
+viso-co:transport_equation a owl:Class;
+  rdfs:subClassOf viso:co_physical_equation.
+
+viso-co:mass_transport_equation a owl:Class;
+  rdfs:subClassOf viso-co:transport_equation.
+
+viso-co:momentum_transport_equation a owl:Class;
+  rdfs:subClassOf viso-co:transport_equation.
+
+viso-co:energy_transport_equation a owl:Class;
+  rdfs:subClassOf viso-co:transport_equation.
+
+# PE for Continuum Thermodynamics
+
+viso-co:equation_of_state a owl:Class;
+  rdfs:subClassOf viso:co_physical_equation. 
+
+viso-co:fundamental_eos a owl:Class;
+  rdfs:comment "An equation of state (EOS) referring to a free energy (e.g., Helmhotz free energy) is denoted as a fundamental EOS."^^xs:string;
+  rdfs:subClassOf viso-co:equation_of_state.
+
+viso-co:thermal_eos a owl:Class;
+  rdfs:comment "An equation of state (EOS) involving pressure, density, temperature, composition is denoted as a thermal EOS."^^xs:string;
+  rdfs:subClassOf viso-co:equation_of_state.
+
+## Material Relations
+
+# MR for CFD
+
+viso-co:momentum_mat_rel a owl:Class;
+  rdfs:subClassOf viso:co_materials_relation.
+
+viso-co:energy_mat_rel a owl:Class;
+  rdfs:subClassOf viso:co_materials_relation.
+
+viso-co:mass_mat_rel a owl:Class;
+  rdfs:subClassOf viso:co_materials_relation.  
+
+# MR for Continuum Thermodynamics
+
+viso-co:eos_mat_rel a owl:Class;
+  rdfs:subClassOf viso:co_materials_relation.
+
+viso-co:molecular_eos a owl:Class;
+  rdfs:subClassOf viso-co:eos_mat_rel.
+
+viso-co:empirical_eos a owl:Class;
+  rdfs:subClassOf viso-co:eos_mat_rel.
+
+viso-co:saft a owl:Class;
+  rdfs:comment "Statistical Associating Fluid Theory."^^xs:string;
+  rdfs:seeAlso "Walter G. Chapman, Keith E. Gubbins, George Jackson, Maciej Radosz, New reference equation of state for associating liquids, Ind. Eng. Chem. Res. 29, 1709--1721, 1990."^^xs:string;
+  rdfs:subClassOf viso-co:molecular_eos.
+
+viso-co:lct a owl:Class;
+  rdfs:subClassOf viso-co:molecular_eos;
+  rdfs:comment "Lattice Cluster Theory."^^xs:string;
+  rdfs:seeAlso """Jacek Dudowicz and Karl F. Freed, Effect of monomer structure and compressibility on the properties of multicomponent polymer blends and solutions: 1. Lattice
+cluster theory of compressible systems, Macromol. 24, 5076--5095, 1991."""^^xs:string.
+
+##############  Continuum Model Object   ###############################
+
+viso-co:model_object a owl:Class;
+  rdfs:subClassOf viso:co_materials_relation_trait;
+  rdfs:subClassOf viso:model_object;
+  rdfs:comment "Type of object entering the model (e.g., a fluid or an interaction surface)."^^xs:string;
+  owl:disjointUnionOf (viso-co:structureless_object viso-co:composite_object).
+    
+viso-co:structureless_object a owl:Class;
+  rdfs:subClassOf viso-co:model_object.
+
+viso-co:cell a owl:Class;
+  rdfs:comment "A cell, i.e., an elementary volume element"^^xs:string;
+  rdfs:subClassOf viso-co:structureless_object.
+
+viso-co:face a owl:Class;
+  rdfs:comment "A face of a cell, i.e., an elementary surface element"^^xs:string;
+  rdfs:subClassOf viso-co:structureless_object.
+
+viso-co:interaction_surface a owl:Class;
+  rdfs:subClassOf viso-co:structureless_object;
+  rdfs:comment "A surface which affects interactions, for example a wall. It is described as a continuum surface, not in terms of elementary faces."^^xs:string;
+  rdfs:seeAlso "See also the interaction_surface class in VISO-AM"^^xs:string.
+
+viso-co:composite_object a owl:Class;
+rdfs:subClassOf viso-co:model_object;
+rdfs:subClassOf [a owl:Restriction;
+        	owl:onProperty viso:has_part;
+	      	owl:minQualifiedCardinality 2;
+	        owl:onClass viso-co:structureless_object].
+		    
+viso-co:continuum_domain rdfs:subClassOf viso-co:composite_object.
+viso-co:fluid rdfs:subClassOf viso-co:composite_object.
+viso-co:solid rdfs:subClassOf viso-co:composite_object.
+
+##############  Connection of model_type to model_object  #############################
+
+viso:co_model_type rdfs:subClassOf [a owl:Restriction;
+                  owl:onProperty vov:involves_object;
+		  owl:someValuesFrom viso-co:continuum_domain].
+
+##############  Continuum Solver feature ###############################
+#######################################################################
+#######################################################################
+
+
+viso-co:continuum_mesh a owl:Class;
+  rdfs:subClassOf viso:co_solver_feature.
+
+viso-co:mesh_3d a owl:Class;
+  rdfs:subClassOf viso-co:continuum_mesh;
+  rdfs:comment "3D continuum mesh."^^xs:string.
+
+viso-co:mesh_2d a owl:Class;
+  rdfs:subClassOf viso-co:continuum_mesh;
+  rdfs:comment "2D continuum mesh."^^xs:string.
+
+viso-co:mesh_1d a owl:Class;
+  rdfs:subClassOf viso-co:continuum_mesh;
+  rdfs:comment "1D continuum mesh."^^xs:string.
+
+
+viso-co:spatial_discretization_scheme a owl:Class;
+  rdfs:subClassOf viso:co_solver_feature;
+  rdfs:comment "Schemes for discretization of quantities in space."^^xs:string.
+
+viso-co:temporal_discretization_scheme a owl:Class;
+  rdfs:subClassOf viso:co_solver_feature;
+  rdfs:comment "Schemes for discretization of quantities in time."^^xs:string.
+
+viso-co:divergence_scheme a owl:Class;
+  rdfs:subClassOf viso-co:spatial_discretization_scheme;
+  rdfs:comment "Schemes for discretization of the divergence of quantities."^^xs:string.
+
+viso-co:gradient_scheme a owl:Class;
+  rdfs:subClassOf viso-co:spatial_discretization_scheme;
+  rdfs:comment "Schemes for discretization of the gradient of quantities."^^xs:string.
+
+
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+###  DATATYPE PROPERTIES
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+# No necessary datatypes for viso-continuum.
+
+
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+###  OBJECT PROPERTIES
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+viso-co:has_closure a owl:ObjectProperty;
+  rdfs:domain viso:co_physical_equation;
+  rdfs:range viso:co_materials_relation;
+  rdfs:subPropertyOf viso:is_connected_to;
+  rdfs:subPropertyOf viprs:has_requirement_satisfied_by.
+
+viso-co:is_closure_of a owl:ObjectProperty;
+  rdfs:domain viso:co_materials_relation;
+  rdfs:range viso:co_physical_equation;
+  owl:inverseOf viso-co:has_closure;
+  rdfs:subPropertyOf viso:is_connected_to;
+  rdfs:subPropertyOf viprs:satisfies_requirement_of.
+  
+
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+###  INSTANCES DEFINITION and DECLARATION OF DIFFERENCES
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+# Physical Equations
+
+viso-co:NAVIER_STOKES a viso-co:momentum_transport_equation;
+viso-co:has_closure viso-co:NEWTONIAN_STRESS_TENSOR;
+  rdfs:comment "Navier-Stokes transport equation for momentum."^^xs:string.
+
+viso-co:ADVECTION_DIFFUSION a viso-co:mass_transport_equation;
+viso-co:has_closure viso-co:DIFFUSION_EINSTEIN_EQUATION;
+  rdfs:comment "Advection-Diffusion equation (i.e.: drift-diffusion equation) for transport of a mass scalar quantity (e.g. concentration)."^^xs:string.
+
+# Material Relations
+
+viso-co:NEWTONIAN_STRESS_TENSOR a viso-co:momentum_mat_rel;
+viso-co:is_closure_of viso-co:NAVIER_STOKES;
+  rdfs:comment "Stress tensor with constant viscosity."^^xs:string.
+
+viso-co:DIFFUSION_EINSTEIN_EQUATION a viso-co:mass_mat_rel;
+viso-co:is_closure_of viso-co:ADVECTION_DIFFUSION;
+  rdfs:comment "Einstein equation for molecular diffusion of spherical particles."^^xs:string.
+
+# Continuum Schemes
+
+viso-co:FIRST_ORDER_UPWIND a viso-co:divergence_scheme;
+  rdfs:comment "First order upwind discretization scheme."^^xs:string.
+
+viso-co:SECOND_ORDER_UPWIND a viso-co:divergence_scheme;
+  rdfs:comment "Second-order upwind discretization scheme."^^xs:string.
+
+viso-co:CENTRAL_DIFFERENCE_SCHEME a viso-co:divergence_scheme;
+  rdfs:comment "Second-order central discretization scheme."^^xs:string.
+
+viso-co:GRADIENT_GAUSS a viso-co:gradient_scheme;
+  rdfs:comment "Second order, Gaussian integration."^^xs:string.
+
+viso-co:GRADIENT_LEAST_SQUARES a viso-co:gradient_scheme;
+  rdfs:comment "Second order, least squares"^^xs:string.
+
+viso-co:GRADIENT_FOURTH a viso-co:gradient_scheme;
+  rdfs:comment "Fourth order, least squares."^^xs:string.
+
+viso-co:EULER a viso-co:temporal_discretization_scheme;
+  rdfs:comment "Transient, first order, implicit, bounded."^^xs:string.
+
+viso-co:BACKWARD a viso-co:temporal_discretization_scheme;
+  rdfs:comment "Transient, second order implicit, potentially unbounded."^^xs:string.
+
+viso-co:CRANK_NICOLSON a viso-co:temporal_discretization_scheme;
+  rdfs:comment "Transient, second order implicit, bounded."^^xs:string.
+
+# Boundary Conditions
+
+viso-co:CYCLIC_BC a viso-co:boundary_condition.
+
+viso-co:ROBIN_BC a viso-co:boundary_condition.
+
+viso-co:SYMMETRY_BC a viso-co:boundary_condition;
+rdfs:comment "Defines a mirror boundary (the solution is mirrored along that boundary)."^^xs:string.
+
+viso-co:ZERO_GRADIENT a viso-co:neumann_bc.
+
+viso-co:GENERIC_NEUMANN_BC a viso-co:neumann_bc.
+
+viso-co:NO_SLIP a viso-co:dirichlet_bc.
+
+viso-co:GENERIC_DIRICHLET_BC a viso-co:dirichlet_bc.
+
+# External Force
+
+viso-co:GRAVITY a viso-co:external_force.
+
+# definition of "Zontal codelist" entries for CO software tool features (individuals). Generated using the Owlready2 python module
+# (and partially completed by hand due to a probable bug).
+
+viso-co:BACKWARD a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:BACKWARD"^^xs:string, "CO:BACKWARD"@en;
+  skos:prefLabel "CO solver feature: temporal discretization scheme: BACKWARD"^^xs:string.
+
+viso-co:CENTRAL_DIFFERENCE_SCHEME a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:CENTRAL_DIFFERENCE_SCHEME"^^xs:string, "CO:CENTRAL_DIFFERENCE_SCHEME"@en;
+  skos:prefLabel "CO solver feature: divergence scheme: CENTRAL DIFFERENCE SCHEME"^^xs:string.
+
+viso-co:CRANK_NICOLSON a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:CRANK_NICOLSON"^^xs:string, "CO:CRANK_NICOLSON"@en;
+  skos:prefLabel "CO solver feature: temporal discretization scheme: CRANK NICOLSON"^^xs:string.
+
+viso-co:EULER a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:EULER"^^xs:string, "CO:EULER"@en;
+  skos:prefLabel "CO solver feature: temporal discretization scheme: EULER"^^xs:string.
+
+viso-co:FIRST_ORDER_UPWIND a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:FIRST_ORDER_UPWIND"^^xs:string, "CO:FIRST_ORDER_UPWIND"@en;
+  skos:prefLabel "CO solver feature: divergence scheme: FIRST ORDER UPWIND"^^xs:string.
+
+viso-co:GRADIENT_FOURTH a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:GRADIENT_FOURTH"^^xs:string, "CO:GRADIENT_FOURTH"@en;
+  skos:prefLabel "CO solver feature: gradient scheme: GRADIENT FOURTH"^^xs:string.
+
+viso-co:GRADIENT_GAUSS a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:GRADIENT_GAUSS"^^xs:string, "CO:GRADIENT_GAUSS"@en;
+  skos:prefLabel "CO solver feature: gradient scheme: GRADIENT GAUSS"^^xs:string.
+
+viso-co:GRADIENT_LEAST_SQUARES a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:GRADIENT_LEAST_SQUARES"^^xs:string, "CO:GRADIENT_LEAST_SQUARES"@en;
+  skos:prefLabel "CO solver feature: gradient scheme: GRADIENT LEAST SQUARES"^^xs:string.
+
+viso-co:SECOND_ORDER_UPWIND a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:SECOND_ORDER_UPWIND"^^xs:string, "CO:SECOND_ORDER_UPWIND"@en;
+  skos:prefLabel "CO solver feature: divergence scheme: SECOND ORDER UPWIND"^^xs:string.
+  
+viso-co:NAVIER_STOKES a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:NAVIER_STOKES"^^xs:string, "CO:NAVIER_STOKES"@en;
+  skos:prefLabel "CO model feature: momentum transport equation: NAVIER STOKES"^^xs:string.
+
+viso-co:ADVECTION_DIFFUSION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:ADVECTION_DIFFUSION"^^xs:string, "CO:ADVECTION_DIFFUSION"@en;
+  skos:prefLabel "CO model feature: mass transport equation: ADVECTION DIFFUSION"^^xs:string.
+
+viso-co:NEWTONIAN_STRESS_TENSOR a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:NEWTONIAN_STRESS_TENSOR"^^xs:string, "CO:NEWTONIAN_STRESS_TENSOR"@en;
+  skos:prefLabel "CO model feature: momentum materials relation: NEWTONIAN STRESS TENSOR"^^xs:string.
+
+viso-co:DIFFUSION_EINSTEIN_EQUATION a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:DIFFUSION_EINSTEIN_EQUATION"^^xs:string, "CO:DIFFUSION_EINSTEIN_EQUATION"@en;
+  skos:prefLabel "CO model feature: mass materials relation: DIFFUSION EINSTEIN EQUATION"^^xs:string.
+
+viso-co:CYCLIC_BC a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:CYCLIC_BC"^^xs:string, "CO:CYCLIC_BC"@en;
+  skos:prefLabel "CO model feature: boundary condition: CYCLIC BC"^^xs:string.
+
+viso-co:ROBIN_BC a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:ROBIN_BC"^^xs:string, "CO:ROBIN_BC"@en;
+  skos:prefLabel "CO model feature: boundary condition: ROBIN BC"^^xs:string.
+
+viso-co:SYMMETRY_BC a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:SYMMETRY_BC"^^xs:string, "CO:SYMMETRY_BC"@en;
+  skos:prefLabel "CO model feature: boundary condition: SYMMETRY BC"^^xs:string.
+
+viso-co:ZERO_GRADIENT a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:ZERO_GRADIENT"^^xs:string, "CO:ZERO_GRADIENT"@en;
+  skos:prefLabel "CO model feature: boundary condition: ZERO GRADIENT"^^xs:string.
+
+viso-co:NO_SLIP a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:NO_SLIP"^^xs:string, "CO:NO_SLIP"@en;
+  skos:prefLabel "CO model feature: boundary condition: NO SLIP"^^xs:string.
+
+viso-co:GENERIC_DIRICHLET_BC a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:GENERIC_DIRICHLET_BC"^^xs:string, "CO:GENERIC_DIRICHLET_BC"@en;
+  skos:prefLabel "CO model feature: boundary condition: GENERIC DIRICHLET BC"^^xs:string.
+
+viso-co:GENERIC_NEUMANN_BC a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:GENERIC_NEUMANN_BC"^^xs:string, "CO:GENERIC_NEUMANN_BC"@en;
+  skos:prefLabel "CO model feature: boundary condition: GENERIC NEUMANN BC"^^xs:string.
+
+viso-co:GRAVITY a vcl:codelist_software_feature;
+  skos:inScheme vcl:CL_SCHEME_SOFTWARE_FEATURE;
+  skos:notation "CO:GRAVITY"^^xs:string, "CO:GRAVITY"@en;
+  skos:prefLabel "CO model feature: external force: GRAVITY"^^xs:string.
+

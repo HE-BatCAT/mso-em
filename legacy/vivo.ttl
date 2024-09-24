@@ -1,0 +1,511 @@
+
+### VIMMP VALIDATION ONTOLOGY (VIVO) ###
+
+### VERSION 1.1.6 ###
+
+### DATED 20TH NOVEMBER 2020 ###
+
+@prefix vivo: <https://purl.vimmp.eu/semantics/vivo/vivo.ttl#>.
+
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix evmpo: <https://emmc.eu/semantics/evmpo/evmpo.ttl#>.
+@prefix macro: <https://purl.vimmp.eu/semantics/macro/macro.ttl#>.
+@prefix mmto: <https://purl.vimmp.eu/semantics/mmto/mmto.ttl#>.
+@prefix osmo: <https://purl.vimmp.eu/semantics/osmo/osmo.ttl#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix qudt: <http://qudt.org/schema/qudt/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix vico: <https://purl.vimmp.eu/semantics/vico/vico.ttl#>.
+@prefix viprs: <https://purl.vimmp.eu/semantics/alignment/viprs.ttl#>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
+
+<https://purl.vimmp.eu/semantics/vivo/vivo.ttl> a owl:Ontology;
+   dcterms:title "VIVO: VIMMP Validation Ontology"^^xs:string;
+   owl:versionInfo "version 1.1.6"^^xs:string;
+   dcterms:modified "2020-11-20"^^xs:date;
+   dcterms:publisher "Virtual Materials Marketplace (VIMMP) project consortium"^^xs:string;
+   dcterms:license "GNU Lesser General Public License (LGPL) version 3"^^xs:string;
+   dcterms:bibliographicCitation "doi:10.1007/s13218-020-00648-9"^^xs:string;
+   dcterms:creator "Martin Thomas Horsch (ORCID 0000-0002-9464-6739)"^^xs:string;
+   dcterms:creator "Silvia Chiacchiera (ORCID 0000-0003-0422-7870)"^^xs:string;
+   dcterms:creator "Michael A. Seaton (ORCID 0000-0002-4708-573X)"^^xs:string;
+   dcterms:creator "Ilian T. Todorov (ORCID 0000-0001-7275-1784)"^^xs:string;
+   dcterms:contributor "Welchy Leite Cavalcanti"^^xs:string;
+   dcterms:contributor "Gerhard Goldbeck (ORCID 0000-0002-4181-2852)"^^xs:string;
+   dcterms:contributor "Daniele Toti (ORCID 0000-0002-9668-6961)"^^xs:string.
+
+
+#####################################
+# ASSERTION BRANCH OF VIVO: GENERAL #
+#####################################
+
+vivo:assertion a owl:Class;
+   rdfs:subClassOf evmpo:data_item;
+   owl:disjointWith evmpo:assessment;
+   rdfs:comment "assertion, i.e., a claim or proposition (e.g., stated within an assessment)"^^xs:string.
+
+vivo:asserts_magnitude a owl:DatatypeProperty, owl:FunctionalProperty;
+   rdfs:domain vivo:assertion;
+   rdfs:range xs:decimal.
+vivo:has_unit a owl:ObjectProperty, owl:FunctionalProperty;
+   rdfs:domain vivo:assertion;
+   rdfs:range vivo:unit;
+   rdfs:comment "points to the unit in which any numerical contents of an assertion are given"^^xs:string;
+   rdfs:subPropertyOf evmpo:has_information_content_entity_annotation.
+vivo:refers_to_property a owl:ObjectProperty;
+   rdfs:domain vivo:assertion;
+   rdfs:range evmpo:property;
+   rdfs:subPropertyOf viprs:is_sign_for.
+
+vivo:assertion owl:disjointWith evmpo:assessment, evmpo:material_property, vivo:validation_infrastructure.
+
+vivo:assertion owl:disjointUnionOf (vivo:accuracy_assertion vivo:requirement_assertion vivo:review_assertion).
+
+vivo:conceptual_assertion a owl:Class;
+   rdfs:subClassOf vivo:assertion.
+
+vivo:material_assertion a owl:Class;
+   rdfs:subClassOf vivo:assertion.
+
+vivo:refers_to_material a owl:ObjectProperty, owl:FunctionalProperty;
+   rdfs:domain vivo:material_assertion;
+   rdfs:range evmpo:material;
+   rdfs:subPropertyOf viprs:is_sign_for;
+   rdfs:comment "points to the material to which a material assertion refers"^^xs:string.
+vivo:refers_to_mp a owl:ObjectProperty, owl:FunctionalProperty;
+   rdfs:domain vivo:material_assertion;
+   rdfs:range evmpo:material_property;
+   rdfs:subPropertyOf vivo:refers_to_property;
+   rdfs:comment "points to the material property (MP) to which a material assertion refers"^^xs:string.
+
+vivo:material_property_information a owl:Class;
+   rdfs:subClassOf vivo:material_assertion, [
+      a owl:Restriction;
+      owl:onProperty viprs:mereosemiotics_is_is;
+      owl:someValuesFrom evmpo:material
+   ];
+   rdfs:comment "material property information, i.e., an assertion referring to a (thermodynamic or mechanical) material property"^^xs:string.
+
+vivo:has_error_statement a owl:ObjectProperty;
+   rdfs:domain vivo:material_property_information;
+   rdfs:range vivo:accuracy_assertion;
+   rdfs:subPropertyOf viprs:has_proper_part;
+   rdfs:comment "points to an accuracy assertion contained within a material property information"^^xs:string.
+vivo:has_given_property a owl:ObjectProperty;
+   rdfs:domain vivo:material_property_information;
+   rdfs:range evmpo:material_property;
+   rdfs:subPropertyOf vivo:refers_to_mp.
+vivo:has_lower_bound a owl:DatatypeProperty;
+   rdfs:domain vivo:material_property_information;
+   rdfs:range xs:decimal.
+vivo:has_upper_bound a owl:DatatypeProperty;
+   rdfs:domain vivo:material_property_information;
+   rdfs:range xs:decimal.
+vivo:has_property_value a owl:DatatypeProperty, owl:FunctionalProperty;
+   rdfs:domain vivo:material_property_information;
+   rdfs:range xs:decimal.
+vivo:is_given_in a owl:ObjectProperty, owl:FunctionalProperty;
+   rdfs:domain vivo:material_property_information;
+   rdfs:range vivo:unit;
+   rdfs:subPropertyOf evmpo:has_information_content_entity_annotation.
+
+vivo:accuracy_assertion a owl:Class;
+   rdfs:subClassOf vivo:assertion;
+   rdfs:comment "accuracy assertion, i.e., statement on an uncertainty, error, or deviation from the most accurate possible value"^^xs:string.
+
+vivo:has_deviation_magnitude a owl:DatatypeProperty, owl:FunctionalProperty;
+   rdfs:domain vivo:accuracy_assertion;
+   rdfs:range xs:decimal;
+   rdfs:subPropertyOf vivo:asserts_magnitude.
+
+vivo:accuracy_assertion owl:disjointUnionOf (vivo:absolute_deviation vivo:relative_deviation vivo:qualitative_accuracy_assertion).
+
+vivo:absolute_deviation a owl:Class;
+   rdfs:subClassOf vivo:accuracy_assertion.
+
+vivo:relative_deviation a owl:Class;
+   rdfs:subClassOf vivo:accuracy_assertion;
+   rdfs:comment "relative deviation, i.e., an accuracy assertion in which the relative magnitude of an error or uncertainty is given, normalized by the absolute magnitude of the value to which the assertion refers"^^xs:string.
+
+vivo:qualitative_accuracy_assertion a owl:Class;
+   rdfs:subClassOf vivo:accuracy_assertion.
+
+vivo:requirement_assertion a owl:Class;
+   rdfs:subClassOf vivo:assertion;
+   owl:disjointWith vivo:review_assertion.
+
+vivo:review_assertion a owl:Class;
+   rdfs:subClassOf vivo:assertion.
+
+
+######################################
+# ASSESSMENT BRANCH OF VIVO: GENERAL #
+######################################
+
+vivo:evaluates a owl:ObjectProperty;
+   rdfs:domain evmpo:assessment;
+   rdfs:range evmpo:marketplace_related_entity;
+   rdfs:subPropertyOf viprs:is_sign_for;
+   rdfs:comment "points to the object evaluated by an assessment"^^xs:string.
+vivo:has_assertion a owl:ObjectProperty;
+   rdfs:domain evmpo:assessment;
+   rdfs:range vivo:assertion;
+   rdfs:subPropertyOf viprs:has_proper_part;
+   rdfs:comment "points to an assertion made within an assessment"^^xs:string.
+vivo:has_assessment_text a owl:DatatypeProperty;
+   rdfs:domain evmpo:assessment;
+   rdfs:range xs:string.
+
+evmpo:assessment owl:disjointWith vivo:assertion, evmpo:material_property, vivo:validation_infrastructure.
+
+evmpo:assessment owl:disjointUnionOf (vivo:accuracy_assessment evmpo:requirement_assessment vivo:review_assessment).
+
+evmpo:assessment owl:disjointUnionOf (vivo:agent_assessment vivo:data_item_assessment vivo:document_assessment vivo:event_assessment vivo:infrastructure_assessment vivo:meta_assessment vivo:model_assessment vivo:project_assessment vivo:service_assessment vivo:workflow_assessment).
+
+vivo:agent_assessment a owl:Class;
+   rdfs:subClassOf evmpo:endorsement_assessment.
+
+vivo:evaluates_agent a owl:ObjectProperty;
+   rdfs:domain vivo:agent_assessment;
+   rdfs:range evmpo:agent;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:agent_assessment owl:disjointWith vivo:accuracy_assessment, evmpo:requirement_assessment.
+
+vivo:data_item_assessment a owl:Class;
+   rdfs:subClassOf evmpo:assessment, [owl:unionOf (vivo:accuracy_assessment vivo:review_assessment)].
+
+vivo:evaluates_data_item a owl:ObjectProperty;
+   rdfs:domain vivo:data_item_assessment;
+   rdfs:range evmpo:data_item;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:data_item_assessment owl:disjointWith evmpo:requirement_assessment.
+
+vivo:document_assessment a owl:Class;
+   rdfs:subClassOf evmpo:assessment, [owl:unionOf (vivo:qualitative_accuracy_assessment vivo:review_assessment)].
+
+vivo:evaluates_document a owl:ObjectProperty;
+   rdfs:domain vivo:document_assessment;
+   rdfs:range evmpo:document;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:document_assessment owl:disjointWith vivo:accuracy_assessment.
+
+vivo:event_assessment a owl:Class;
+   rdfs:subClassOf evmpo:assessment, [
+      owl:unionOf (evmpo:endorsement_assessment vivo:other_requirement_assessment)
+      ], [
+         a owl:Restriction;
+         owl:onProperty viprs:mereosemiotics_is_is;
+         owl:someValuesFrom evmpo:physical_process
+      ].
+
+vivo:evaluates_event a owl:ObjectProperty;
+   rdfs:domain vivo:event_assessment;
+   rdfs:range evmpo:calendar_event;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:event_assessment owl:disjointWith vivo:accuracy_assessment.
+
+vivo:infrastructure_assessment a owl:Class;
+   rdfs:subClassOf evmpo:assessment;
+   owl:disjointUnionOf (vivo:data_infrastructure_assessment vivo:hardware_infrastructure_assessment vivo:software_infrastructure_assessment).
+
+vivo:evaluates_infrastructure a owl:ObjectProperty;
+   rdfs:domain vivo:infrastructure_assessment;
+   rdfs:range evmpo:infrastructure;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:data_infrastructure_assessment a owl:Class;
+   rdfs:subClassOf vivo:infrastructure_assessment, [owl:unionOf (vivo:qualitative_accuracy_assessment vivo:computational_space_requirement vivo:other_requirement_assessment evmpo:endorsement_assessment)].
+vivo:hardware_infrastructure_assessment a owl:Class;
+   rdfs:subClassOf vivo:infrastructure_assessment, [owl:unionOf (vivo:other_requirement_assessment evmpo:endorsement_assessment)].
+vivo:software_infrastructure_assessment a owl:Class;
+   rdfs:subClassOf vivo:infrastructure_assessment, [owl:unionOf (vivo:computational_space_requirement vivo:other_requirement_assessment evmpo:endorsement_assessment)].
+
+vivo:meta_assessment a owl:Class;
+   rdfs:subClassOf vivo:review_assessment.
+
+vivo:evaluates_assessment a owl:ObjectProperty;
+   rdfs:domain vivo:meta_assessment;
+   rdfs:range evmpo:assessment;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:meta_assessment owl:disjointWith vivo:accuracy_assessment, evmpo:requirement_assessment.
+
+vivo:model_assessment a owl:Class;
+   rdfs:subClassOf evmpo:assessment, [owl:unionOf (vivo:accuracy_assessment vivo:other_requirement_assessment vivo:review_assessment)].
+
+vivo:evaluates_model a owl:ObjectProperty;
+   rdfs:domain vivo:model_assessment;
+   rdfs:range evmpo:model;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:project_assessment a owl:Class;
+   rdfs:subClassOf evmpo:assessment, [owl:unionOf (vivo:other_requirement_assessment evmpo:endorsement_assessment)].
+
+vivo:evaluates_project a owl:ObjectProperty;
+   rdfs:domain vivo:project_assessment;
+   rdfs:range mmto:project;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:project_assessment owl:disjointWith vivo:accuracy_assessment.
+
+vivo:service_assessment a owl:Class;
+   rdfs:subClassOf vivo:review_assessment, [
+      a owl:Restriction;
+      owl:onProperty viprs:mereosemiotics_is_is;
+      owl:someValuesFrom evmpo:physical_process
+   ], [owl:unionOf (evmpo:endorsement_assessment vivo:comment)].
+
+vivo:evaluates_service a owl:ObjectProperty;
+   rdfs:domain vivo:service_assessment;
+   rdfs:range evmpo:service;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:service_assessment owl:disjointWith vivo:accuracy_assessment, evmpo:requirement_assessment.
+
+vivo:service_assessment owl:disjointUnionOf (vivo:data_access_assessment vivo:hardware_access_assessment vivo:software_access_assessment vivo:training_assessment vivo:translation_assessment vivo:other_service_assessment).
+
+vivo:data_access_assessment a owl:Class;
+   rdfs:subClassOf vivo:service_assessment.
+
+vivo:hardware_access_assessment a owl:Class;
+   rdfs:subClassOf vivo:service_assessment.
+
+vivo:software_access_assessment a owl:Class;
+   rdfs:subClassOf vivo:service_assessment.
+
+vivo:training_assessment a owl:Class;
+   rdfs:subClassOf vivo:service_assessment.
+
+vivo:translation_assessment a owl:Class;
+   rdfs:subClassOf vivo:service_assessment.
+
+vivo:other_service_assessment a owl:Class;
+   rdfs:subClassOf vivo:service_assessment.
+
+vivo:workflow_assessment a owl:Class;
+   rdfs:subClassOf evmpo:assessment, [
+      a owl:Restriction;
+      owl:onProperty viprs:mereosemiotics_is_is;
+      owl:someValuesFrom evmpo:simulation
+   ].
+
+vivo:evaluates_workflow a owl:ObjectProperty;
+   rdfs:domain vivo:workflow_assessment;
+   rdfs:range osmo:workflow_graph;
+   rdfs:subPropertyOf vivo:evaluates.
+
+vivo:accuracy_assessment a owl:Class;
+   rdfs:subClassOf evmpo:assessment, [owl:unionOf (vivo:data_item_assessment vivo:document_assessment vivo:data_infrastructure_assessment vivo:model_assessment vivo:workflow_assessment)];
+   owl:disjointUnionOf (vivo:absolute_accuracy_assessment vivo:relative_accuracy_assessment vivo:qualitative_accuracy_assessment).
+
+vivo:has_accuracy_assertion a owl:ObjectProperty;
+   rdfs:domain vivo:accuracy_assessment;
+   rdfs:range vivo:accuracy_assertion;
+   rdfs:subPropertyOf vivo:has_assertion.
+
+vivo:absolute_accuracy_assessment a owl:Class;
+   rdfs:subClassOf vivo:accuracy_assessment, [owl:unionOf (vivo:data_item_assessment vivo:model_assessment vivo:workflow_assessment)].
+vivo:relative_accuracy_assessment a owl:Class;
+   rdfs:subClassOf vivo:accuracy_assessment, [owl:unionOf (vivo:data_item_assessment vivo:model_assessment vivo:workflow_assessment)].
+vivo:qualitative_accuracy_assessment a owl:Class;
+   rdfs:subClassOf vivo:accuracy_assessment.
+
+evmpo:requirement_assessment rdfs:subClassOf evmpo:assessment, [owl:unionOf (vivo:event_assessment vivo:infrastructure_assessment vivo:model_assessment vivo:project_assessment vivo:workflow_assessment)];
+   owl:disjointUnionOf (vivo:computational_time_requirement vivo:computational_space_requirement vivo:other_requirement_assessment).
+
+vivo:has_requirement_assertion a owl:ObjectProperty;
+   rdfs:domain evmpo:requirement_assessment;
+   rdfs:range vivo:requirement_assertion;
+   rdfs:subPropertyOf vivo:has_assertion.
+
+vivo:computational_time_requirement a owl:Class;
+   rdfs:subClassOf evmpo:requirement_assessment, vivo:workflow_assessment.
+vivo:computational_space_requirement a owl:Class;
+   rdfs:subClassOf evmpo:requirement_assessment, [owl:unionOf (vivo:data_infrastructure_assessment vivo:software_infrastructure_assessment vivo:workflow_assessment)].
+vivo:other_requirement_assessment a owl:Class;
+   rdfs:subClassOf evmpo:requirement_assessment.
+
+vivo:review_assessment a owl:Class;
+   rdfs:subClassOf evmpo:assessment;
+   owl:disjointUnionOf (evmpo:endorsement_assessment vivo:comment vivo:revision).
+
+vivo:has_review_assertion a owl:ObjectProperty;
+   rdfs:domain vivo:review_assessment;
+   rdfs:range vivo:review_assertion;
+   rdfs:subPropertyOf vivo:has_assertion.
+vivo:has_stars a owl:DatatypeProperty;
+   rdfs:domain vivo:review_assessment;
+   rdfs:range xs:decimal;
+   rdfs:comment "By convention, the number of stars will normally be an integer between zero and five; in special circumstances, exceptions (non-integer, or negative, or six stars, etc.) may be justified."^^xs:string.
+
+vivo:comment a owl:Class;
+   rdfs:subClassOf vivo:review_assessment, [owl:unionOf (vivo:data_item_assessment vivo:document_assessment vivo:meta_assessment vivo:model_assessment vivo:service_assessment vivo:workflow_assessment)].
+vivo:revision a owl:Class;
+   rdfs:subClassOf vivo:review_assessment, [owl:unionOf (vivo:data_item_assessment vivo:document_assessment vivo:meta_assessment vivo:model_assessment vivo:workflow_assessment)];
+   rdfs:comment "revision, i.e., a review assessment by which a replacement for the entity under review is recommended"^^xs:string.
+
+
+################################
+# COMMUNICATION BRANCH OF VIVO #
+################################
+
+vivo:validation_statement a owl:Class;
+   rdfs:subClassOf evmpo:statement, vico:validation_communication;
+   owl:intersectionOf (vico:validation_communication evmpo:statement);
+   rdfs:comment "validation statement, i.e., a statement which, as its main feature or purpose, relates to validation"^^xs:string.
+
+vivo:validation_statement owl:disjointWith evmpo:material_property, vivo:validation_infrastructure.
+
+vivo:certificate a owl:Class;
+   rdfs:subClassOf vivo:validation_statement;
+   rdfs:comment "certificate, i.e., a validation statement by which an assessment is stated"^^xs:string.
+
+vivo:has_certifier a owl:ObjectProperty;
+   rdfs:domain vivo:certificate;
+   rdfs:range vico:certifier;
+   rdfs:subPropertyOf viprs:has_requirement_satisfied_by;
+   owl:inverseOf vico:is_certifier_of;
+   rdfs:comment "connects a certificate to the certifier who is responsible for the included assessment (not necessarily identical with the author who communicates the certificate)"^^xs:string.
+vivo:states_assessment a owl:ObjectProperty;
+   rdfs:domain vivo:certificate;
+   rdfs:range evmpo:assessment;
+   rdfs:subPropertyOf vico:has_object_content, viprs:enables, viprs:has_proper_part.
+
+vivo:certificate rdfs:subClassOf [
+      a owl:Restriction;
+      owl:onProperty vivo:has_certifier;
+      owl:someValuesFrom vico:certifier
+   ], [
+      a owl:Restriction;
+      owl:onProperty vivo:states_assessment;
+      owl:someValuesFrom evmpo:assessment
+   ].
+
+
+#################################
+# INFRASTRUCTURE BRANCH OF VIVO #
+#################################
+
+vivo:validation_infrastructure a owl:Class;
+   rdfs:subClassOf evmpo:infrastructure;
+   rdfs:comment "validation infrastructure, i.e., an infrastructure which, as its main feature or purpose, relates to validation"^^xs:string.
+
+vivo:validation_infrastructure owl:disjointWith vivo:assertion, evmpo:assessment, evmpo:material_property, vivo:validation_statement.
+
+vivo:validation_channel a owl:Class;
+   rdfs:subClassOf vivo:validation_infrastructure, macro:channel.
+
+vivo:validation_repository a owl:Class;
+   rdfs:subClassOf vivo:validation_infrastructure, macro:repository, evmpo:agent.
+
+
+###########################
+# PROPERTY BRANCH OF VIVO #
+###########################
+
+evmpo:material_property rdfs:subClassOf osmo:logical_variable;
+   rdfs:comment "thermodynamic or mechanical behaviour of a material (referring either to the real material itself or a model thereof)"^^xs:string.
+
+vivo:is_quantity_kind a owl:ObjectProperty, owl:FunctionalProperty;
+   rdfs:domain evmpo:material_property;
+   rdfs:range qudt:QuantityKind;
+   rdfs:subPropertyOf viprs:has_sign, evmpo:has_property_annotation;
+   rdfs:comment "points to the physical property characterization following QUDT"^^xs:string.
+
+evmpo:material_property owl:disjointWith vivo:assertion, evmpo:assessment, vivo:validation_statement, vivo:validation_infrastructure.
+
+
+################################################################
+# ANNOTATION: ADDITIONAL UNITS DEFINED IN ACCORDANCE WITH QUDT #
+################################################################
+
+vivo:unit a owl:Class;
+   rdfs:subClassOf evmpo:annotation;
+   owl:equivalentClass qudt:Unit;
+   owl:sameAs qudt:Unit;
+   rdfs:comment "A unit that can be expressed as a scalar multiple of an algebraic combination of SI units. This class, defined by identity with ReferenceUnit from the EMMO, cf. EVI, can be used to specify units (individuals of the unit class) that are absent from qudt-unit"^^xs:string.
+
+vivo:UNIT_DEBYE_ANGSTROM a vivo:unit, qudt:ElectricityAndMagnetismUnit;
+   qudt:conversionMultiplier 3.33564e-40;
+   qudt:conversionOffset 0.0;
+   qudt:symbol "DA"^^xs:string;
+   qudt:description "Debye Angstrom, i.e., a quadrupole-moment unit, corresponding to 3.33564e-40 C m^2, also referred to as Buckingham"^^xs:string.
+qudt:ElectricityAndMagnetismUnit rdfs:subClassOf vivo:unit.
+vivo:UNIT_KELVIN_BOLTZMANN a vivo:unit, qudt:EnergyAndWorkUnit;
+   qudt:conversionMultiplier 1.38065e-23;
+   qudt:conversionOffset 0.0;
+   qudt:symbol "K k_B"^^xs:string;
+   qudt:description "Kelvin x Boltzmann constant, i.e., an energy unit, corresponding to 1.38065e-23 J"^^xs:string.
+qudt:EnergyAndWorkUnit rdfs:subClassOf vivo:unit.
+vivo:UNIT_U a vivo:unit, qudt:MassUnit;  # note: this exists within qudt, but there is a bug in the definition
+   qudt:conversionMultiplier 1.660539e-27;
+   qudt:conversionOffset 0.0;
+   qudt:symbol "u"^^xs:string;
+   qudt:description "Unit of mass corresponding to 1 g/mol, also referred to as Dalton"^^xs:string.
+qudt:MassUnit rdfs:subClassOf vivo:unit.
+
+
+###
+# EXPLICIT IMPORTS
+###
+
+qudt:QuantityKind a owl:Class;
+   rdfs:subClassOf evmpo:annotation.
+qudt:Unit a owl:Class;
+   rdfs:subClassOf evmpo:annotation.
+
+
+###
+# DATATYPE PROPERTIES
+###
+
+vivo:asserts_magnitude rdfs:subPropertyOf viprs:has_numerical_content.
+vivo:has_deviation_magnitude rdfs:subPropertyOf viprs:has_numerical_content.
+vivo:has_lower_bound rdfs:subPropertyOf viprs:has_numerical_content.
+vivo:has_upper_bound rdfs:subPropertyOf viprs:has_numerical_content.
+vivo:has_property_value rdfs:subPropertyOf viprs:has_numerical_content.
+vivo:has_stars rdfs:subPropertyOf viprs:has_numerical_content.
+vivo:has_assessment_text rdfs:subPropertyOf viprs:has_textual_content.
+
+
+###
+# NOTES ON ALIGNMENT
+###
+
+# An assertion is a symbolic entity
+# an accuracy_assertion is a mathematical entity
+# a material_assertion is also a sign for a material
+# a material_property_information is also a sign for a property, and a sign for a sign for a material
+
+# An assessment is a sign; specifically:
+#    an agent_assessment is a sign for an agent (i.e., for an interpreter)
+#    a data_item_assessment is a sign for a data item (i.e., for a symbolic entity)
+#    a document_assessment is a sign for a document (i.e., for a symbolic entity)
+#    an event_assessment is a sign for a calendar event (i.e., for a sign that represents a process)
+#    an infrastructure_assessment is a sign for an infrastructure (i.e., for an engineered entity)
+#    a model_assessment is a sign for a model
+#    a project_assessment is a sign for a project (i.e., for a process)
+#    a service_assessment is a sign for a service (i.e., for a sign that represents a process)
+#    a workflow_assessment is a sign for a simulation workflow (i.e., for a symbolic entity that is also a sign for a semiosis)
+
+# a communication, hence a statement, hence a validation_statement, is a symbolic entity
+
+# a material_property is a property that (inverse of hasProperty) some material
+
+# the classes vivo:unit and emmo1s:ReferenceUnit are the same
+
+# evaluates is a subproperty of is_sign_for
+
+# "X has_certifier Y" is a subproperty of "A can only occur if some B occurs" where A = {X} and B conceptualizes Y
+#    hence, has_certifier subPropertyOf has_requirement_satisfied_by
+# "X is_cerfifier_of Y" is a subproperty of the inverse relation of the above
+#    hence, is_certifier_of subPropertyOf satisfies_requirement_of
+
+# refers_to_material and refers_to_property are subproperties of is_sign_for
+
+# states_assessment is a subproperty of has_proper_part & of enables
