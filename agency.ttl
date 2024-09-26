@@ -20,8 +20,8 @@
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-08/agency.ttl>;
    dcterms:title "MSO-EM module 'agency' (Action, Agent, Intention)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'agency': Version dated August 2024"^^xs:string;
-   dcterms:issued "2024-08-16"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'agency': Version dated September 2024"^^xs:string;
+   dcterms:issued "2024-09-26"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -47,7 +47,6 @@ mso-em:Action a owl:Class;
    ];
    skos:exactMatch pims-ii:Action;
    skos:definition "action, i.e., a process that is done by an agent"@en;
-   rdfs:comment    "action, i.e., a process that is done by an agent"@en;
    skos:closeMatch schema:Action;
    skos:scopeNote "An action has exactly one agent. An action does *not* require a purpose. But it does require an agent."@en;
    skos:editorialNote "DOLCE defines two classes of perdurants: Event and Stative. The difference is 'whether [classification under a concept] holds of the mereological sum of two of its instances'. If it does, it is stative, if it does not, it is an event. Accordingly, Action must be subsumed under Event, since two actions combined are not necessarily also an action (they could be unrelated, or it would not make sense to say that the combined event 'has exactly one agent', which is something that we require of an action)."@en.
@@ -58,8 +57,7 @@ mso-em:Agent a owl:Class;
    skos:altLabel "Agent"@en;
    rdfs:subClassOf dol:physical-object;
    skos:exactMatch pims-ii:Agent;
-   skos:definition "agent, i.e., an object that interacts with its surroundings by a) perceiving and b) doing, i.e., an object that carries out actions, including perceptive actions"@en;
-   rdfs:comment    "agent, i.e., an object that interacts with its surroundings by a) perceiving and b) doing, i.e., an object that carries out actions, including perceptive actions"@en.
+   skos:definition "agent, i.e., an object that interacts with its surroundings by a) perceiving and b) doing, i.e., an object that carries out actions, including perceptive actions"@en.
 
 mso-em:Intention a owl:Class;
    skos:prefLabel "Intention"@en;
@@ -67,8 +65,7 @@ mso-em:Intention a owl:Class;
    skos:altLabel "Intention"@en;
    rdfs:subClassOf dol:physical-quality;
    skos:exactMatch pims-ii:Intention;
-   skos:definition "intention, i.e., an agent's quality that constitutes the agent's aim or goal"@en;
-   rdfs:comment    "intention, i.e., an agent's quality that constitutes the agent's aim or goal"@en.
+   skos:definition "intention, i.e., an agent's quality that constitutes the agent's aim or goal"@en.
 
 
 ############################################
@@ -83,7 +80,6 @@ mso-em:isDoneBy a owl:ObjectProperty;
    rdfs:domain mso-em:Action;
    rdfs:range mso-em:Agent;
    skos:definition "(x is done by y) means that y is the agent that conducts/undertakes the action x."@en;
-   rdfs:comment "(x is done by y) means that y is the agent that conducts/undertakes the action x."@en;
    skos:scopeNote "An action is done by exactly one agent."@en.
 
 mso-em:isDoneFor a owl:ObjectProperty;
@@ -94,7 +90,6 @@ mso-em:isDoneFor a owl:ObjectProperty;
    rdfs:domain mso-em:Action;
    rdfs:range mso-em:Intention;
    skos:definition "(x is done for y) means that x is a purposeful action, and y is one of the aims followed by the agent of x by undertaking x"@en;
-   rdfs:comment    "(x is done for y) means that x is a purposeful action, and y is one of the aims followed by the agent of x by undertaking x"@en;
    skos:scopeNote "No goal-directedness (awareness of the intention) is required on the side of the agent."@en.
 
 mso-em:isDoneWith a owl:ObjectProperty;
@@ -104,8 +99,7 @@ mso-em:isDoneWith a owl:ObjectProperty;
    skos:altLabel "isDoneWith"@en;
    rdfs:domain mso-em:Action;
    rdfs:range dol:endurant;
-   skos:definition "(x is done with y) means that y is a tool used for action x by its agent."@en;
-   rdfs:comment    "(x is done with y) means that y is a tool used for action x by its agent."@en.
+   skos:definition "(x is done with y) means that y is a tool used for action x by its agent."@en.
 
    
 ########################
@@ -123,7 +117,6 @@ mso-em:ExpressiveAct a owl:Class;
    ];
    skos:exactMatch pims-ii:ExpressiveAct;
    skos:definition "expressive act, i.e., a purposeful communication (e.g., a speech act or an analogous digital act of communicating) done by its agent, the speaker"@en;
-   rdfs:comment    "expressive act, i.e., a purposeful communication (e.g., a speech act or an analogous digital act of communicating) done by its agent, the speaker"@en;
    skos:scopeNote "The role of the speaker (agent doing the expressive act) must be understood in a generalized sense, i.e., not limited to speech. The purpose of the action consists in its illocutionary and perlocutionary intent."@en.
 
 mso-em:PurposefulAction a owl:Class;
@@ -140,8 +133,7 @@ mso-em:PurposefulAction a owl:Class;
       owl:someValuesFrom mso-em:Intention
    ];
    skos:exactMatch pims-ii:PurposefulAction;
-   skos:definition "purposeful action, i.e., an action carried out with an aim that its agent (hence, a goal-directed agent) is aware of"@en;
-   rdfs:comment    "purposeful action, i.e., an action carried out with an aim that its agent (hence, a goal-directed agent) is aware of"@en.
+   skos:definition "purposeful action, i.e., an action carried out with an aim that its agent (hence, a goal-directed agent) is aware of"@en.
 
    
 #######################
@@ -160,7 +152,6 @@ mso-em:GoalDirectedAgent a owl:Class;
    ];
    skos:exactMatch pims-ii:GoalDirectedAgent;
    skos:definition "'Goal-directed agents are intelligent agents that have an internal representation of the goals they [tend to] achieve' (Conte, doi:10.1007/978-1-4614-1800-9_158, 2009)."@en;
-   rdfs:comment    "'Goal-directed agents are intelligent agents that have an internal representation of the goals they [tend to] achieve' (Conte, doi:10.1007/978-1-4614-1800-9_158, 2009)."@en;
    skos:scopeNote "Goal-directedness requires an explicit internal representation of intentions/objectives/goals of the agent; that is what distinguishes it from goal orientation. Here, goal orientation is denoted by the relation isOrientedToward (which does not require an internal mental representation of the goal), whereas conscious goal directedness is denoted by the relation isDirectedToward."@en.
 
 mso-em:GoalOrientedAgent a owl:Class;
@@ -175,7 +166,6 @@ mso-em:GoalOrientedAgent a owl:Class;
    ];
    skos:exactMatch pims-ii:GoalOrientedAgent;
    skos:definition "goal-oriented agent, i.e., an agent that exhibits the tendency 'to achieve a certain state of the world' (Conte, doi:10.1007/978-1-4614-1800-9_158, 2009)"@en;
-   rdfs:comment    "goal-oriented agent, i.e., an agent that exhibits the tendency 'to achieve a certain state of the world' (Conte, doi:10.1007/978-1-4614-1800-9_158, 2009)"@en;
    skos:scopeNote "A goal of a goal-oriented agent is a descriptor/representamen for that state of the world, and it is also a descriptor/representament for the agent itself. Goal orientation can emerge by a multitude of mechanisms, including natural selection. It does *not* require the agent to be consciously aware of its goals. Here, goal orientation is denoted by the relation 'is goal of' (which does not require an internal mental representation of the goal), whereas conscious goal directedness is denoted by the relation 'is goal for'."@en.
 
 mso-em:Interlocutor a owl:Class;
@@ -184,8 +174,7 @@ mso-em:Interlocutor a owl:Class;
    skos:altLabel "Interlocutor"@en;
    rdfs:subClassOf mso-em:Agent;
    skos:exactMatch pims-ii:Interlocutor;
-   skos:definition "interlocutor, i.e., an agent that can be addressed and is capable of addressing others in a communication process"@en;
-   rdfs:comment    "interlocutor, i.e., an agent that can be addressed and is capable of addressing others in a communication process"@en.
+   skos:definition "interlocutor, i.e., an agent that can be addressed and is capable of addressing others in a communication process"@en.
 
 mso-em:KnowledgeBase a owl:Class;
    skos:prefLabel "Knowledge base"@en;
@@ -193,8 +182,7 @@ mso-em:KnowledgeBase a owl:Class;
    skos:altLabel "KnowledgeBase"@en;
    rdfs:subClassOf mso-em:Interlocutor;
    skos:exactMatch pims-ii:KnowledgeBase;;
-   skos:definition "knowledge base, i.e., an interlocutor that makes a consistent set of claims and will respond consistently if queried"@en;
-   rdfs:comment    "knowledge base, i.e., an interlocutor that makes a consistent set of claims and will respond consistently if queried"@en.
+   skos:definition "knowledge base, i.e., an interlocutor that makes a consistent set of claims and will respond consistently if queried"@en.
 
 mso-em:Person a owl:Class;
    skos:prefLabel "Person"@en;
@@ -202,8 +190,7 @@ mso-em:Person a owl:Class;
    skos:altLabel "Person"@en;
    rdfs:subClassOf mso-em:Interlocutor;
    skos:exactMatch pims-ii:Person;
-   skos:definition "person, i.e., an interlocutor that is socially identified as a natural or legal person by social convention that involves using a name (or multiple names) for it as rigid designators"@en;
-   rdfs:comment    "person, i.e., an interlocutor that is socially identified as a natural or legal person by social convention that involves using a name (or multiple names) for it as rigid designators"@en.
+   skos:definition "person, i.e., an interlocutor that is socially identified as a natural or legal person by social convention that involves using a name (or multiple names) for it as rigid designators"@en.
 
 mso-em:Self a owl:Class;
    skos:prefLabel "Self"@en;
@@ -212,8 +199,7 @@ mso-em:Self a owl:Class;
    rdfs:subClassOf mso-em:Interlocutor;
    skos:exactMatch pims-ii:ReferenceToSelf;
    skos:definition "Self, i.e., an entity that *is* the present system, i.e., the system containing or communicating the present knowledge graph/triples, or a component of it (namely, the component holding/responsible for the present semantic content)"@en;
-   skos:definition "Self, i.e., an entity that *is* the present system, i.e., the system containing or communicating the present knowledge graph/triples, or a component of it (namely, the component holding/responsible for the present semantic content)"@en;
-   rdfs:comment    "If the present triples are processed by a research data infrastructure with a federated architecture, consisting of several repositories (which are interlocutors, i.e., they can be queried and communicate with the outside world), both the research data infrastructure as a whole and the individual repositories can be instances of the 'Self' class"@en.
+   skos:scopeNote "If the present triples are processed by a research data infrastructure with a federated architecture, consisting of several repositories (which are interlocutors, i.e., they can be queried and communicate with the outside world), both the research data infrastructure as a whole and the individual repositories can be instances of the 'Self' class"@en.
 
 
 #####################################
@@ -228,7 +214,6 @@ mso-em:isDirectedToward a owl:ObjectProperty;
    rdfs:domain mso-em:GoalDirectedAgent;
    rdfs:range mso-em:Intention;
    skos:definition "(x is directed toward y) means that to the goal-directed agent x, the intention y represents something that is to be reached."@en;
-   rdfs:comment    "(x is directed toward y) means that to the goal-directed agent x, the intention y represents something that is to be reached."@en;
    skos:example "In (x is directed toward y), if the agent y wants to go to Paris, x is *not* physically the city of Paris as a spacetime object, but rather the associated intention, i.e., a mental or textual *representation* of the agent achieving the objective and reaching Paris."@en.
 
 mso-em:isOrientedToward a owl:ObjectProperty;
@@ -239,5 +224,4 @@ mso-em:isOrientedToward a owl:ObjectProperty;
    rdfs:domain mso-em:GoalOrientedAgent;
    rdfs:range mso-em:Intention;
    skos:definition "(x is oriented toward y) means that x is a goal-oriented agent with the tendency to work toward a state of affairs that is described/represented by y"@en;
-   rdfs:comment    "(x is oriented toward y) means that x is a goal-oriented agent with the tendency to work toward a state of affairs that is described/represented by y"@en;
    skos:scopeNote "this does *not* imply that the agent x is aware of pursuing y as a goal, or that y is somehow included in x as a mental representation - for that purpose, use the relation 'is directed toward'"@en.

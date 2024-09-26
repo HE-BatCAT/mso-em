@@ -19,7 +19,7 @@
    dcterms:title "MSO-EM module 'sign' (Articulation, Plurality, Structure)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'sign': Version dated September 2024"^^xs:string;
-   dcterms:issued "2024-09-24"^^dcterms:W3CDTF;
+   dcterms:issued "2024-09-26"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -38,25 +38,84 @@ mso-em:Articulation a owl:Class;
    skos:prefLabel "Articulation"@en;
    rdfs:label     "Articulation"@en;
    skos:altLabel "Articulation"@en;
-   rdfs:subClassOf dol:endurant, [
+   rdfs:subClassOf dol:non-physical-endurant, [
       a owl:Restriction;
-      owl:onProperty dol:generic-constituent;
+      owl:onProperty mso-em:isRealizedBy;
       owl:someValuesFrom dol:endurant
    ];
    skos:exactMatch pims-ii:Articulation;
-   skos:definition "Articulation (collective expression), i.e., a sign (type/collection) the realizations of which are not collective expressions, but individual literal (written or digital) or non-literal (e.g., spoken) items with the same semiotic function."@en;
-   rdfs:comment    "Articulation (collective expression), i.e., a sign (type/collection) the realizations of which are not collective expressions, but individual literal (written or digital) or non-literal (e.g., spoken) items with the same semiotic function."@en.
+   skos:definition "articulation (collective expression), i.e., a sign (type/collection) the realizations of which are not collective expressions, but individual literal (written or digital) or non-literal (e.g., spoken) items with the same semiotic function."@en.
 
-pims-ii:Plurality a owl:Class;
+mso-em:Plurality a owl:Class;
    skos:prefLabel "Plurality"@en;
    rdfs:label     "Plurality"@en;
    skos:altLabel "Plurality"@en;
-   rdfs:subClassOf dol:set, [
+   rdfs:subClassOf dol:abstract, [
       a owl:Restriction;
-      owl:onProperty dol:generic-constituent;
-      owl:someValuesFrom dol:endurant
+      owl:onProperty mso-em:hasElement;
+      owl:someValuesFrom owl:Thing
    ];
    skos:exactMatch pims-ii:Plurality;
-   skos:definition "Plurality, i.e., a semiotic collective the members of which are a representational element (referent or representamen) together, whereby all act/contribute in the same way"@en;
-   rdfs:comment "Plurality, i.e., a semiotic collective the members of which are a representational element (referent or representamen) together, whereby all act/contribute in the same way"@en;
+   owl:disjointWith [
+      a owl:Restriction;
+      owl:onProperty dol:specific-constant-constituent;
+      owl:someValuesFrom mso-em:Plurality
+   ], [
+      a owl:Restriction;
+      owl:onProperty dol:specific-constant-constituent;
+      owl:someValuesFrom mso-em:Structure
+   ];
+   skos:definition "plurality, i.e., a tuple the members of which are a representational element (referent or representamen) together, whereby all act/contribute in the same way"@en;
    skos:example "The referent of the expression 'the four seasons/quarters of the year' (for a given year, within a given spatial region) is a plurality, and each of the four seasons/quarters is one of its semiotic members"@en.
+
+mso-em:Structure a owl:Class;
+   skos:prefLabel "Structure"@en;
+   rdfs:label     "Structure"@en;
+   skos:altLabel "Structure"@en;
+   rdfs:subClassOf dol:abstract, [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasElement;
+      owl:someValuesFrom owl:Thing
+   ];
+   owl:disjointWith [
+      a owl:Restriction;
+      owl:onProperty dol:specific-constant-constituent;
+      owl:someValuesFrom mso-em:Structure
+   ];
+   skos:exactMatch pims-ii:Structure;
+   skos:definition "structure, i.e., a semiotic collective the semiotic members of which complement each other, contributing in different ways (or, at least, not all int the same way) to their joint action as a referent or a representamen"@en.
+
+
+############################################
+# Properties of the highest-level concepts #
+############################################
+
+mso-em:hasElement a owl:ObjectProperty;
+   skos:prefLabel "has element"@en;
+   rdfs:label     "has element"@en;
+   rdfs:subPropertyOf dol:specific-constant-constituent;
+   rdfs:domain dol:abstract;
+   skos:definition "(x has element y) means that y is an entry in the plurality (tuple), structure, or set x"@en.
+
+mso-em:isArticulatedBy a owl:ObjectProperty;
+   skos:prefLabel "is articulated by"@en;
+   rdfs:label     "is articulated by"@en;
+   skos:altLabel "isArticulatedBy"@en;
+   rdfs:subPropertyOf dol:generic-constituent;
+   rdfs:domain dol:proposition;
+   rdfs:range mso-em:Articulation;
+   skos:definition "(y is articulated by x) means that x is a semiotic member of the proposition y, giving a literal or non-literal (e.g., spoken) expression to its propositional content; n.b., x may also express other propositions beside y"@en.
+dol:proposition rdfs:subClassOf [
+      a owl:Restriction;
+      owl:onProperty mso-em:isArticulatedBy;
+      owl:someValuesFrom mso-em:Articulation
+   ].
+   
+mso-em:isRealizedBy a owl:ObjectProperty;
+   skos:prefLabel "is realized by"@en;
+   rdfs:label "is realized by"@en;
+   skos:altLabel "isRealizedBy"@en;
+   rdfs:subPropertyOf dol:generic-constituent;
+   rdfs:domain mso-em:Articulation;
+   rdfs:range dol:endurant;
+   skos:definition "(y is realized by y) means that x, which is not a semiotic collective, is a literal or non-literal realization of the expression y"@en.
