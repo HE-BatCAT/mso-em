@@ -18,7 +18,7 @@
    dcterms:title "MSO-EM module 'dol-inclusions' (concepts and relations reused from DOLCE Lite)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'dol-inclusions': Version dated September 2024"^^xs:string;
-   dcterms:issued "2024-09-26"^^dcterms:W3CDTF;
+   dcterms:issued "2024-09-27"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0001-5568-2684>;  # Aldo Gangemi, did the ontology engineering for DOLCE Lite
@@ -190,6 +190,13 @@ dol:generic-constituent a owl:ObjectProperty;
    rdfs:subPropertyOf dol:immediate-relation;
    skos:definition "(x [has] generic constituent y) means that it is in some way constitutive to x to have something like y associated with it in a certain way."@en;
    skos:scopeNote "If y generically constitutes x, that means it is possible to replace y with a similar y', and x still remains x. That is what distinguishes 'generic constituent' from 'specific constant constituent'."@en.
+
+dol:generically-dependent-on a owl:ObjectProperty;
+   skos:prefLabel "generically dependent on"@en;
+   rdfs:label     "generically dependent on"@en;
+   skos:altLabel  "genericallyDependentOn"@en;
+   rdfs:subPropertyOf dol:immediate-relation-i;
+   skos:definition "The dependence on an individual of a given type at some time. This is traditionally a relation between particulars and universals, but not necessarily, in DOLCE."@en.
 
 dol:has-quality a owl:ObjectProperty;
    skos:prefLabel "has quality"@en;

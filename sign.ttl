@@ -11,6 +11,7 @@
 @prefix dol: <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#>.
 @prefix ineurese: <http://purl.org/info:eu-repo/semantics/>.
 @prefix pims-ii: <http://www.molmod.info/semantics/pims-ii.ttl#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix vann: <http://purl.org/vocab/vann/>.
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
@@ -19,7 +20,7 @@
    dcterms:title "MSO-EM module 'sign' (Articulation, Plurality, Structure)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'sign': Version dated September 2024"^^xs:string;
-   dcterms:issued "2024-09-26"^^dcterms:W3CDTF;
+   dcterms:issued "2024-09-27"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -37,7 +38,7 @@
 mso-em:Articulation a owl:Class;
    skos:prefLabel "Articulation"@en;
    rdfs:label     "Articulation"@en;
-   skos:altLabel "Articulation"@en;
+   skos:altLabel  "Articulation"@en;
    rdfs:subClassOf dol:non-physical-endurant, [
       a owl:Restriction;
       owl:onProperty mso-em:isRealizedBy;
@@ -49,7 +50,7 @@ mso-em:Articulation a owl:Class;
 mso-em:Plurality a owl:Class;
    skos:prefLabel "Plurality"@en;
    rdfs:label     "Plurality"@en;
-   skos:altLabel "Plurality"@en;
+   skos:altLabel  "Plurality"@en;
    rdfs:subClassOf dol:abstract, [
       a owl:Restriction;
       owl:onProperty mso-em:hasElement;
@@ -71,7 +72,7 @@ mso-em:Plurality a owl:Class;
 mso-em:Structure a owl:Class;
    skos:prefLabel "Structure"@en;
    rdfs:label     "Structure"@en;
-   skos:altLabel "Structure"@en;
+   skos:altLabel  "Structure"@en;
    rdfs:subClassOf dol:abstract, [
       a owl:Restriction;
       owl:onProperty mso-em:hasElement;
@@ -93,14 +94,15 @@ mso-em:Structure a owl:Class;
 mso-em:hasElement a owl:ObjectProperty;
    skos:prefLabel "has element"@en;
    rdfs:label     "has element"@en;
+   skos:altLabel  "hasElement"@en;
    rdfs:subPropertyOf dol:specific-constant-constituent;
    rdfs:domain dol:abstract;
-   skos:definition "(x has element y) means that y is an entry in the plurality (tuple), structure, or set x"@en.
+   skos:definition "(x has element y) means that y is an element of the plurality (tuple), structure, or set x"@en.
 
 mso-em:isArticulatedBy a owl:ObjectProperty;
    skos:prefLabel "is articulated by"@en;
    rdfs:label     "is articulated by"@en;
-   skos:altLabel "isArticulatedBy"@en;
+   skos:altLabel  "isArticulatedBy"@en;
    rdfs:subPropertyOf dol:generic-constituent;
    rdfs:domain dol:proposition;
    rdfs:range mso-em:Articulation;
@@ -113,9 +115,174 @@ dol:proposition rdfs:subClassOf [
    
 mso-em:isRealizedBy a owl:ObjectProperty;
    skos:prefLabel "is realized by"@en;
-   rdfs:label "is realized by"@en;
-   skos:altLabel "isRealizedBy"@en;
+   rdfs:label     "is realized by"@en;
+   skos:altLabel  "isRealizedBy"@en;
    rdfs:subPropertyOf dol:generic-constituent;
    rdfs:domain mso-em:Articulation;
    rdfs:range dol:endurant;
    skos:definition "(y is realized by y) means that x, which is not a semiotic collective, is a literal or non-literal realization of the expression y"@en.
+
+   
+##############################
+# Subclasses of Articulation #
+##############################
+
+mso-em:DataItem a owl:Class;
+   skos:prefLabel "Data item"@en;
+   rdfs:label     "Data item"@en;
+   skos:altLabel  "DataItem"@en;
+   rdfs:subClassOf mso-em:Literal, [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasEntry;
+      owl:someValuesFrom mso-em:Literal
+   ];
+   owl:disjointWith mso-em:IRI, mso-em:Name;
+   skos:exactMatch pims-ii:DataItem;
+   skos:definition "Data item, i.e., a digital articulation given as a tuple of literals"@en;
+   skos:example "e.g., a key-value dyad with a left-hand side and a right-hand side"@en.
+
+mso-em:Dataset a owl:Class;
+   skos:prefLabel "Dataset"@en;
+   rdfs:label     "Dataset"@en;
+   skos:altLabel  "Dataset"@en;
+   rdfs:subClassOf mso-em:Articulation, [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasEntry;
+      owl:someValuesFrom mso-em:DataItem
+   ];
+   owl:disjointwith mso-em:Utterance;
+   skos:exactMatch pims-ii:Dataset;
+   skos:definition "dataset, i.e., a digital articulation that is composed of data items that are similar in shape, kind, and content type"@en.
+
+mso-em:Dyad a owl:Class;
+   skos:prefLabel "Dyad"@en;
+   rdfs:label     "Dyad"@en;
+   skos:altLabel  "Dyad"@en;
+   rdfs:subClassOf mso-em:DataItem, [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasLeftEntry;
+      owl:someValuesFrom mso-em:Literal
+   ], [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasRightEntry;
+      owl:someValuesFrom mso-em:Literal
+   ];
+   owl:disjointWith mso-em:Triple;
+   skos:exactMatch pims-ii:Dyad;
+   skos:definition "dyad, i.e., a data item by which two conventionals are grouped together"@en;
+   skos:example "e.g., an equality or inequality articulation"@en.
+
+mso-em:IRI a owl:Class;
+   skos:prefLabel "IRI"@en;
+   rdfs:label     "IRI"@en;
+   skos:altLabel  "IRI"@en;
+   rdfs:subClassOf mso-em:Literal;
+   skos:exactMatch pims-ii:IRI;
+   skos:definition "internationalized resource identifier (IRI) as defined by RFC 3987"@en;
+   skos:scopeNote "an IRI object should be related by 'isLiterally' to an xs:string containing the IRI literal"@en.
+
+mso-em:Literal a owl:Class;
+   skos:prefLabel "Literal"@en;
+   rdfs:label     "Literal"@en;
+   skos:altLabel  "Literal"@en;
+   rdfs:subClassOf mso-em:Articulation, [
+      a owl:Restriction;
+      owl:onProperty mso-em:isLiterally;
+      owl:someValuesFrom rdfs:Literal
+   ];
+   owl:disjointWith mso-em:Utterance;
+   skos:exactMatch pims-ii:CollectiveLiteral;
+   skos:definition "literal, i.e., a semiotic collective the members of which all have a digital, printed, or written textual/numerical form in that they are all instances/copies of the same RDFS literal (or multiple RDFS literals that are very similar"@en;
+   skos:example "different ways of spelling/abbreviating the same word or denoting the same number can be considered realizations of a single literal"@en.
+
+mso-em:Name a owl:Class;
+   skos:prefLabel "Name"@en;
+   rdfs:label     "Name"@en;
+   skos:altLabel  "Name"@en;
+   rdfs:subClassOf mso-em:Literal;
+   skos:exactMatch pims-ii:Name;
+   skos:definition "name, i.e., a lexeme that acts as a rigid designator due to social convention"@en.
+
+mso-em:Triple a owl:Class;
+   skos:prefLabel "Triple"@en;
+   rdfs:label     "Triple"@en;
+   skos:altLabel  "Triple"@en;
+   rdfs:subClassOf mso-em:DataItem, [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasLeftEntry;
+      owl:someValuesFrom mso-em:IRI
+   ], [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasMidEntry;
+      owl:someValuesFrom mso-em:IRI
+   ], [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasRightEntry;
+      owl:someValuesFrom mso-em:IRI
+   ];
+   owl:disjointWith mso-em:Dyad;
+   skos:definition "triple, i.e., a subject-predicate-object triple (connected by relations to the IRIs of the subject, predicate, and object)"@en.
+
+mso-em:Utterance a owl:Class;
+   skos:prefLabel "Utterance"@en;
+   rdfs:label     "Utterance"@en;
+   skos:altLabel  "Utterance"@en;
+   rdfs:subClassOf mso-em:Articulation;
+   owl:disjointWith mso-em:Literal;
+   skos:exactMatch pims-ii:CollectiveUtterance;
+   skos:definition "utterance, i.e., a semiotic collective the members of which do not have digital, printed, or written textual/numerical form and the members of which are all attributed the same semantics and pragmatics"@en.
+
+
+############################################
+# Properties of subclasses of Articulation #
+############################################
+
+mso-em:hasEntry a owl:ObjectProperty;
+   skos:prefLabel "has entry"@en;
+   rdfs:label     "has entry"@en;
+   skos:altLabel  "hasEntry"@en;
+   rdfs:subPropertyOf dol:specific-constant-constituent;
+   rdfs:domain mso-em:Articulation;
+   rdfs:range mso-em:Articulation;
+   skos:definition "(x has entry y) means that x is an articulation and y, also an articulation, is one of its constitutive elements"@en.
+
+mso-em:hasLeftEntry a owl:ObjectProperty;
+   skos:prefLabel "has left entry"@en;
+   rdfs:label     "has left entry"@en;
+   skos:altLabel  "hasLeftEntry"@en;
+   rdfs:subPropertyOf mso-em:hasEntry;
+   skos:definition "(x has left entry y) means that x is an articulation with multiple entries, and y is the 'left' one"@en;
+   skos:scopeNote "used for the subject entry of a mso-em:Triple and for the first element of a mso-em:Dyad"@en.
+
+mso-em:hasMidEntry a owl:ObjectProperty;
+   skos:prefLabel "has mid entry"@en;
+   rdfs:label     "has mid entry"@en;
+   skos:altLabel  "hasMidEntry"@en;
+   rdfs:subPropertyOf mso-em:hasEntry;
+   skos:definition "(x has mid entry y) means that x is an articulation with multiple entries, and y is the 'mid' one"@en;
+   skos:scopeNote "used for the predicate entry of a mso-em:Triple"@en.
+
+mso-em:hasRightEntry a owl:ObjectProperty;
+   skos:prefLabel "has right entry"@en;
+   rdfs:label     "has right entry"@en;
+   skos:altLabel  "hasLeftEntry"@en;
+   rdfs:subPropertyOf mso-em:hasEntry;
+   skos:definition "(x has right entry y) means that x is an articulation with multiple entries, and y is the 'right' one"@en;
+   skos:scopeNote "used for the object entry of a mso-em:Triple and for the second element of a mso-em:Dyad"@en.
+
+mso-em:isLiterally a owl:DatatypeProperty;
+   skos:prefLabel "is literally"@en;
+   rdfs:label     "is literally"@en;
+   skos:altLabel  "isLiterally"@en;
+   rdfs:domain mso-em:Literal;
+   skos:exactMatch pims-ii:isLiterally;
+   skos:definition "points to the expression of a collective literal as an RDFS literal (e.g., xs:string or xs:decimal)"@en.
+
+mso-em:isNameFor a owl:ObjectProperty;
+   skos:prefLabel "is name for"@en;
+   rdfs:label     "is name for"@en;
+   skos:altLabel  "isNameFor"@en;
+   rdfs:domain mso-em:Name;
+   rdfs:subPropertyOf mso-em:generically-dependent-on;
+   skos:exactMatch pims-ii:isNameFor;
+   skos:definition "(x isNameFor y), to be applied in the frequent special case where y is represented by x, its name"@en.
