@@ -1,0 +1,110 @@
+#########################
+# MSO-EM topic ontology #
+#########################
+
+@base <https://www.purl.org/mso-em#>.
+@prefix mso-em: <https://www.purl.org/mso-em#>.
+
+@prefix dcelem: <http://purl.org/dc/elements/1.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix dol: <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#>.
+@prefix ineurese: <http://purl.org/info:eu-repo/semantics/>.
+@prefix pims-ii: <http://www.molmod.info/semantics/pims-ii.ttl#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vann: <http://purl.org/vocab/vann/>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
+
+<https://www.purl.org/mso-em-topic> a owl:Ontology;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/topic.ttl>;
+   dcterms:title "MSO-EM module 'topic' (Query, Topical, Topical sum)"^^xs:string;
+   dcterms:created "2024"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'topic': Version dated October 2024"^^xs:string;
+   dcterms:issued "2024-10-10"^^dcterms:W3CDTF;
+   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
+   dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
+   dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
+   dcterms:status ineurese:publishedVersion;
+   dcterms:source <http://www.molmod.info/semantics/pims-ii.ttl>;
+   vann:preferredNamespaceUri "https://www.purl.org/mso-em#"^^xs:string;
+   dcelem:description "MSO-EM module for topics. Its highest-level concepts are Query, Topical, and Topical sum."@en;
+   dcterms:bibliographicCitation "M. T. Horsch, S. Chiacchiera, I. T. Todorov, A. T. Correia, A. Dey, N. A. Konchakova, S. Scholze, S. Stephan, K. Tøndel, A. Sarkar, M. H. Karray, F. Al Machot, B. Schembera, 'Exploration of key concepts required for mid- and domain-level ontology development to facilitate explainable-AI-readiness of data and models,' submitted, 2024."@en.
+
+
+##########################
+# Highest-level concepts #
+##########################
+
+mso-em:Query a owl:Class;
+   skos:prefLabel "Query"@en;
+   skos:altLabel  "Query"@en;
+   rdfs:subClassOf mso-em:Articulation;
+   skos:exactMatch pims-ii:Query;
+   skos:definition "Query, i.e., a digital articulation of a question"@en.
+   
+mso-em:Topical a owl:Class;
+   skos:prefLabel "Topical"@en;
+   skos:altLabel  "Topical"@en;
+   rdfs:subClassOf dol:proposition;
+   skos:exactMatch pims-ii:Topical;
+   skos:definition "Topical (or topical proposition), i.e., a proposition understood as expressing/constituting the topic of something"@en;
+   skos:scopeNote "In particular, all questions are topical propositions, since they state the topic of their potential answer. A topic can be a product of (sub-)topics, that is the case if two aspects of something are being addressed jointly, with a genuine interaction between multiple factors; in this case, the whole topic is a topical product (subclass of topical). But something can also address multiple contributions to its subject matter independently, without a genuine interaction between the elements; such a structure of subject matter is documented as a topical sum (disjoint with topical), whose elements are topicals."@en.
+
+mso-em:TopicalSum a owl:Class;
+   skos:prefLabel "Topical sum"@en;
+   skos:altLabel  "TopicalSum"@en;
+   rdfs:subClassOf mso-em:Plurality;
+   owl:equivalentClass [
+      a owl:Restriction;
+      owl:onProperty mso-em:containsTopicalSummand;
+      owl:someValuesFrom mso-em:Topical
+   ];
+   skos:exactMatch pims-ii:TopicalSum;
+   skos:definition "Topical sum, i.e., a plurality of topical propositions, where the individual elements (summands) don't genuinely interact but are just standing beside each other as independent, unrelated (or not very closely related) parts of what is addressed"@en.
+
+
+############################################
+# Properties of the highest-level concepts #
+############################################
+
+mso-em:containsTopicalSummand a owl:ObjectProperty;
+   skos:prefLabel "contains topical summand"@en;
+   skos:altLabel  "containsTopicalSummand"@en;
+   rdfs:domain mso-em:TopicalSum;
+   rdfs:range mso-em:Topical;
+   rdfs:subPropertyOf mso-em:hasElement;
+   skos:definition "(x contains topical summand y) means that y is one of the topics contained in x, a collection of topics that are not immediately closely related to each other"@en;
+   skos:scopeNote "If multiple topics are combined in a way that relates them closely to each other, with some meaningful interaction between them, the relation isTopicalFactorIn should be used, and the whole should then be a topical product, not a topical sum"@en.
+
+
+#########################
+# Subclasses of Topical #
+#########################
+
+# ...
+
+mso-em:TopicalProduct a owl:Class;
+   skos:prefLabel "Topical product"@en;
+   skos:altLabel  "TopicalProduct"@en;
+   rdfs:subClassOf mso-em:Topical;
+   owl:equivalentClass [
+      a owl:Restriction;
+      owl:onProperty mso-em:containsTopicalFactor;
+      owl:someValuesFrom dol:abstract
+   ];
+   skos:exactMatch pims-ii:TopicalProduct;
+   skos:definition "Topical sum, i.e., a topical proposition with multiple topical factors"@en.
+
+
+#######################################
+# Properties of subclasses of Topical #
+#######################################
+
+# ...
+
+mso-em:containsTopicalFactor a owl:ObjectProperty;
+   skos:prefLabel "contains topical factor"@en;
+   skos:altLabel  "containsTopicalFactor"@en;
+   rdfs:domain mso-em:TopicalProduct;
+   rdfs:range dol:abstract;
+   rdfs:subPropertyOf mso-em:hasElement;
+   skos:definition "(x contains topical factor y) means that y is combined with other subtopics into the topical proposition x, such that y and the other subtopics are not just standing beside each other, but exhibiting a meaningful interaction"@en.

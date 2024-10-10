@@ -1,4 +1,3 @@
-
 ##########################
 # MSO-EM agency ontology #
 ##########################
@@ -17,11 +16,11 @@
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
 <https://www.purl.org/mso-em-agency> a owl:Ontology;
-   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-08/agency.ttl>;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/agency.ttl>;
    dcterms:title "MSO-EM module 'agency' (Action, Agent, Intention)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'agency': Version dated September 2024"^^xs:string;
-   dcterms:issued "2024-09-26"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'agency': Version dated October 2024"^^xs:string;
+   dcterms:issued "2024-10-10"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -38,7 +37,6 @@
 
 mso-em:Action a owl:Class;
    skos:prefLabel "Action"@en;
-   rdfs:label     "Action"@en;
    skos:altLabel "Action"@en;
    rdfs:subClassOf dol:event, [
       a owl:Restriction;
@@ -53,7 +51,6 @@ mso-em:Action a owl:Class;
 
 mso-em:Agent a owl:Class;
    skos:prefLabel "Agent"@en;
-   rdfs:label     "Agent"@en;
    skos:altLabel "Agent"@en;
    rdfs:subClassOf dol:physical-object;
    skos:exactMatch pims-ii:Agent;
@@ -61,7 +58,6 @@ mso-em:Agent a owl:Class;
 
 mso-em:Intention a owl:Class;
    skos:prefLabel "Intention"@en;
-   rdfs:label     "Intention"@en;
    skos:altLabel "Intention"@en;
    rdfs:subClassOf dol:physical-quality;
    skos:exactMatch pims-ii:Intention;
@@ -74,7 +70,6 @@ mso-em:Intention a owl:Class;
 
 mso-em:isDoneBy a owl:ObjectProperty;
    skos:prefLabel "is done by"@en;
-   rdfs:label     "is done by"@en;
    skos:altLabel "isDoneBy"@en;
    rdfs:subPropertyOf dol:constant-participant;
    rdfs:domain mso-em:Action;
@@ -84,7 +79,6 @@ mso-em:isDoneBy a owl:ObjectProperty;
 
 mso-em:isDoneFor a owl:ObjectProperty;
    skos:prefLabel "is done for"@en;
-   rdfs:label     "is done for"@en;
    skos:altLabel "isDoneFor"@en;
    rdfs:subPropertyOf dol:has-quality;
    rdfs:domain mso-em:Action;
@@ -94,7 +88,6 @@ mso-em:isDoneFor a owl:ObjectProperty;
 
 mso-em:isDoneWith a owl:ObjectProperty;
    skos:prefLabel "is done with"@en;
-   rdfs:label     "is done with"@en;
    rdfs:subPropertyOf dol:participant;
    skos:altLabel "isDoneWith"@en;
    rdfs:domain mso-em:Action;
@@ -108,7 +101,6 @@ mso-em:isDoneWith a owl:ObjectProperty;
 
 mso-em:ExpressiveAct a owl:Class;
    skos:prefLabel "Expressive act"@en;
-   rdfs:label     "Expressive act"@en;
    skos:altLabel "ExpressiveAct"@en;
    rdfs:subClassOf mso-em:PurposefulAction, [
       a owl:Restriction;
@@ -121,7 +113,6 @@ mso-em:ExpressiveAct a owl:Class;
 
 mso-em:PurposefulAction a owl:Class;
    skos:prefLabel "Purposeful action"@en;
-   rdfs:label     "Purposeful action"@en;
    skos:altLabel "PurposefulAction"@en;
    rdfs:subClassOf mso-em:Action, [
       a owl:Restriction;
@@ -142,7 +133,6 @@ mso-em:PurposefulAction a owl:Class;
 
 mso-em:GoalDirectedAgent a owl:Class;
    skos:prefLabel "Goal-directed agent"@en;
-   rdfs:label     "Goal-directed agent"@en;
    skos:altLabel "GoalDirectedAgent"@en;
    rdfs:subClassOf mso-em:GoalOrientedAgent;
    owl:equivalentClass [
@@ -156,7 +146,6 @@ mso-em:GoalDirectedAgent a owl:Class;
 
 mso-em:GoalOrientedAgent a owl:Class;
    skos:prefLabel "Goal-oriented agent"@en;
-   rdfs:label     "Goal-oriented agent"@en;
    skos:altLabel "GoalOrientedAgent"@en;
    rdfs:subClassOf mso-em:Agent;
    owl:equivalentClass [
@@ -170,7 +159,6 @@ mso-em:GoalOrientedAgent a owl:Class;
 
 mso-em:Interlocutor a owl:Class;
    skos:prefLabel "Interlocutor"@en;
-   rdfs:label     "Interlocutor"@en;
    skos:altLabel "Interlocutor"@en;
    rdfs:subClassOf mso-em:Agent;
    skos:exactMatch pims-ii:Interlocutor;
@@ -178,7 +166,6 @@ mso-em:Interlocutor a owl:Class;
 
 mso-em:KnowledgeBase a owl:Class;
    skos:prefLabel "Knowledge base"@en;
-   rdfs:label     "Knowledge base"@en;
    skos:altLabel "KnowledgeBase"@en;
    rdfs:subClassOf mso-em:Interlocutor;
    skos:exactMatch pims-ii:KnowledgeBase;;
@@ -186,7 +173,6 @@ mso-em:KnowledgeBase a owl:Class;
 
 mso-em:Person a owl:Class;
    skos:prefLabel "Person"@en;
-   rdfs:label     "Person"@en;
    skos:altLabel "Person"@en;
    rdfs:subClassOf mso-em:Interlocutor;
    skos:exactMatch pims-ii:Person;
@@ -194,7 +180,6 @@ mso-em:Person a owl:Class;
 
 mso-em:Self a owl:Class;
    skos:prefLabel "Self"@en;
-   rdfs:label     "Self"@en;
    skos:altLabel "Self"@en;
    rdfs:subClassOf mso-em:Interlocutor;
    skos:exactMatch pims-ii:ReferenceToSelf;
@@ -208,7 +193,6 @@ mso-em:Self a owl:Class;
 
 mso-em:isDirectedToward a owl:ObjectProperty;
    skos:prefLabel "is directed toward"@en;
-   rdfs:label     "is directed toward"@en;
    skos:altLabel "isDirectedToward"@en;
    rdfs:subPropertyOf mso-em:isOrientedToward;
    rdfs:domain mso-em:GoalDirectedAgent;
@@ -218,7 +202,6 @@ mso-em:isDirectedToward a owl:ObjectProperty;
 
 mso-em:isOrientedToward a owl:ObjectProperty;
    skos:prefLabel "is oriented toward"@en;
-   rdfs:label     "is oriented toward"@en;
    skos:altLabel "isOrientedToward"@en;
    rdfs:subPropertyOf dol:has-quality;
    rdfs:domain mso-em:GoalOrientedAgent;

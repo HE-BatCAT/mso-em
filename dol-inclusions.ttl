@@ -14,11 +14,11 @@
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
 <https://www.purl.org/mso-em-dol-inclusions> a owl:Ontology;
-   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-08/dol-inclusions.ttl>;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/dol-inclusions.ttl>;
    dcterms:title "MSO-EM module 'dol-inclusions' (concepts and relations reused from DOLCE Lite)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'dol-inclusions': Version dated September 2024"^^xs:string;
-   dcterms:issued "2024-09-27"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'dol-inclusions': Version dated October 2024"^^xs:string;
+   dcterms:issued "2024-10-10"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0001-5568-2684>;  # Aldo Gangemi, did the ontology engineering for DOLCE Lite
@@ -36,7 +36,6 @@
 
 dol:abstract a owl:Class;
    skos:prefLabel "Abstract"@en;
-   rdfs:label     "Abstract"@en;
    skos:altLabel "Abstract"@en;
    owl:disjointWith dol:endurant, dol:perdurant, dol:quality;
    skos:definition "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves."@en;
@@ -44,7 +43,6 @@ dol:abstract a owl:Class;
 
 dol:endurant a owl:Class;
    skos:prefLabel "Endurant"@en;
-   rdfs:label     "Endurant"@en;
    skos:altLabel "Endurant"@en;
    owl:disjointWith dol:abstract, dol:perdurant, dol:quality, [
          a owl:Restriction;
@@ -65,7 +63,6 @@ dol:endurant a owl:Class;
 
 dol:event a owl:Class;
    skos:prefLabel "Event"@en;
-   rdfs:label     "Event"@en;
    skos:altLabel "Event"@en;
    rdfs:subClassOf dol:perdurant;
    skos:scopeNote "An occurrence-type is stative or eventive according to whether it holds of the mereological sum of two of its instances, i.e. if it is cumulative or not. Events do not require a description as a unifying criterion."@en;
@@ -78,7 +75,6 @@ dol:event a owl:Class;
 #
 dol:non-physical-endurant a owl:Class;
    skos:prefLabel "Non-physical endurant"@en;
-   rdfs:label     "Non-physical endurant"@en;
    skos:altLabel "NonPhysicalEndurant"@en;
    rdfs:subClassOf dol:endurant;
    owl:disjointWith dol:physical-endurant;
@@ -88,7 +84,6 @@ dol:non-physical-endurant a owl:Class;
 
 dol:perdurant a owl:Class;
    skos:prefLabel "Perdurant"@en;
-   rdfs:label     "Perdurant"@en;
    skos:altLabel "Perdurant"@en;
    rdfs:subClassOf [
          a owl:Restriction;
@@ -116,7 +111,6 @@ dol:perdurant a owl:Class;
 
 dol:physical-endurant a owl:Class;
    skos:prefLabel "Physical endurant"@en;
-   rdfs:label     "Physical endurant"@en;
    skos:altLabel "PhysicalEndurant"@en;
    rdfs:subClassOf dol:endurant;
    owl:disjointWith dol:non-physical-endurant;
@@ -125,7 +119,6 @@ dol:physical-endurant a owl:Class;
 
 dol:physical-object a owl:Class;
    skos:prefLabel "Physical object"@en;
-   rdfs:label     "Physical object"@en;
    skos:altLabel "PhysicalObject"@en;
    rdfs:subClassOf dol:physical-endurant;
    skos:definition "The main characteristic of physical objects is that they are endurants with unity. However, they have no common unity criterion, since different subtypes of objects may have different unity criteria."@en;
@@ -134,7 +127,6 @@ dol:physical-object a owl:Class;
 
 dol:physical-quality a owl:Class;
    skos:prefLabel "Physical quality"@en;
-   rdfs:label     "Physical quality"@en;
    skos:altLabel "PhysicalQuality"@en;
    rdfs:subClassOf dol:quality;
    skos:definition "physical quality, i.e., a quality inherent in a physical endurant"@en;
@@ -142,7 +134,6 @@ dol:physical-quality a owl:Class;
 
 dol:proposition a owl:Class;
    skos:prefLabel "Proposition"@en;
-   rdfs:label     "Proposition"@en;
    skos:altLabel "Proposition"@en;
    rdfs:subClassOf dol:abstract;
    skos:definition "The abstract content of a proposition."@en;
@@ -151,7 +142,6 @@ dol:proposition a owl:Class;
 
 dol:quality a owl:Class;
    skos:prefLabel "Quality"@en;
-   rdfs:label     "Quality"@en;
    skos:altLabel "Quality"@en;
    owl:disjointWith dol:abstract, dol:endurant, dol:perdurant;
    skos:definition "Qualities inhere to entities: every entity (including qualities themselves) comes with certain qualities, which exist as long as the entity exists"@en;
@@ -163,7 +153,6 @@ dol:quality a owl:Class;
 # #
 # dol:set a owl:Class;
 #    skos:prefLabel "Set"@en;
-#    rdfs:label     "Set"@en;
 #    skos:altLabel "Set"@en;
 #    rdfs:subClassOf dol:abstract;
 #    skos:definition "set, i.e., a mathematical set"@en;
@@ -176,7 +165,6 @@ dol:quality a owl:Class;
 
 dol:constant-participant a owl:ObjectProperty;
    skos:prefLabel "constant participant"@en;
-   rdfs:label     "constant participant"@en;
    skos:altLabel "constantParticipant"@en;
    rdfs:subPropertyOf dol:participant;
    rdfs:domain dol:perdurant;
@@ -185,7 +173,6 @@ dol:constant-participant a owl:ObjectProperty;
 
 dol:generic-constituent a owl:ObjectProperty;
    skos:prefLabel "generic constituent"@en;
-   rdfs:label     "generic constituent"@en;
    skos:altLabel "genericConstituent"@en;
    rdfs:subPropertyOf dol:immediate-relation;
    skos:definition "(x [has] generic constituent y) means that it is in some way constitutive to x to have something like y associated with it in a certain way."@en;
@@ -193,14 +180,12 @@ dol:generic-constituent a owl:ObjectProperty;
 
 dol:generically-dependent-on a owl:ObjectProperty;
    skos:prefLabel "generically dependent on"@en;
-   rdfs:label     "generically dependent on"@en;
    skos:altLabel  "genericallyDependentOn"@en;
    rdfs:subPropertyOf dol:immediate-relation-i;
    skos:definition "The dependence on an individual of a given type at some time. This is traditionally a relation between particulars and universals, but not necessarily, in DOLCE."@en.
 
 dol:has-quality a owl:ObjectProperty;
    skos:prefLabel "has quality"@en;
-   rdfs:label     "has quality"@en;
    skos:altLabel "hasQuality"@en;
    rdfs:subPropertyOf dol:immediate-relation-i;
    rdfs:range dol:quality;
@@ -208,14 +193,12 @@ dol:has-quality a owl:ObjectProperty;
 
 dol:immediate-relation a owl:ObjectProperty;
    skos:prefLabel "immediate relation"@en;
-   rdfs:label     "immediate relation"@en;
    skos:altLabel "immediateRelation"@en;
    skos:definition "top relation from DOLCE 'that holds without additional mediating individuals' and has the default direction (defined slightly arbitrarily in DOLCE)"@en;
    skos:scopeNote "Relations defined in the opposite-to-default direction are categorized under 'immediate-relation-i' (i.e., inverse of immediate-relation)"@en.
 
 dol:immediate-relation-i a owl:ObjectProperty;
    skos:prefLabel "immediate relation inverse"@en;
-   rdfs:label     "immediate relation inverse"@en;
    skos:altLabel "immediateRelationInverse"@en;
    skos:definition "top relation from DOLCE 'that holds without additional mediating individuals' and has the opposite-to-default direction (defined slightly arbitrarily in DOLCE)"@en;
    rdfs:comment    "top relation from DOLCE 'that holds without additional mediating individuals' and has the opposite-to-default direction (defined slightly arbitrarily in DOLCE)"@en;
@@ -225,7 +208,6 @@ dol:immediate-relation-i a owl:ObjectProperty;
 # #
 # dol:mediated-relation a owl:ObjectProperty;
 #    skos:prefLabel "mediated relation"@en;
-#    rdfs:label     "mediated relation"@en;
 #    skos:altLabel "mediatedRelation"@en;
 #    skos:definition "relation that is defined through a chain or pattern of other, more elementary relations, and has the default direction (defined slightly arbitrarily in DOLCE)"@en;
 #    skos:scopeNote  "where x and y are connected through a mediated relation, there is really some intermediate object z (and potentially more, in a chain or pattern) by which the two are related to each other"@en.
@@ -234,14 +216,12 @@ dol:immediate-relation-i a owl:ObjectProperty;
 # #
 # dol:mediated-relation-i a owl:ObjectProperty;
 #    skos:prefLabel "mediated relation inverse"@en;
-#    rdfs:label     "mediated relation inverse"@en;
 #    skos:altLabel "mediatedRelationInverse"@en;
 #    skos:definition "relation that is defined through a chain or pattern of other, more elementary relations; inverse of the direction that is defined (slightly arbitrarily) as default in DOLCE"@en;
 #    skos:scopeNote  "where x and y are connected through a mediated relation, there is really some intermediate object z (and potentially more, in a chain or pattern) by which the two are related to each other"@en.
 
 dol:participant a owl:ObjectProperty;
    skos:prefLabel "participant"@en;
-   rdfs:label     "participant"@en;
    skos:altLabel "participant"@en;
    rdfs:subPropertyOf dol:immediate-relation;
    rdfs:domain dol:perdurant;
@@ -253,14 +233,12 @@ dol:participant a owl:ObjectProperty;
 # #
 # dol:partly-compresent a owl:ObjectProperty;
 #    skos:prefLabel "partly compresent"@en;
-#    rdfs:label     "partly compresent"@en;
 #    skos:altLabel "partlyCompresent"@en;
 #    rdfs:subPropertyOf rdfs:subPropertyOf dol:mediated-relation, dol:mediated-relation-i;
 #    skos:definition "mediated relation that entails that its two arguments coexist at some point in time"@en.
 
 dol:specific-constant-constituent a owl:ObjectProperty;
    skos:prefLabel "specific constant constituent"@en;
-   rdfs:label     "specific constant constituent"@en;
    skos:altLabel "specificConstantConstituent"@en;
    rdfs:subPropertyOf dol:immediate-relation;
    skos:definition "(x [has] specific constituent y) means that y is constitutive to x; if y is not there, or if we replace it with some y' in the same role, the object x no longer exists (some other x' might exist in its place)."@en;
