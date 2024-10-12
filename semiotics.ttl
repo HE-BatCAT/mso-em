@@ -1,0 +1,68 @@
+#############################
+# MSO-EM semiotics ontology #
+#############################
+
+@base <https://www.purl.org/mso-em#>.
+@prefix mso-em: <https://www.purl.org/mso-em#>.
+
+@prefix dcelem: <http://purl.org/dc/elements/1.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix dol: <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#>.
+@prefix ineurese: <http://purl.org/info:eu-repo/semantics/>.
+@prefix pims-ii: <http://www.molmod.info/semantics/pims-ii.ttl#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vann: <http://purl.org/vocab/vann/>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
+
+<https://www.purl.org/mso-em-semiotics> a owl:Ontology;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/semiotics.ttl>;
+   dcterms:title "MSO-EM module 'semiotics' (Claim, Cognition)"^^xs:string;
+   dcterms:created "2024"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'semiotics': Version dated October 2024"^^xs:string;
+   dcterms:issued "2024-10-12"^^dcterms:W3CDTF;
+   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
+   dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
+   dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
+   dcterms:status ineurese:publishedVersion;
+   dcterms:source <http://www.molmod.info/semantics/pims-ii.ttl>;
+   vann:preferredNamespaceUri "https://www.purl.org/mso-em#"^^xs:string;
+   dcelem:description "MSO-EM module for semiotics. Its highest-level concepts are Claim and Cognition."@en;
+   dcterms:bibliographicCitation "M. T. Horsch, S. Chiacchiera, I. T. Todorov, A. T. Correia, A. Dey, N. A. Konchakova, S. Scholze, S. Stephan, K. Tøndel, A. Sarkar, M. H. Karray, F. Al Machot, B. Schembera, 'Exploration of key concepts required for mid- and domain-level ontology development to facilitate explainable-AI-readiness of data and models,' submitted, 2024."@en.
+
+
+##########################
+# Highest-level concepts #
+##########################
+
+mso-em:Claim a owl:Class;
+   skos:prefLabel "Claim"@en;
+   skos:altLabel  "Claim"@en;
+   rdfs:subClassOf dol:proposition;
+   owl:equivalentClass [
+      a owl:Restriction;
+      owl:onProperty mso-em:isAssertedBy;
+      owl:someValuesFrom pims-ii:Interlocutor
+   ];
+   skos:exactMatch pims-ii:Claim;
+   skos:definition "Claim, i.e., a proposition that is asserted by an interlocutor"@en.
+
+mso-em:Cognition a owl:Class;
+   skos:prefLabel "Cognition"@en;
+   skos:altLabel  "Cognition"@en;
+   rdfs:subClassOf dol:event;
+   skos:exactMatch pims-ii:Cognition;
+   skos:definition "Cognition, i.e., a process dealing with signs and the representation of objects by signs"@en;
+   skos:scopeNote "The congition can consist of a single cognitive step or of multiple steps that are connected to each other as a cognitive chain"@en.
+
+
+############################################
+# Properties of the highest-level concepts #
+############################################
+
+mso-em:isAssertedBy a owl:ObjectProperty;
+   skos:prefLabel "is asserted by"@en;
+   skos:altLabel  "isAssertedBy"@en;
+   rdfs:domain mso-em:Claim;
+   rdfs:range mso-em:Interlocutor;
+   rdfs:subPropertyOf dol:generically-dependent-on;
+   skos:definition "(x is asserted by y) means that x is a claim that is affirmatively communicated by the interlocutor y"@en.
