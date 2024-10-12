@@ -27,3 +27,4 @@ Referencing:
    => 2. agent.ttl (only uses the DOL inclusions in a "hard" way, such as subClassOf)
    => 3. sign.ttl
    => 4. topic.ttl
+   => 5. semiotics.ttl

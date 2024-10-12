@@ -19,7 +19,7 @@
    dcterms:title "MSO-EM module 'sign' (Articulation, Plurality, Structure)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'sign': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-10"^^dcterms:W3CDTF;
+   dcterms:issued "2024-10-12"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -54,7 +54,7 @@ mso-em:Plurality a owl:Class;
       owl:someValuesFrom owl:Thing
    ];
    skos:exactMatch pims-ii:Plurality;
-   owl:disjointWith [
+   owl:disjointWith dol:proposition, mso-em:Structure, [
       a owl:Restriction;
       owl:onProperty dol:specific-constant-constituent;
       owl:someValuesFrom mso-em:Plurality
@@ -74,7 +74,7 @@ mso-em:Structure a owl:Class;
       owl:onProperty mso-em:hasElement;
       owl:someValuesFrom owl:Thing
    ];
-   owl:disjointWith [
+   owl:disjointWith dol:proposition, mso-em:Plurality, [
       a owl:Restriction;
       owl:onProperty dol:specific-constant-constituent;
       owl:someValuesFrom mso-em:Structure
@@ -142,7 +142,7 @@ mso-em:Dataset a owl:Class;
       owl:onProperty mso-em:hasEntry;
       owl:someValuesFrom mso-em:DataItem
    ];
-   owl:disjointwith mso-em:Utterance;
+   owl:disjointwith mso-em:Literal, mso-em:Utterance;
    skos:exactMatch pims-ii:Dataset;
    skos:definition "dataset, i.e., a digital articulation that is composed of data items that are similar in shape, kind, and content type"@en.
 
@@ -179,7 +179,7 @@ mso-em:Literal a owl:Class;
       owl:onProperty mso-em:isLiterally;
       owl:someValuesFrom rdfs:Literal
    ];
-   owl:disjointWith mso-em:Utterance;
+   owl:disjointWith mso-em:Dataset, mso-em:Utterance;
    skos:exactMatch pims-ii:CollectiveLiteral;
    skos:definition "literal, i.e., a semiotic collective the members of which all have a digital, printed, or written textual/numerical form in that they are all instances/copies of the same RDFS literal (or multiple RDFS literals that are very similar"@en;
    skos:example "different ways of spelling/abbreviating the same word or denoting the same number can be considered realizations of a single literal"@en.
@@ -214,7 +214,7 @@ mso-em:Utterance a owl:Class;
    skos:prefLabel "Utterance"@en;
    skos:altLabel  "Utterance"@en;
    rdfs:subClassOf mso-em:Articulation;
-   owl:disjointWith mso-em:Literal;
+   owl:disjointWith mso-em:Dataset, mso-em:Literal;
    skos:exactMatch pims-ii:CollectiveUtterance;
    skos:definition "utterance, i.e., a semiotic collective the members of which do not have digital, printed, or written textual/numerical form and the members of which are all attributed the same semantics and pragmatics"@en.
 

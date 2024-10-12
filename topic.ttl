@@ -89,6 +89,7 @@ mso-em:Question a owl:Class;
       owl:onProperty mso-em:isArticulatedBy;
       owl:someValuesFrom mso-em:Query
    ];
+   owl:disjointWith mso-em:Utterance;
    skos:exactMatch pims-ii:Question;
    skos:definition "Question, i.e., a topical proposition with interrogative character"@en;
    skos:scopeNote "Questions are articulated digitally by queries. A question contains interrogative pronouns or other interrogative elements, such as blank nodes when articulated as a query."@en.

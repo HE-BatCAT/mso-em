@@ -43,6 +43,7 @@ mso-em:Claim a owl:Class;
       owl:onProperty mso-em:isAssertedBy;
       owl:someValuesFrom mso-em:Interlocutor
    ];
+   owl:disjointWith mso-em:Question;
    skos:exactMatch pims-ii:Claim;
    skos:definition "Claim, i.e., a proposition that is asserted by an interlocutor"@en.
 
