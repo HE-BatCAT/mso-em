@@ -18,7 +18,7 @@
    dcterms:title "MSO-EM module 'dol-inclusions' (concepts and relations reused from DOLCE Lite)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'dol-inclusions': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-10"^^dcterms:W3CDTF;
+   dcterms:issued "2024-10-17"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0001-5568-2684>;  # Aldo Gangemi, did the ontology engineering for DOLCE Lite
@@ -35,10 +35,10 @@
 #######################################################################
 
 dol:abstract a owl:Class;
-   skos:prefLabel "Abstract"@en;
+   skos:prefLabel "abstract"@en;
    skos:altLabel "Abstract"@en;
    owl:disjointWith dol:endurant, dol:perdurant, dol:quality;
-   skos:definition "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves."@en;
+   skos:scopeNote "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves."@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:endurant a owl:Class;
@@ -62,7 +62,7 @@ dol:endurant a owl:Class;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:event a owl:Class;
-   skos:prefLabel "Event"@en;
+   skos:prefLabel "event"@en;
    skos:altLabel "Event"@en;
    rdfs:subClassOf dol:perdurant;
    skos:scopeNote "An occurrence-type is stative or eventive according to whether it holds of the mereological sum of two of its instances, i.e. if it is cumulative or not. Events do not require a description as a unifying criterion."@en;
@@ -74,16 +74,16 @@ dol:event a owl:Class;
 # not used right now ~ restore if needed
 #
 dol:non-physical-endurant a owl:Class;
-   skos:prefLabel "Non-physical endurant"@en;
+   skos:prefLabel "non-physical endurant"@en;
    skos:altLabel "NonPhysicalEndurant"@en;
    rdfs:subClassOf dol:endurant;
    owl:disjointWith dol:physical-endurant;
-   skos:definition "An endurant with no mass, generically constantly depending on some agent."@en;
+   skos:definition "endurant with no mass, generically constantly depending on some agent"@en;
    skos:scopeNote "Non-physical endurants can have physical constituents (e.g., in the case of members of a collection)."@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:perdurant a owl:Class;
-   skos:prefLabel "Perdurant"@en;
+   skos:prefLabel "perdurant"@en;
    skos:altLabel "Perdurant"@en;
    rdfs:subClassOf [
          a owl:Restriction;
@@ -103,59 +103,58 @@ dol:perdurant a owl:Class;
          owl:onProperty dol:specific-constant-constituent;
          owl:someValuesFrom dol:quality
       ];
-   skos:definition "Perdurants (AKA occurrences) comprise what are variously called events, processes, phenomena, activities and states. They can have temporal parts or spatial parts"@en;
+   skos:scopeNote "Perdurants (AKA occurrences) comprise what are variously called events, processes, phenomena, activities and states. They can have temporal parts or spatial parts."@en;
    skos:scopeNote "We assume that objects cannot be parts of occurrences, but rather they participate in them. Perdurants extend in time by accumulating different temporal parts, so that, at any time they are present, they are only partially present, in  the sense that some of their proper temporal parts (e.g., their previous or future phases) may be not present. Philosophers say that endurants are entities that are in time, while lacking temporal parts (so to speak, all their parts flow with them in time). Perdurants, on the contrary, are entities that happen in time, and can have temporal parts (all their parts are fixed in time)."@en;
    skos:example "For instance, the first movement of (an execution of) a symphony is a temporal part of the symphony. On the other hand, the play performed by the left side of the orchestra is a spatial part. In both cases, these parts are occurrences themselves."@en;
    skos:example "E.g., the piece of paper you are reading now is wholly present, while some temporal parts of your reading are not present yet, or any more."@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:physical-endurant a owl:Class;
-   skos:prefLabel "Physical endurant"@en;
+   skos:prefLabel "physical endurant"@en;
    skos:altLabel "PhysicalEndurant"@en;
    rdfs:subClassOf dol:endurant;
    owl:disjointWith dol:non-physical-endurant;
-   skos:definition "An endurant having a direct physical (at least spatial) quality."@en;
+   skos:definition "endurant with a direct physical (at least spatial) quality"@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:physical-object a owl:Class;
-   skos:prefLabel "Physical object"@en;
+   skos:prefLabel "physical object"@en;
    skos:altLabel "PhysicalObject"@en;
    rdfs:subClassOf dol:physical-endurant;
-   skos:definition "The main characteristic of physical objects is that they are endurants with unity. However, they have no common unity criterion, since different subtypes of objects may have different unity criteria."@en;
+   skos:scopeNote "The main characteristic of physical objects is that they are endurants with unity. However, they have no common unity criterion, since different subtypes of objects may have different unity criteria."@en;
    skos:scopeNote "Differently from  aggregates, (most) physical objects change some of their parts while keeping their identity, they can have therefore temporary parts. Often physical objects (indeed, all endurants) are ontologically independent from occurrences (discussed below). However, if we admit that every object has a life, it is hard to exclude a mutual specific constant dependence between the two. Nevertheless, we may still use the notion of dependence to (weakly) characterize objects as being not specifically constantly dependent on other objects."@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:physical-quality a owl:Class;
-   skos:prefLabel "Physical quality"@en;
+   skos:prefLabel "physical quality"@en;
    skos:altLabel "PhysicalQuality"@en;
    rdfs:subClassOf dol:quality;
-   skos:definition "physical quality, i.e., a quality inherent in a physical endurant"@en;
+   skos:definition "quality inherent in a physical endurant"@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:proposition a owl:Class;
-   skos:prefLabel "Proposition"@en;
+   skos:prefLabel "proposition"@en;
    skos:altLabel "Proposition"@en;
    rdfs:subClassOf dol:abstract;
-   skos:definition "The abstract content of a proposition."@en;
    skos:scopeNote "Abstract content is purely combinatorial: from this viewpoint, any content that can be generated by means of combinatorial rules is assumed to exist in the domain of quantification (reified abstracts)."@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:quality a owl:Class;
-   skos:prefLabel "Quality"@en;
+   skos:prefLabel "quality"@en;
    skos:altLabel "Quality"@en;
    owl:disjointWith dol:abstract, dol:endurant, dol:perdurant;
-   skos:definition "Qualities inhere to entities: every entity (including qualities themselves) comes with certain qualities, which exist as long as the entity exists"@en;
-   skos:example "Qualities are the basic entities we can perceive or measure: shapes, colors, sizes, sounds, smells, as well as weights, lengths,  electrical charges ..."@en;
+   skos:scopeNote "Qualities inhere to entities: every entity (including qualities themselves) comes with certain qualities, which exist as long as the entity exists"@en;
    skos:scopeNote "The qualities are 'inherent' in an object, but can change over time"@en;
+   skos:example "Qualities are the basic entities we can perceive or measure: shapes, colors, sizes, sounds, smells, as well as weights, lengths,  electrical charges ..."@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 # # not used right now ~ restore if needed
 # #
 # dol:set a owl:Class;
-#    skos:prefLabel "Set"@en;
+#    skos:prefLabel "set"@en;
 #    skos:altLabel "Set"@en;
 #    rdfs:subClassOf dol:abstract;
-#    skos:definition "set, i.e., a mathematical set"@en;
+#    skos:definition "a mathematical set"@en;
 #    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 
@@ -169,7 +168,7 @@ dol:constant-participant a owl:ObjectProperty;
    rdfs:subPropertyOf dol:participant;
    rdfs:domain dol:perdurant;
    rdfs:range dol:endurant;
-   skos:definition "(x [has] constant participant y) means that anytime x is present, x has participant y. In other words, all parts of x have a same participant"@en.
+   skos:definition "(x [has] constant participant y) means that anytime x is present, x has participant y. In other words, all parts of x have a same participant."@en.
 
 dol:generic-constituent a owl:ObjectProperty;
    skos:prefLabel "generic constituent"@en;
@@ -189,7 +188,7 @@ dol:has-quality a owl:ObjectProperty;
    skos:altLabel "hasQuality"@en;
    rdfs:subPropertyOf dol:immediate-relation-i;
    rdfs:range dol:quality;
-   skos:definition "basic relation between something and one of its qualities; this is the opposite-of-default direction (the default-direction relation is called 'inherent-in')"@en.
+   skos:definition "basic relation between something and one of its qualities; opposite-of-default direction (the default-direction relation is called 'inherent-in')"@en.
 
 dol:immediate-relation a owl:ObjectProperty;
    skos:prefLabel "immediate relation"@en;
@@ -201,7 +200,6 @@ dol:immediate-relation-i a owl:ObjectProperty;
    skos:prefLabel "immediate relation inverse"@en;
    skos:altLabel "immediateRelationInverse"@en;
    skos:definition "top relation from DOLCE 'that holds without additional mediating individuals' and has the opposite-to-default direction (defined slightly arbitrarily in DOLCE)"@en;
-   rdfs:comment    "top relation from DOLCE 'that holds without additional mediating individuals' and has the opposite-to-default direction (defined slightly arbitrarily in DOLCE)"@en;
    skos:scopeNote "Relations defined in default direction are categorized under 'immediate-relation'"@en.
 
 # # not used right now ~ restore if needed

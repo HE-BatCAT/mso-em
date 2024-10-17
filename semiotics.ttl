@@ -19,7 +19,7 @@
    dcterms:title "MSO-EM module 'semiotics' (Claim, Cognition)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'semiotics': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-12"^^dcterms:W3CDTF;
+   dcterms:issued "2024-10-17"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -35,7 +35,7 @@
 ##########################
 
 mso-em:Claim a owl:Class;
-   skos:prefLabel "Claim"@en;
+   skos:prefLabel "claim"@en;
    skos:altLabel  "Claim"@en;
    rdfs:subClassOf dol:proposition;
    owl:equivalentClass [
@@ -45,14 +45,14 @@ mso-em:Claim a owl:Class;
    ];
    owl:disjointWith mso-em:Question;
    skos:exactMatch pims-ii:Claim;
-   skos:definition "Claim, i.e., a proposition that is asserted by an interlocutor"@en.
+   skos:definition "proposition that is asserted by an interlocutor"@en.
 
 mso-em:Cognition a owl:Class;
-   skos:prefLabel "Cognition"@en;
+   skos:prefLabel "cognition"@en;
    skos:altLabel  "Cognition"@en;
    rdfs:subClassOf dol:event;
    skos:exactMatch pims-ii:Cognition;
-   skos:definition "Cognition, i.e., a process dealing with signs and the representation of objects by signs"@en;
+   skos:definition "process dealing with signs and the representation of objects by signs"@en;
    skos:scopeNote "The congition can consist of a single cognitive step or of multiple steps that are connected to each other as a cognitive chain"@en.
 
 
@@ -66,4 +66,4 @@ mso-em:isAssertedBy a owl:ObjectProperty;
    rdfs:domain mso-em:Claim;
    rdfs:range mso-em:Interlocutor;
    rdfs:subPropertyOf dol:generically-dependent-on;
-   skos:definition "(x is asserted by y) means that x is a claim that is affirmatively communicated by the interlocutor y"@en.
+   skos:definition "(x is asserted by y) means that x is a claim that is affirmatively communicated by the interlocutor y."@en.
