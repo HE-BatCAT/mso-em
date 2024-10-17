@@ -42,7 +42,7 @@ dol:abstract a owl:Class;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:endurant a owl:Class;
-   skos:prefLabel "Endurant"@en;
+   skos:prefLabel "endurant"@en;
    skos:altLabel "Endurant"@en;
    owl:disjointWith dol:abstract, dol:perdurant, dol:quality, [
          a owl:Restriction;

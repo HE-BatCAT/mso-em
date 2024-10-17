@@ -37,7 +37,7 @@
 mso-em:Query a owl:Class;
    skos:prefLabel "query"@en;
    skos:altLabel  "Query"@en;
-   rdfs:subClassOf mso-em:Articulation;
+   rdfs:subClassOf mso-em:Articulation, dol:non-physical-endurant;
    owl:disjointWith mso-em:Utterance;
    skos:exactMatch pims-ii:Query;
    skos:definition "digital articulation of a question"@en.
@@ -53,7 +53,7 @@ mso-em:Topical a owl:Class;
 mso-em:TopicalSum a owl:Class;
    skos:prefLabel "topical sum"@en;
    skos:altLabel  "TopicalSum"@en;
-   rdfs:subClassOf mso-em:Plurality;
+   rdfs:subClassOf mso-em:Plurality, dol:abstract;
    owl:equivalentClass [
       a owl:Restriction;
       owl:onProperty mso-em:containsTopicalSummand;
@@ -72,7 +72,7 @@ mso-em:containsTopicalSummand a owl:ObjectProperty;
    skos:altLabel  "containsTopicalSummand"@en;
    rdfs:domain mso-em:TopicalSum;
    rdfs:range mso-em:Topical;
-   rdfs:subPropertyOf mso-em:hasElement;
+   rdfs:subPropertyOf mso-em:hasElement, dol:specific-constant-constituent;
    skos:definition "(x contains topical summand y) means that y is one of the topics contained in x, a collection of topics that are not immediately closely related to each other."@en;
    skos:scopeNote "If multiple topics are combined in a way that relates them closely to each other, with some meaningful interaction between them, the relation isTopicalFactorIn should be used, and the whole should then be a topical product, not a topical sum"@en.
 
@@ -122,5 +122,5 @@ mso-em:containsTopicalFactor a owl:ObjectProperty;
    skos:altLabel  "containsTopicalFactor"@en;
    rdfs:domain mso-em:TopicalProduct;
    rdfs:range dol:abstract;
-   rdfs:subPropertyOf mso-em:hasElement;
+   rdfs:subPropertyOf mso-em:hasElement, dol:specific-constant-constituent;
    skos:definition "(x contains topical factor y) means that y is combined with other subtopics into the topical proposition x, such that y and the other subtopics are not just standing beside each other, but exhibiting a meaningful interaction."@en.

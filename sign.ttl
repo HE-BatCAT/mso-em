@@ -263,6 +263,6 @@ mso-em:isNameFor a owl:ObjectProperty;
    skos:prefLabel "is name for"@en;
    skos:altLabel  "isNameFor"@en;
    rdfs:domain mso-em:Name;
-   rdfs:subPropertyOf mso-em:generically-dependent-on;
+   rdfs:subPropertyOf dol:generically-dependent-on;
    skos:exactMatch pims-ii:isNameFor;
    skos:definition "(x isNameFor y), to be applied in the frequent special case where y is represented by x, its name"@en.
