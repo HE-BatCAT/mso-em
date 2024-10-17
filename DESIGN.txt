@@ -14,11 +14,11 @@ About compliance and alignment:
  - Use rdfs:subClassOf and rdfs:subPropertyOf only in reference to DOLCE and mso-em itself. Don't use skos:broader/narrower.
  - Where it can be done, use skos:exactMatch for alignment with DOLCE, Metadata4Ing (where it is aligned with PIMS-II from previous work), and PIMS-II.
  - Use skos:closeMatch where appropriate for D-SI, EMMO, GPO, Metadata4Ing (where it is not aligned with PIMS-II), schema.org, and any of the legacy ontologies other than PIMS-II.
+ - Each module's concepts and relations all directly aligned with DOLCE, in addition to the indirect alignment through the whole taxonomy. This is so that you can load a single module, and still everything is shown in alignment with DOLCE.
 
 Style:
  - skos:prefLabel as normal text, with camel case as IRI and skos:altLabel
-   => For concepts, begin the pref label with a capital letter (in the first word only); the camel-case alt label and IRI begins with a capital letter. Example: The IRI pims-ii:PurposefulAction corresponds to skos:altLabel "PurposefulAction"@en; the skos:prefLabel is "Purposeful action"@en, with a space and with only the first word capitalized.
-      => In use in textual descriptions, the capitalized version refers to the class. Example: "The class Purposeful action is a subclass of Action." When refering to instances of the classes, use lower case. Example: "Every purposeful action is an action." (But: "Every instance of Purposeful action is an instance of Action.")
+   => For concepts, begin the pref label with a lower-case letter (in the first word only); the camel-case alt label and IRI begins with a capital letter. Example: The IRI pims-ii:PurposefulAction corresponds to skos:altLabel "PurposefulAction"@en; the skos:prefLabel is "purposeful action"@en, with a space and with only the first word capitalized.
    => For relations, the pref label is all in lower case; the camel-case alt label and IRI begins with a lower-case letter. Example: The IRI pims-ii:isDoneBy corresponds to skos:altLabel "isDoneBy"@en; the skos:prefLabel is "is done by"@en, all in lower-case.
    
 Referencing:
