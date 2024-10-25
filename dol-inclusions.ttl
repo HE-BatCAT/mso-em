@@ -18,7 +18,7 @@
    dcterms:title "MSO-EM module 'dol-inclusions' (concepts and relations reused from DOLCE Lite)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'dol-inclusions': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-17"^^dcterms:W3CDTF;
+   dcterms:issued "2024-10-25"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0001-5568-2684>;  # Aldo Gangemi, did the ontology engineering for DOLCE Lite
@@ -217,6 +217,13 @@ dol:immediate-relation-i a owl:ObjectProperty;
 #    skos:altLabel "mediatedRelationInverse"@en;
 #    skos:definition "relation that is defined through a chain or pattern of other, more elementary relations; inverse of the direction that is defined (slightly arbitrarily) as default in DOLCE"@en;
 #    skos:scopeNote  "where x and y are connected through a mediated relation, there is really some intermediate object z (and potentially more, in a chain or pattern) by which the two are related to each other"@en.
+
+dol:part a owl:ObjectProperty;
+   skos:prefLabel "part"@en;
+   skos:altLabel "part"@en;
+   rdfs:subPropertyOf dol:immediate-relation;
+   skos:definition "(x [has] part y) is the basic mereological relation from DOLCE."@en;
+   skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:participant a owl:ObjectProperty;
    skos:prefLabel "participant"@en;

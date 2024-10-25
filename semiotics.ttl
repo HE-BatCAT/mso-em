@@ -16,17 +16,17 @@
 
 <https://www.purl.org/mso-em-semiotics> a owl:Ontology;
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/semiotics.ttl>;
-   dcterms:title "MSO-EM module 'semiotics' (Claim, Cognition)"^^xs:string;
+   dcterms:title "MSO-EM module 'semiotics' (Claim, Cognition, Communication)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'semiotics': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-17"^^dcterms:W3CDTF;
+   dcterms:issued "2024-10-25"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
    dcterms:status ineurese:publishedVersion;
    dcterms:source <http://www.molmod.info/semantics/pims-ii.ttl>;
    vann:preferredNamespaceUri "https://www.purl.org/mso-em#"^^xs:string;
-   dcelem:description "MSO-EM module for semiotics. Its highest-level concepts are Claim and Cognition."@en;
+   dcelem:description "MSO-EM module for semiotics. Its highest-level concepts are Claim, Cognition, and Communication."@en;
    dcterms:bibliographicCitation "M. T. Horsch, S. Chiacchiera, I. T. Todorov, A. T. Correia, A. Dey, N. A. Konchakova, S. Scholze, S. Stephan, K. Tøndel, A. Sarkar, M. H. Karray, F. Al Machot, B. Schembera, 'Exploration of key concepts required for mid- and domain-level ontology development to facilitate explainable-AI-readiness of data and models,' submitted, 2024."@en.
 
 
@@ -50,10 +50,23 @@ mso-em:Claim a owl:Class;
 mso-em:Cognition a owl:Class;
    skos:prefLabel "cognition"@en;
    skos:altLabel  "Cognition"@en;
-   rdfs:subClassOf dol:event;
+   rdfs:subClassOf mso-em:Action;
    skos:exactMatch pims-ii:Cognition;
    skos:definition "process dealing with signs and the representation of objects by signs"@en;
-   skos:scopeNote "The congition can consist of a single cognitive step or of multiple steps that are connected to each other as a cognitive chain"@en.
+   skos:scopeNote "The congition can consist of a single cognitive step or of multiple steps that are connected to each other as a cognitive chain"@en;
+   skos:editorialNote "Now subsumed under action; this is a change from PIMS-II where it was possible for a cognition not to be an action"@en.
+
+mso-em:Communication a owl:Class;
+   skos:prefLabel "communication"@en;
+   skos:altLabel  "Communication"@en;
+   rdfs:subClassOf mso-em:PurposefulAction, [
+      a owl:Restriction;
+      owl:onProperty dol:part;
+      owl:someValuesFrom mso-em:ExpressiveAct
+   ];
+   skos:exactMatch pims-ii:Communication;
+   skos:definition "purposeful action wherein multiple interlocutors engage in an exchange of information with another"@en;
+   skos:scopeNote "A communication involves at least one expressive act. The agent here includes all those who are speaking; i.e., it can be a group of people (not necessarily therefore an interlocutor)."@en.
 
 
 ############################################
@@ -67,3 +80,39 @@ mso-em:isAssertedBy a owl:ObjectProperty;
    rdfs:range mso-em:Interlocutor;
    rdfs:subPropertyOf dol:generically-dependent-on;
    skos:definition "(x is asserted by y) means that x is a claim that is affirmatively communicated by the interlocutor y."@en.
+
+
+#######################
+# Subclasses of Claim #
+#######################
+
+mso-em:OwnClaim a owl:Class;
+   skos:prefLabel "own claim"@en;
+   skos:altLabel  "OwnClaim"@en;
+   rdfs:subClassOf mso-em:Claim;
+   owl:equivalentClass [
+      a owl:Restriction;
+      owl:onProperty mso-em:isAssertedBy;
+      owl:someValuesFrom mso-em:Self
+   ];
+   skos:exactMatch pims-ii:OwnClaim;
+   skos:definition "claim that is asserted by a self reference, i.e., held to be true by the present system"@en;
+   skos:scopeNote "can be used to mark propositional content of the present knowledge base, as opposed to claims made by others"@en.
+
+
+###############################
+# Subclasses of Communication #
+###############################
+
+mso-em:ExpressiveAct a owl:Class;
+   skos:prefLabel "expressive act"@en;
+   skos:altLabel "ExpressiveAct"@en;
+   rdfs:subClassOf mso-em:Communication, [
+      a owl:Restriction;
+      owl:onProperty mso-em:isDoneBy;
+      owl:someValuesFrom mso-em:Interlocutor
+   ];
+   skos:exactMatch pims-ii:ExpressiveAct;
+   skos:definition "elementary unit of communication done by its agent, the speaker"@en;
+   skos:example "e.g., a speech act or an analogous digital act of communicating"@en;
+   skos:scopeNote "The role of the speaker (agent doing the expressive act) must be understood in a generalized sense, i.e., not limited to speech. The purpose of the action consists in its illocutionary and perlocutionary intent."@en.

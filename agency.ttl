@@ -20,7 +20,7 @@
    dcterms:title "MSO-EM module 'agency' (Action, Agent, Intention)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'agency': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-17"^^dcterms:W3CDTF;
+   dcterms:issued "2024-10-25"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -98,19 +98,6 @@ mso-em:isDoneWith a owl:ObjectProperty;
 ########################
 # Subclasses of Action #
 ########################
-
-mso-em:ExpressiveAct a owl:Class;
-   skos:prefLabel "expressive act"@en;
-   skos:altLabel "ExpressiveAct"@en;
-   rdfs:subClassOf mso-em:PurposefulAction, [
-      a owl:Restriction;
-      owl:onProperty mso-em:isDoneBy;
-      owl:someValuesFrom mso-em:Interlocutor
-   ];
-   skos:exactMatch pims-ii:ExpressiveAct;
-   skos:definition "purposeful communication done by its agent, the speaker"@en;
-   skos:example "e.g., a speech act or an analogous digital act of communicating"@en;
-   skos:scopeNote "The role of the speaker (agent doing the expressive act) must be understood in a generalized sense, i.e., not limited to speech. The purpose of the action consists in its illocutionary and perlocutionary intent."@en.
 
 mso-em:PurposefulAction a owl:Class;
    skos:prefLabel "purposeful action"@en;
