@@ -50,11 +50,20 @@ mso-em:Claim a owl:Class;
 mso-em:Cognition a owl:Class;
    skos:prefLabel "cognition"@en;
    skos:altLabel  "Cognition"@en;
-   rdfs:subClassOf mso-em:Action;
+   rdfs:subClassOf mso-em:Action, [
+      a owl:Restriction;
+      owl:onProperty mso-em:involvesRepresentamen;
+      owl:someValuesFrom owl:Thing
+   ], [
+      a owl:Restriction;
+      owl:onProperty mso-em:involvesReferent;
+      owl:someValuesFrom owl:Thing
+   ];
    skos:exactMatch pims-ii:Cognition;
    skos:definition "process dealing with signs and the representation of objects by signs"@en;
    skos:scopeNote "The congition can consist of a single cognitive step or of multiple steps that are connected to each other as a cognitive chain"@en;
    skos:editorialNote "Now subsumed under action; this is a change from PIMS-II where it was possible for a cognition not to be an action"@en.
+mso-em:Action rdfs:subClassOf dol:event. # module alignment support statement
 
 mso-em:Communication a owl:Class;
    skos:prefLabel "communication"@en;
@@ -63,10 +72,19 @@ mso-em:Communication a owl:Class;
       a owl:Restriction;
       owl:onProperty dol:part;
       owl:someValuesFrom mso-em:ExpressiveAct
+   ], [
+      a owl:Restriction;
+      owl:onProperty mso-em:involvesSpeaker;
+      owl:someValuesFrom mso-em:Interlocutor
+   ], [
+      a owl:Restriction;
+      owl:onProperty mso-em:involvesListener;
+      owl:someValuesFrom mso-em:Interlocutor
    ];
    skos:exactMatch pims-ii:Communication;
    skos:definition "purposeful action wherein multiple interlocutors engage in an exchange of information with another"@en;
-   skos:scopeNote "A communication involves at least one expressive act. The agent here includes all those who are speaking; i.e., it can be a group of people (not necessarily therefore an interlocutor)."@en.
+   skos:scopeNote "A communication involves at least one expressive act. The agent here includes all those who are speaking; i.e., it can be a group of people (not necessarily therefore an interlocutor). In the special case of an expressive act, there is exactly one speaker, who is also the agent."@en.
+mso-em:PurposefulAction rdfs:subClassOf dol:event. # module alignment support statement
 
 
 ############################################
@@ -80,6 +98,64 @@ mso-em:isAssertedBy a owl:ObjectProperty;
    rdfs:range mso-em:Interlocutor;
    rdfs:subPropertyOf dol:generically-dependent-on;
    skos:definition "(x is asserted by y) means that x is a claim that is affirmatively communicated by the interlocutor y."@en.
+
+mso-em:hasCognitiveStep a owl:ObjectProperty;
+   skos:prefLabel "has cognitive step"@en;
+   skos:altLabel  "hasCognitiveStep"@en;
+   rdfs:domain mso-em:Cognition;
+   rdfs:range mso-em:Cognition;
+   rdfs:subPropertyOf dol:part;
+   skos:definition "(x has cognitive step y) means that y is one of multiple steps that together constitute the cognition x"@en;
+   skos:example "a typical case of this is a cognitive workflow, e.g., a simulation workflow, that consists of many semioses and metonymizations that are connected to each other"@en;
+   skos:example "e.g., the substep a: s - o - s' and the substep b: s' - o - s'' can be combined to yield a single triad, (a o b) = c: s - o - s''; in that case, c can be an element of a higher-order cognitive chain (of which it is a step), and a and b are its cognitive substeps"@en.
+   
+mso-em:involvesInterlocutor a owl:ObjectProperty;
+   skos:prefLabel "involves interlocutor"@en;
+   skos:altLabel  "involvesInterlocutor"@en;
+   rdfs:domain mso-em:Communication;
+   rdfs:lange mso-em:Interlocutor;
+   rdfs:subPropertyOf dol:participant;
+   skos:definition "(x involves interlocutor y) means that y engages, jointly with other interlocutors, in the communication x."@en.
+
+mso-em:involvesListener a owl:ObjectProperty;
+   skos:prefLabel "involves listener"@en;
+   skos:altLabel  "involvesListener"@en;
+   rdfs:domain mso-em:Communication;
+   rdfs:lange mso-em:Interlocutor;
+   rdfs:subPropertyOf mso-em:involvesInterlocutor;
+   skos:definition "(x involves listener y) means that y is receiving (possibly also sending) information in the communication x."@en;
+   skos:scopeNote "If x is an expressive act, the roles of the listener(s) and the speaker are disjoint."@en.
+
+mso-em:involvesReferent a owl:ObjectProperty;
+   skos:prefLabel "involves referent"@en;
+   skos:altLabel  "involvesReferent"@en;
+   rdfs:domain mso-em:Cognition;
+   rdfs:subPropertyOf mso-em:involvesRepresentationalElement;
+   skos:definition "(x involves referent y) means that y occurs in the cognition x as a referent of a representamen."@en.
+
+mso-em:involvesRepresentamen a owl:ObjectProperty;
+   skos:prefLabel "involves representamen"@en;
+   skos:altLabel  "involvesRepresentamen"@en;
+   rdfs:domain mso-em:Cognition;
+   rdfs:subPropertyOf mso-em:involvesRepresentationalElement, dol:participant;
+   skos:definition "(x involves representamen y) means that y participates in the cognition x in the role of a representamen."@en.
+
+mso-em:involvesRepresentationalElement a owl:ObjectProperty;
+   skos:prefLabel "involves representational element"@en;
+   skos:altLabel  "involvesRepresentationalElement"@en;
+   rdfs:domain mso-em:Cognition;
+   rdfs:range dol:endurant;
+   rdfs:subPropertyOf dol:weak-connection;
+   skos:definition "(x involves representational element y) means that y acts as a representamen or referent in the cognition x."@en.
+
+mso-em:involvesSpeaker a owl:ObjectProperty;
+   skos:prefLabel "involves speaker"@en;
+   skos:altLabel  "involvesSpeaker"@en;
+   rdfs:domain mso-em:Communication;
+   rdfs:lange mso-em:Interlocutor;
+   rdfs:subPropertyOf mso-em:involvesInterlocutor;
+   skos:definition "(x involves speaker y) means that y is sending (possibly also receiving) information in the communication x."@en;
+   skos:scopeNote "If x is an expressive act, the roles of the listener(s) and the speaker are disjoint; i.e., the expressive act has exactly one speaker, who is also the agent."@en.
 
 
 #######################
@@ -100,6 +176,118 @@ mso-em:OwnClaim a owl:Class;
    skos:scopeNote "can be used to mark propositional content of the present knowledge base, as opposed to claims made by others"@en.
 
 
+###########################
+# Subclasses of Cognition #
+###########################
+
+mso-em:CognitiveWorkflow a owl:Class;
+   skos:prefLabel "cognitive workflow"@en;
+   skos:altLabel  "CognitiveWorkflow"@en;
+   rdfs:subClassOf mso-em:Cognition, mso-em:PurposefulAction, [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasCognitiveStep;
+      owl:someValuesFrom mso-em:Cognition
+   ];
+   owl:disjointWith mso-em:Metonymization, mso-em:Semiosis;
+   skos:exactMatch pims-ii:CognitiveWorkflow;
+   skos:definition "purposefully conducted cognition consisting of multiple cognitive steps"@en.
+
+mso-em:Interpretation a owl:Class;
+   skos:prefLabel "interpretation"@en;
+   skos:altLabel  "Interpretation"@en;
+   rdfs:subClassOf mso-em:Semiosis, mso-em:PurposefulAction;
+   owl:disjointWith mso-em:Perception;
+   skos:exactMatch pims-ii:Interpretation;
+   skos:definition "semiosis s-o-s' that is conducted purposefully by its agent and such that the referent o does not necessarily have to be present physically"@en.
+
+mso-em:Metonymization a owl:Class;
+   skos:prefLabel "metonymization"@en;
+   skos:altLabel  "Metonymization"@en;
+   rdfs:subClassOf mso-em:Cognition, [
+      a owl:Restriction;
+      owl:onProperty mso-em:involvesOldReferent;
+      owl:someValuesFrom owl:Thing
+   ], [
+      a owl:Restriction;
+      owl:onProperty mso-em:involvesNewReferent;
+      owl:someValuesFrom owl:Thing
+   ];
+   owl:disjointWith mso-em:CognitiveWorkflow, mso-em:Semiosis;
+   skos:exactMatch pims-ii:SemanticChange;
+   skos:definition "triadic cognition by which a representamen is assigned a new referent"@en;
+   skos:scopeNote "To document a metonymization x: o-s-o', use (x involves old referent o), (x involves representamen s), and (x involves new referent o') to document the relationship between the cognitive step and its triadic represenational elements."@en;
+   skos:editorialNote "Compared to PIMS-II, metonymization takes the role of semantic change from PIMS-II; the concept semantic change is eliminated from the ontology, and the special additional condition for a metonymization from Perice's philosophy is also eliminated."@en.
+
+mso-em:Perception a owl:Class;
+   skos:prefLabel "perception"@en;
+   skos:altLabel  "Perception"@en;
+   rdfs:subClassOf mso-em:Semiosis;
+   owl:disjointWith mso-em:Interpretation;
+   skos:exactMatch pims-ii:Perception;
+   skos:definition "semiosis s-o-s' in which the referent o partakes as a perceived object and therefore needs to be present physically"@en.
+
+mso-em:Semiosis a owl:Class;
+   skos:prefLabel "semiosis"@en;
+   skos:altLabel  "Semiosis"@en;
+   rdfs:subClassOf mso-em:Cognition, [
+      a owl:Restriction;
+      owl:onProperty mso-em:involvesSign;
+      owl:someValuesFrom owl:Thing
+   ], [
+      a owl:Restriction;
+      owl:onProperty mso-em:involvesInterpretant;
+      owl:someValuesFrom owl:Thing
+   ];
+   owl:disjointWith mso-em:CognitiveWorkflow, mso-em:Metonymization;
+   skos:exactMatch pims-ii:Semiosis;
+   skos:definition "triadic congition that, following Peirce, relates 'the sign', 'the object' (referent), and 'the interpretant' to each other"@en;
+   skos:scopeNote "To document a semiosis x: s-o-s', use (x involves sign s), (x involves referent o), and (x involves interpretant s') to document the relationship between the cognitive step and its triadic represenational elements. A semiosis is either a perception (if the object needs to be present and participate physically in the process) or an interpretation (if the physical participation of the object is not inherently necessary."@en.
+
+mso-em:Telesis a owl:Class;
+   skos:prefLabel "telesis"@en;
+   skos:altLabel  "Telesis"@en;
+   rdfs:subClassOf mso-em:Semiosis, mso-em:PurposefulAction;
+   skos:exactMatch pims-ii:Telesis;
+   skos:definition "semiosis, carried out purposefully by its agent, in which the sign is an aim (telos), the object is an action, claim, or situation against which that aim is evaluated, and the interpretant is a resolution, e.g., a revised objective, plan, or similar evaluation outcome"@en.
+
+
+#########################################
+# Properties of subclasses of cognition #
+#########################################
+
+mso-em:involvesInterpretant a owl:ObjectProperty;
+   skos:prefLabel "involves interpretant"@en;
+   skos:altLabel  "involvesInterpretant"@en;
+   skos:domain mso-em:Semiosis;
+   rdfs:subPropertyOf mso-em:involvesRepresentamen;
+   skos:definition "(x involves interpreant s') means that x is a semiosis and s' is the interpretant (third element) in this semiosis."@en;
+   skos:scopeNote "For the sign (first element), use 'involves sign', and for the object (referent, second element), use 'involves referent'."@en.
+
+mso-em:involvesNewReferent a owl:ObjectProperty;
+   skos:prefLabel "involves new referent"@en;
+   skos:altLabel "involvesNewReferent"@en;
+   rdfs:domain mso-em:Metonymization;
+   rdfs:subPropertyOf mso-em:involvesReferent;
+   skos:definition "(x involves new referent o') means that x is a metonymization and o' is the new referent (first element) in this metonymization."@en;
+   skos:scopeNote "For the old referent (first element), use 'involves old referent', and for the sign (representamen, second element), use 'involves representamen'."@en.
+
+mso-em:involvesOldReferent a owl:ObjectProperty;
+   skos:prefLabel "involves old referent"@en;
+   skos:altLabel "involvesOldReferent"@en;
+   rdfs:domain mso-em:Metonymization;
+   rdfs:subPropertyOf mso-em:involvesReferent;
+   skos:definition "(x involves old referent o) means that x is a metonymization and o is the old referent (first element) in this metonymization."@en;
+   skos:scopeNote "For the sign (representamen, second element), use 'involves representamen', and for the new referent (third element), use 'involves new referent'."@en.
+
+mso-em:involvesSign a owl:ObjectProperty;
+   skos:prefLabel "involves sign"@en;
+   skos:altLabel  "involvesSign"@en;
+   skos:domain mso-em:Semiosis;
+   rdfs:subPropertyOf mso-em:involvesRepresentamen;
+   skos:definition "(x involves sign s) means that x is a semiosis and s is the sign (first element) in this semiosis."@en;
+   skos:scopeNote "For the object (referent, second element), use 'involves referent', and for the interpretant (third element), use 'involves interpretant'."@en.
+
+
 ###############################
 # Subclasses of Communication #
 ###############################
@@ -115,4 +303,4 @@ mso-em:ExpressiveAct a owl:Class;
    skos:exactMatch pims-ii:ExpressiveAct;
    skos:definition "elementary unit of communication done by its agent, the speaker"@en;
    skos:example "e.g., a speech act or an analogous digital act of communicating"@en;
-   skos:scopeNote "The role of the speaker (agent doing the expressive act) must be understood in a generalized sense, i.e., not limited to speech. The purpose of the action consists in its illocutionary and perlocutionary intent."@en.
+   skos:scopeNote "The role of the speaker (who is also the agent doing the expressive act) must be understood in a generalized sense, i.e., not limited to speech. The purpose of the action consists in its illocutionary and perlocutionary intent."@en.

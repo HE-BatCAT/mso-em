@@ -19,7 +19,7 @@
    dcterms:title "MSO-EM module 'sign' (Articulation, Plurality, Structure)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'sign': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-17"^^dcterms:W3CDTF;
+   dcterms:issued "2024-10-25"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch

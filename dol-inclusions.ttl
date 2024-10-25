@@ -56,6 +56,18 @@ dol:endurant a owl:Class;
          a owl:Restriction;
          owl:onProperty dol:specific-constant-constituent;
          owl:someValuesFrom dol:quality
+      ], [
+         a owl:Restriction;
+         owl:onProperty dol:part;
+         owl:someValuesFrom dol:abstract
+      ], [
+         a owl:Restriction;
+         owl:onProperty dol:part;
+         owl:someValuesFrom dol:perdurant
+      ], [
+         a owl:Restriction;
+         owl:onProperty dol:part;
+         owl:someValuesFrom dol:quality
       ];
    skos:scopeNote "The main characteristic of endurants is that all of them are independent essential wholes. This does not mean that the corresponding property (being an endurant) carries proper unity, since there is no common unity criterion for endurants. Within endurants, we distinguish between physical and non-physical endurants, according to whether they have direct spatial qualities. Within physical endurants, we distinguish between amounts of matter, objects, and features."@en;
    skos:example "Endurants can 'genuinely' change in time, in the sense that the very same endurant as a whole can have incompatible properties at different times. To see this, suppose that an endurant - say 'this paper' - has a property at a time t 'it's white', and a different, incompatible property at time t' 'it's yellow': in both cases we refer to the whole object, without picking up any particular part of it."@en;
@@ -101,6 +113,18 @@ dol:perdurant a owl:Class;
       ], [
          a owl:Restriction;
          owl:onProperty dol:specific-constant-constituent;
+         owl:someValuesFrom dol:quality
+      ], [
+         a owl:Restriction;
+         owl:onProperty dol:part;
+         owl:someValuesFrom dol:abstract
+      ], [
+         a owl:Restriction;
+         owl:onProperty dol:part;
+         owl:someValuesFrom dol:endurant
+      ], [
+         a owl:Restriction;
+         owl:onProperty dol:part;
          owl:someValuesFrom dol:quality
       ];
    skos:scopeNote "Perdurants (AKA occurrences) comprise what are variously called events, processes, phenomena, activities and states. They can have temporal parts or spatial parts."@en;
@@ -248,4 +272,11 @@ dol:specific-constant-constituent a owl:ObjectProperty;
    rdfs:subPropertyOf dol:immediate-relation;
    skos:definition "(x [has] specific constituent y) means that y is constitutive to x; if y is not there, or if we replace it with some y' in the same role, the object x no longer exists (some other x' might exist in its place)."@en;
    skos:example "A marriage between y and y' is specifically constantly constituted by y and y'; if they divorce and y marries y'', there will be a marriage (between y and y''), but it will not be the same as the one between y and y'."@en;
+   skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
+
+dol:weak-connection a owl:ObjectProperty;
+   skos:prefLabel "weak connection"@en;
+   skos:altLabel "weakConnection"@en;
+   rdfs:subPropertyOf dol:immediate-relation;
+   skos:definition "the basic connection, not requiring a common boundary"@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.

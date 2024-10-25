@@ -19,7 +19,7 @@
    dcterms:title "MSO-EM module 'topic' (Query, Topical, Topical sum)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'topic': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-17"^^dcterms:W3CDTF;
+   dcterms:issued "2024-10-25"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -37,10 +37,11 @@
 mso-em:Query a owl:Class;
    skos:prefLabel "query"@en;
    skos:altLabel  "Query"@en;
-   rdfs:subClassOf mso-em:Articulation, dol:non-physical-endurant;
+   rdfs:subClassOf mso-em:Articulation;
    owl:disjointWith mso-em:Utterance;
    skos:exactMatch pims-ii:Query;
    skos:definition "digital articulation of a question"@en.
+mso-em:Articulation rdfs:subClassOf dol:non-physical-endurant. # module alignment support statement
    
 mso-em:Topical a owl:Class;
    skos:prefLabel "topical"@en;
@@ -53,7 +54,7 @@ mso-em:Topical a owl:Class;
 mso-em:TopicalSum a owl:Class;
    skos:prefLabel "topical sum"@en;
    skos:altLabel  "TopicalSum"@en;
-   rdfs:subClassOf mso-em:Plurality, dol:abstract;
+   rdfs:subClassOf mso-em:Plurality;
    owl:equivalentClass [
       a owl:Restriction;
       owl:onProperty mso-em:containsTopicalSummand;
@@ -61,6 +62,7 @@ mso-em:TopicalSum a owl:Class;
    ];
    skos:exactMatch pims-ii:TopicalSum;
    skos:definition "plurality of topical propositions, where the individual elements (summands) don't genuinely interact but are just standing beside each other as independent, unrelated (or not very closely related) parts of what is addressed"@en.
+mso-em:Plurality rdfs:subClassOf dol:abstract. # module alignment support statement
 
 
 ############################################
@@ -72,9 +74,10 @@ mso-em:containsTopicalSummand a owl:ObjectProperty;
    skos:altLabel  "containsTopicalSummand"@en;
    rdfs:domain mso-em:TopicalSum;
    rdfs:range mso-em:Topical;
-   rdfs:subPropertyOf mso-em:hasElement, dol:specific-constant-constituent;
+   rdfs:subPropertyOf mso-em:hasElement;
    skos:definition "(x contains topical summand y) means that y is one of the topics contained in x, a collection of topics that are not immediately closely related to each other."@en;
    skos:scopeNote "If multiple topics are combined in a way that relates them closely to each other, with some meaningful interaction between them, the relation isTopicalFactorIn should be used, and the whole should then be a topical product, not a topical sum"@en.
+mso-em:hasElement rdfs:subPropertyOf dol:specific-constant-constituent. # module alignment support statement
 
 
 #########################
@@ -122,5 +125,6 @@ mso-em:containsTopicalFactor a owl:ObjectProperty;
    skos:altLabel  "containsTopicalFactor"@en;
    rdfs:domain mso-em:TopicalProduct;
    rdfs:range dol:abstract;
-   rdfs:subPropertyOf mso-em:hasElement, dol:specific-constant-constituent;
+   rdfs:subPropertyOf mso-em:hasElement;
    skos:definition "(x contains topical factor y) means that y is combined with other subtopics into the topical proposition x, such that y and the other subtopics are not just standing beside each other, but exhibiting a meaningful interaction."@en.
+mso-em:hasElement rdfs:subPropertyOf dol:specific-constant-constituent. # module alignment support statement
