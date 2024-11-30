@@ -16,16 +16,16 @@
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
 <https://www.purl.org/mso-em> a owl:Ontology;
-   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-10/dol-inclusions.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-10/agency.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-10/semiotics.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-10/sign.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-10/topic.ttl>;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-12/>;
+   owl:imports <https://batcat.info/semantics/mso-em-2024-12/dol-inclusions.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2024-12/agency.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2024-12/semiotics.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2024-12/sign.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2024-12/topic.ttl>;
    dcterms:title "MSO-EM: Ontologies for modelling, simulation, optimization (MSO) and epistemic metadata (EM) "^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM ontologies: Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-17"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM ontologies: Version dated December 2024"^^xs:string;
+   dcterms:issued "2024-12-01"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
