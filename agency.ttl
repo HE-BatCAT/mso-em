@@ -19,8 +19,8 @@
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/agency.ttl>;
    dcterms:title "MSO-EM module 'agency' (Action, Agent, Intention)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'agency': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-25"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'agency': Version dated December 2024"^^xs:string;
+   dcterms:issued "2024-12-01"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -59,9 +59,9 @@ mso-em:Agent a owl:Class;
 mso-em:Intention a owl:Class;
    skos:prefLabel "intention"@en;
    skos:altLabel "Intention"@en;
-   rdfs:subClassOf dol:physical-quality;
+   rdfs:subClassOf dol:quale;
    skos:exactMatch pims-ii:Intention;
-   skos:definition "quality of an agent constituting the agent's aim or goal"@en.
+   skos:definition "quale (value of a quality) of an agent, constituting the agent's aim or goal"@en.
 
 
 ############################################
@@ -76,15 +76,6 @@ mso-em:isDoneBy a owl:ObjectProperty;
    rdfs:range mso-em:Agent;
    skos:definition "(x is done by y) means that y is the agent that conducts/undertakes the action x."@en;
    skos:scopeNote "An action is done by exactly one agent."@en.
-
-mso-em:isDoneFor a owl:ObjectProperty;
-   skos:prefLabel "is done for"@en;
-   skos:altLabel "isDoneFor"@en;
-   rdfs:subPropertyOf dol:has-quality;
-   rdfs:domain mso-em:Action;
-   rdfs:range mso-em:Intention;
-   skos:definition "(x is done for y) means that x is a purposeful action, and y is one of the aims followed by the agent of x by undertaking x."@en;
-   skos:scopeNote "No goal-directedness (awareness of the intention) is required on the side of the agent."@en.
 
 mso-em:isDoneWith a owl:ObjectProperty;
    skos:prefLabel "is done with"@en;
@@ -113,6 +104,20 @@ mso-em:PurposefulAction a owl:Class;
    ];
    skos:exactMatch pims-ii:PurposefulAction;
    skos:definition "action carried out with an aim that its agent (hence, a goal-directed agent) is aware of"@en.
+
+
+######################################
+# Properties of subclasses of Action #
+######################################
+
+mso-em:isDoneFor a owl:ObjectProperty;
+   skos:prefLabel "is done for"@en;
+   skos:altLabel "isDoneFor"@en;
+   rdfs:subPropertyOf dol:generic-location;
+   rdfs:domain mso-em:PurposefulAction;
+   rdfs:range mso-em:Intention;
+   skos:definition "(x is done for y) means that x is a purposeful action, and y is one of the aims followed by the agent of x by undertaking x."@en;
+   skos:scopeNote "No goal-directedness (awareness of the intention) is required on the side of the agent."@en.
 
    
 #######################
@@ -193,7 +198,7 @@ mso-em:isDirectedToward a owl:ObjectProperty;
 mso-em:isOrientedToward a owl:ObjectProperty;
    skos:prefLabel "is oriented toward"@en;
    skos:altLabel "isOrientedToward"@en;
-   rdfs:subPropertyOf dol:has-quality;
+   rdfs:subPropertyOf dol:exact-location;
    rdfs:domain mso-em:GoalOrientedAgent;
    rdfs:range mso-em:Intention;
    skos:definition "(x is oriented toward y) means that x is a goal-oriented agent with the tendency to work toward a state of affairs that is described/represented by y."@en;
