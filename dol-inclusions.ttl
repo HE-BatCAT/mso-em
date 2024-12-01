@@ -326,6 +326,13 @@ dol:specific-constant-constituent a owl:ObjectProperty;
    skos:example "A marriage between y and y' is specifically constantly constituted by y and y'; if they divorce and y marries y'', there will be a marriage (between y and y''), but it will not be the same as the one between y and y'."@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
+dol:specific-constant-dependent a owl:ObjectProperty;
+   skos:prefLabel "specific constant dependent"@en;
+   skos:altLabel "specificConstantDependent"@en;
+   rdfs:subPropertyOf dol:immediate-relation;
+   skos:definition "The constant dependence between two individuals. Taken in DOLCE as primitive."@en;
+   skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
+
 dol:weak-connection a owl:ObjectProperty;
    skos:prefLabel "weak connection"@en;
    skos:altLabel "weakConnection"@en;

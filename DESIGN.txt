@@ -24,7 +24,9 @@ Style:
 Referencing:
  - When one mso-em module references (uses) concepts or relations from another, only "lower" modules should use concepts from "higher" modules, referring to linear order according to the list below.
    => 1. dol-inclusions.ttl (highest module, does not make "hard" use any concepts/relations from other modules)
-   => 2. agent.ttl (only uses the DOL inclusions in a "hard" way, such as subClassOf)
+   => 2. agency.ttl (only uses the DOL inclusions in a "hard" way, such as subClassOf)
    => 3. sign.ttl
    => 4. topic.ttl
    => 5. semiotics.ttl
+   => 6. epistemic.ttl
+   => 7. simulation.ttl

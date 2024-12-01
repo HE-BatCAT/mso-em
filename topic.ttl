@@ -128,3 +128,19 @@ mso-em:containsTopicalFactor a owl:ObjectProperty;
    rdfs:subPropertyOf mso-em:hasElement;
    skos:definition "(x contains topical factor y) means that y is combined with other subtopics into the topical proposition x, such that y and the other subtopics are not just standing beside each other, but exhibiting a meaningful interaction."@en.
 mso-em:hasElement rdfs:subPropertyOf dol:specific-constant-constituent. # module alignment support statement
+
+mso-em:isAbout a owl:ObjectProperty;
+   skos:prefLabel "is about"@en;
+   skos:altLabel "isAbout"@en;
+   rdfs:subPropertyOf mso-em:represents, dol:generically-dependent-on;
+   skos:exactMatch pims-ii:isAbout;
+   skos:definition "(x is about y) means that x is a proposition or articulation, and y is the object that x is related to by aboutness"@en.
+
+mso-em:hasSubjectMatter a owl:ObjectProperty;
+   skos:prefLabel "has subject matter"@en;
+   skos:altLabel "hasSubjectMatter"@en;
+   rdfs:subPropertyOf mso-em:isAbout;
+   rdfs:domain dol:proposition;
+   rdfs:range dol:abstract;
+   skos:definition "(x has subject matter y) means that x is a proposition or articulation that addresses the topic or topical sum y, i.e., that has y as its subject matter"@en;
+   skos:scopeNote "following Yablo, there is such a thing as *the* subject matter of something, in other words, hasSubjectMatter is a functional property"@en.

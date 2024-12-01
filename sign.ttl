@@ -18,8 +18,8 @@
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/sign.ttl>;
    dcterms:title "MSO-EM module 'sign' (Articulation, Plurality, Structure)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'sign': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-25"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'sign': Version dated December 2024"^^xs:string;
+   dcterms:issued "2024-12-01"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -263,6 +263,14 @@ mso-em:isNameFor a owl:ObjectProperty;
    skos:prefLabel "is name for"@en;
    skos:altLabel  "isNameFor"@en;
    rdfs:domain mso-em:Name;
-   rdfs:subPropertyOf dol:generically-dependent-on;
+   rdfs:subPropertyOf mso-em:represents;
    skos:exactMatch pims-ii:isNameFor;
    skos:definition "(x isNameFor y), to be applied in the frequent special case where y is represented by x, its name"@en.
+
+mso-em:represents a owl:ObjectProperty;
+   skos:prefLabel "represents"@en;
+   skos:altLabel "represents"@en;
+   rdfs:subPropertyOf dol:generically-dependent-on;
+   skos:exactMatch pims-ii:isRepresentamenFor;
+   skos:definition "Dyadic representation relation; (x represents y) means that, in a Peircean sense, x is a sign (i.e., a representamen) for y"@en;
+   skos:scopeNote "(x represents y) requires that there is a cognitive step z such that (x isRepresentamenIn z) and (y isReferentIn z)"@en.

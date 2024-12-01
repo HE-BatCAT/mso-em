@@ -18,8 +18,8 @@
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/semiotics.ttl>;
    dcterms:title "MSO-EM module 'semiotics' (Claim, Cognition, Communication)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'semiotics': Version dated October 2024"^^xs:string;
-   dcterms:issued "2024-10-25"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'semiotics': Version dated December 2024"^^xs:string;
+   dcterms:issued "2024-12-01"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -37,7 +37,11 @@
 mso-em:Claim a owl:Class;
    skos:prefLabel "claim"@en;
    skos:altLabel  "Claim"@en;
-   rdfs:subClassOf dol:proposition;
+   rdfs:subClassOf dol:proposition, [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasSubjectMatter;
+      owl:someValuesFrom mso-em:Question
+   ];
    owl:equivalentClass [
       a owl:Restriction;
       owl:onProperty mso-em:isAssertedBy;
@@ -50,7 +54,7 @@ mso-em:Claim a owl:Class;
 mso-em:Cognition a owl:Class;
    skos:prefLabel "cognition"@en;
    skos:altLabel  "Cognition"@en;
-   rdfs:subClassOf mso-em:Action, [
+   rdfs:subClassOf mso-em:Action, dol:event, [
       a owl:Restriction;
       owl:onProperty mso-em:involvesRepresentamen;
       owl:someValuesFrom owl:Thing
@@ -68,7 +72,7 @@ mso-em:Action rdfs:subClassOf dol:event. # module alignment support statement
 mso-em:Communication a owl:Class;
    skos:prefLabel "communication"@en;
    skos:altLabel  "Communication"@en;
-   rdfs:subClassOf mso-em:PurposefulAction, [
+   rdfs:subClassOf mso-em:PurposefulAction, dol:event, [
       a owl:Restriction;
       owl:onProperty dol:part;
       owl:someValuesFrom mso-em:ExpressiveAct
@@ -98,6 +102,15 @@ mso-em:isAssertedBy a owl:ObjectProperty;
    rdfs:range mso-em:Interlocutor;
    rdfs:subPropertyOf dol:generically-dependent-on;
    skos:definition "(x is asserted by y) means that x is a claim that is affirmatively communicated by the interlocutor y."@en.
+
+mso-em:isBasedOn a owl:ObjectProperty;
+   skos:prefLabel "is based on"@en;
+   skos:altLabel  "isBasedOn"@en;
+   rdfs:domain mso-em:Claim;
+   rdfs:range mso-em:Articulation;
+   rdfs:subPropertyOf dol:generic-constituent;
+   skos:definition "(x is based on y) means that x is a claim, and y are data that this claim is based on."@en;
+   skos:scopeNote "it is not necessary for a claim in general to be based on data; however, a knowledge claim (module 'epistemic') must be based on some data"@en.
 
 mso-em:hasCognitiveStep a owl:ObjectProperty;
    skos:prefLabel "has cognitive step"@en;

@@ -19,8 +19,10 @@
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-12/>;
    owl:imports <https://batcat.info/semantics/mso-em-2024-12/dol-inclusions.ttl>;
    owl:imports <https://batcat.info/semantics/mso-em-2024-12/agency.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2024-12/epistemic.ttl>;
    owl:imports <https://batcat.info/semantics/mso-em-2024-12/semiotics.ttl>;
    owl:imports <https://batcat.info/semantics/mso-em-2024-12/sign.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2024-12/simulation.ttl>;
    owl:imports <https://batcat.info/semantics/mso-em-2024-12/topic.ttl>;
    dcterms:title "MSO-EM: Ontologies for modelling, simulation, optimization (MSO) and epistemic metadata (EM) "^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
