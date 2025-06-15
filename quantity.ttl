@@ -14,7 +14,7 @@
 @prefix vann: <http://purl.org/vocab/vann/>.
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
-<https://www.purl.org/mso-em-semiotics> a owl:Ontology;
+<https://www.purl.org/mso-em-quantity> a owl:Ontology;
    owl:versionIRI <https://batcat.info/semantics/mso-em-2025-06/quantity.ttl>;
    dcterms:title "MSO-EM module 'quantity' (Equality, Term, Unit)"@en;
    dcterms:created "2025"^^dcterms:W3CDTF;
