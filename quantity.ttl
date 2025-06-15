@@ -1,0 +1,63 @@
+############################
+# MSO-EM quantity ontology #
+############################
+
+@base <https://www.purl.org/mso-em#>.
+@prefix mso-em: <https://www.purl.org/mso-em#>.
+
+@prefix dcelem: <http://purl.org/dc/elements/1.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix dol: <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#>.
+@prefix ineurese: <http://purl.org/info:eu-repo/semantics/>.
+@prefix pims-ii: <http://www.molmod.info/semantics/pims-ii.ttl#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix vann: <http://purl.org/vocab/vann/>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
+
+<https://www.purl.org/mso-em-semiotics> a owl:Ontology;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2025-06/quantity.ttl>;
+   dcterms:title "MSO-EM module 'quantity' (Equality, Term, Unit)"@en;
+   dcterms:created "2025"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'quantity': Version dated June 2025"@en;
+   dcterms:issued "2025-06-15"^^dcterms:W3CDTF;
+   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"@en;
+   dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
+   dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
+   dcterms:status ineurese:publishedVersion;
+   dcterms:source <http://www.molmod.info/semantics/pims-ii.ttl>;
+   vann:preferredNamespaceUri "https://www.purl.org/mso-em#"^^xs:string;
+   dcelem:description "MSO-EM module for quantities. Its highest-level concepts are Equality, Term, and Unit."@en;
+   dcterms:bibliographicCitation "M. T. Horsch, S. Chiacchiera, I. T. Todorov, A. T. Correia, A. Dey, N. A. Konchakova, S. Scholze, S. Stephan, K. Tøndel, A. Sarkar, M. H. Karray, F. Al Machot & B. Schembera (2024). Exploration of core concepts required for mid- and domain-level ontology development to facilitate explainable-AI-readiness of data and models. In R. Confalonieri et al. (editors), Data meets Ontologies in Explainable AI 2024: 5. CEUR-WS, Aachen."@en.
+
+
+##########################
+# Highest-level concepts #
+##########################
+
+mso-em:Equality a owl:Class;
+   skos:prefLabel "equality"@en;
+   skos:altLabel  "Equality"@en;
+   rdfs:subClassOf mso-em:Dyad, dol:non-physical-endurant, [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasLeftEntry;
+      owl:someValuesFrom mso-em:Term
+   ], [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasRightEntry;
+      owl:someValuesFrom mso-em:Term
+   ];
+   skos:exactMatch pims-ii:EqualityArticulation;
+   skos:definition "dyad by which two terms are asserted to be equal or to become equal"@en.
+
+mso-em:Term a owl:Class;
+   skos:prefLabel "term"@en;
+   skos:altLabel  "Term"@en;
+   rdfs:subClassOf mso-em:Articulation, dol:non-physical-endurant;
+   ### owl:equivalentClass [
+   ###    a owl:Restriction;
+   ###    owl:onProperty [owl:inverseOf pims-ii:isAdmissibleValueFor];
+   ###    owl:someValuesFrom pims-ii:Value
+   ### ];
+   skos:exactMatch pims-ii:Term;
+   skos:definition "conventional articulation that can evaluate to a value"@en;
+   skos:scopeNote "terms include variables, values, and any mathematically and semantically valid ways of combining variables, values, and mathematical operators - note that it is required for a term to potentially take a value"@en.

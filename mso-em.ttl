@@ -16,19 +16,20 @@
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
 <https://www.purl.org/mso-em> a owl:Ontology;
-   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-12/>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-12/dol-inclusions.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-12/agency.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-12/epistemic.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-12/semiotics.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-12/sign.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-12/simulation.ttl>;
-   owl:imports <https://batcat.info/semantics/mso-em-2024-12/topic.ttl>;
-   dcterms:title "MSO-EM: Ontologies for modelling, simulation, optimization (MSO) and epistemic metadata (EM) "^^xs:string;
-   dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM ontologies: Version dated December 2024"^^xs:string;
-   dcterms:issued "2024-12-01"^^dcterms:W3CDTF;
-   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2025-06/>;
+   owl:imports <https://batcat.info/semantics/mso-em-2025-06/dol-inclusions.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2025-06/agency.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2025-06/epistemic.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2025-06/quantity.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2025-06/semiotics.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2025-06/sign.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2025-06/simulation.ttl>;
+   owl:imports <https://batcat.info/semantics/mso-em-2025-06/topic.ttl>;
+   dcterms:title "MSO-EM: Ontologies for modelling, simulation, optimization (MSO) and epistemic metadata (EM)"@en;
+   dcterms:created "2025"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM ontologies: Version dated June 2025"@en;
+   dcterms:issued "2025-06-15"^^dcterms:W3CDTF;
+   dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"@en;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
    dcterms:status ineurese:publishedVersion;
@@ -36,4 +37,4 @@
    vann:preferredNamespacePrefix "mso-em"^^xs:string;
    vann:preferredNamespaceUri "https://www.purl.org/mso-em#"^^xs:string;
    dcelem:description "MSO-EM is a system of ontologies for documenting the knowledge status of models and data; the aim is to make models and data explainable-AI-ready (XAIR)."@en;
-   dcterms:bibliographicCitation "M. T. Horsch, S. Chiacchiera, I. T. Todorov, A. T. Correia, A. Dey, N. A. Konchakova, S. Scholze, S. Stephan, K. Tøndel, A. Sarkar, M. H. Karray, F. Al Machot, B. Schembera, 'Exploration of key concepts required for mid- and domain-level ontology development to facilitate explainable-AI-readiness of data and models,' to appear, 2024."@en.
+   dcterms:bibliographicCitation "M. T. Horsch, S. Chiacchiera, I. T. Todorov, A. T. Correia, A. Dey, N. A. Konchakova, S. Scholze, S. Stephan, K. Tøndel, A. Sarkar, M. H. Karray, F. Al Machot & B. Schembera (2024). Exploration of core concepts required for mid- and domain-level ontology development to facilitate explainable-AI-readiness of data and models. In R. Confalonieri et al. (editors), Data meets Ontologies in Explainable AI 2024: 5. CEUR-WS, Aachen."@en.
