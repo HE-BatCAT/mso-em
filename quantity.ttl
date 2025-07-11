@@ -18,8 +18,8 @@
    owl:versionIRI <https://batcat.info/semantics/mso-em-2025-06/quantity.ttl>;
    dcterms:title "MSO-EM module 'quantity' (Equality, Term, Unit)"@en;
    dcterms:created "2025"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'quantity': Version dated June 2025"@en;
-   dcterms:issued "2025-06-15"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'quantity': Version dated July 2025"@en;
+   dcterms:issued "2025-07-11"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"@en;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -52,12 +52,43 @@ mso-em:Equality a owl:Class;
 mso-em:Term a owl:Class;
    skos:prefLabel "term"@en;
    skos:altLabel  "Term"@en;
-   rdfs:subClassOf mso-em:Articulation, dol:non-physical-endurant;
-   ### owl:equivalentClass [
-   ###    a owl:Restriction;
-   ###    owl:onProperty [owl:inverseOf pims-ii:isAdmissibleValueFor];
-   ###    owl:someValuesFrom pims-ii:Value
-   ### ];
+   rdfs:subClassOf mso-em:Articulation, dol:non-physical-endurant, [
+      a owl:Restriction;
+      owl:onProperty mso-em:hasAdmissibleValue;
+      owl:someValuesFrom mso-em:Value
+   ];
    skos:exactMatch pims-ii:Term;
    skos:definition "conventional articulation that can evaluate to a value"@en;
    skos:scopeNote "terms include variables, values, and any mathematically and semantically valid ways of combining variables, values, and mathematical operators - note that it is required for a term to potentially take a value"@en.
+
+mso-em:Unit a owl:Class;
+   skos:prefLabel "unit"@en;
+   skos:altLabel  "Unit"@en;
+   rdfs:subClassOf mso-em:Literal, dol:non-physical-endurant;
+   skos:exactMatch pims-ii:MeasurementUnit;
+   skos:definition "'real scalar quantity, defined and adopted by convention' (EMMO, ISO 80000-1)"@en.
+
+
+############################################
+# Properties of the highest-level concepts #
+############################################
+
+mso-em:hasAdmissibleValue a owl:ObjectProperty;
+   skos:prefLabel "has admissible value"@en;
+   skos:altLabel "hasAdmissibleValue"@en;
+   rdfs:domain mso-em:Term;
+   rdfs:range mso-em:Value;
+   rdfs:subPropertyOf dol:generically-dependent-on;
+   skos:definition "(x has admissible value y) means that x is a term that in principle could evaluate to the value y"@en.
+
+
+######################
+# Subclasses of Term #
+######################
+
+mso-em:Value a owl:Class;
+   skos:prefLabel "value"@en;
+   skos:altLabel  "Value"@en;
+   rdfs:subClassOf mso-em:Term;
+   skos:exactMatch pims-ii:Term;
+   skos:definition "articulation that is by social convention understood to be potentially assignable to a variable"@en.
