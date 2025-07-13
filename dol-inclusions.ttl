@@ -16,9 +16,9 @@
 <https://www.purl.org/mso-em-dol-inclusions> a owl:Ontology;
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/dol-inclusions.ttl>;
    dcterms:title "MSO-EM module 'dol-inclusions' (concepts and relations reused from DOLCE Lite)"^^xs:string;
-   dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'dol-inclusions': Version dated December 2024"^^xs:string;
-   dcterms:issued "2024-12-01"^^dcterms:W3CDTF;
+   dcterms:created "2024-2025"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'dol-inclusions': Version dated July 2025"^^xs:string;
+   dcterms:issued "2025-07-13"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0001-5568-2684>;  # Aldo Gangemi, did the ontology engineering for DOLCE Lite
@@ -37,6 +37,7 @@
 dol:abstract a owl:Class;
    skos:prefLabel "abstract"@en;
    skos:altLabel "Abstract"@en;
+   rdfs:subClassOf owl:Thing;
    owl:disjointWith dol:endurant, dol:perdurant, dol:quality;
    skos:scopeNote "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves."@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
@@ -44,6 +45,7 @@ dol:abstract a owl:Class;
 dol:endurant a owl:Class;
    skos:prefLabel "endurant"@en;
    skos:altLabel "Endurant"@en;
+   rdfs:subClassOf owl:Thing;
    owl:disjointWith dol:abstract, dol:perdurant, dol:quality, [
          a owl:Restriction;
          owl:onProperty dol:specific-constant-constituent;
@@ -176,6 +178,7 @@ dol:quale a owl:Class;
 dol:quality a owl:Class;
    skos:prefLabel "quality"@en;
    skos:altLabel "Quality"@en;
+   rdfs:subClassOf owl:Thing;
    owl:disjointWith dol:abstract, dol:endurant, dol:perdurant;
    skos:scopeNote "Qualities inhere to entities: every entity (including qualities themselves) comes with certain qualities, which exist as long as the entity exists"@en;
    skos:scopeNote "The qualities are 'inherent' in an object, but can change over time"@en;
@@ -252,7 +255,7 @@ dol:generic-location a owl:ObjectProperty;
    skos:prefLabel "generic location"@en;
    skos:altLabel "genericLocation"@en;
    rdfs:subPropertyOf dol:mediated-relation;
-   skos:scopeNote "The most generic location relation, probably equivalent to more than one image schema in a cognitive system (e.g. containment for exact location, proximity for approximate location).This is meant to reason on generalized, common sense as well as formal locations, including naive localization, between any kinds of entities. Generic location is branched into 'exact' location, ranging on regions, and 'approximate' (naive) location, ranging on non-regions."@en;
+   skos:scopeNote "The most generic location relation, probably equivalent to more than one image schema in a cognitive system (e.g. containment for exact location, proximity for approximate location). This is meant to reason on generalized, common sense as well as formal locations, including naive localization, between any kinds of entities. Generic location is branched into 'exact' location, ranging on regions, and 'approximate' (naive) location, ranging on non-regions."@en;
    skos:editorialNote "taken from DOLCE Lite (http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl)"@en.
 
 dol:has-quality a owl:ObjectProperty;
