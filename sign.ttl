@@ -17,9 +17,9 @@
 <https://www.purl.org/mso-em-sign> a owl:Ontology;
    owl:versionIRI <https://batcat.info/semantics/mso-em-2025-07/sign.ttl>;
    dcterms:title "MSO-EM module 'sign' (Articulation, Plurality, Structure)"^^xs:string;
-   dcterms:created "2024-2025"^^dcterms:W3CDTF;
+   dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'sign': Version dated July 2025"^^xs:string;
-   dcterms:issued "2025-07-13"^^dcterms:W3CDTF;
+   dcterms:issued "2025-07-18"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -74,7 +74,7 @@ mso-em:Structure a owl:Class;
       owl:onProperty mso-em:hasElement;
       owl:someValuesFrom owl:Thing
    ];
-   owl:disjointWith dol:proposition, mso-em:Plurality, [
+   owl:disjointWith dol:proposition, dol:region, mso-em:Plurality, [
       a owl:Restriction;
       owl:onProperty dol:specific-constant-constituent;
       owl:someValuesFrom mso-em:Structure

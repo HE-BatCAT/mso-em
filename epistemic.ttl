@@ -18,8 +18,8 @@
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-12/epistemic.ttl>;
    dcterms:title "MSO-EM module 'epistemic' (Assessment, KnowledgeClaim, ValidityClaim)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'epistemic': Version dated December 2024"^^xs:string;
-   dcterms:issued "2024-12-01"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'epistemic': Version dated July 2025"^^xs:string;
+   dcterms:issued "2025-07-18"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -34,6 +34,17 @@
 # Highest-level concepts #
 ##########################
 
+mso-em:Assessment a owl:Class;
+   skos:prefLabel "assessment"@en;
+   skos:altLabel  "Assessment"@en;
+   rdfs:subClassOf dol:proposition, [
+         a owl:Restriction;
+         owl:onProperty mso-em:isAbout;
+         owl:someValuesFrom mso-em:Cognition
+      ];
+   skos:exactMatch pims-ii:Assessment;
+   skos:definition "ground that provides an explanation including a proposition on the extent (quantitatively or qualitatively) to which the grounded cognition is reliable, accurate, valid, or similar, and why that is the case"@en.
+
 mso-em:KnowledgeClaim a owl:Class;
    skos:prefLabel "knowledge claim"@en;
    skos:altLabel  "KnowledgeClaim"@en;
@@ -42,7 +53,62 @@ mso-em:KnowledgeClaim a owl:Class;
          owl:onProperty mso-em:isBasedOn;
          owl:someValuesFrom mso-em:Articulation
       ];
+   owl:disjointWith mso-em:ValidityClaim;
    skos:exactMatch pims-ii:KnowledgeClaim;
    skos:definition "claim asserting the knowledge status of something / proposition asserting the knowledge status of another proposition"@en;
    skos:scopeNote "The subject matter of a knowledge claim must be a (single) question, namely the one that is answered by the claim; in particular, therefore, its subject matter may not be a sum (plurality) of unrelated questions - in such a case, split it up into multiple independent knowledge claims"@en;
    skos:scopeNote "A knowledge claim states 'what data mean,' i.e., in what way some agent of the academic discourse has given some data an interpretation as constituting knowledge. A knowledge claim asserts what was found from research data: 'Research data δ made agent a know φ,' which can be expanded as 'the interpreation of research data δ by interpreter a yielded the knowledge claim φ as an interpretant.'"@en.
+
+mso-em:ValidityClaim a owl:Class;
+   skos:prefLabel "validity claim"@en;
+   skos:altLabel  "ValidityClaim"@en;
+   rdfs:subClassOf mso-em:Claim, [
+          a owl:Restriction;
+          owl:onProperty;
+          owl:someValuesFrom mso-em:Claim
+      ];
+   owl:disjointWith mso-em:KnowledgeClaim;
+   skos:exactMatch pims-ii:ValidityClaim;
+   skos:definition "claim about another claim, saying something about that claim's (in-)accuracy or somebody's (dis-)trust in the claim"@en.
+
+
+############################################
+# Properties of the highest-level concepts #
+############################################
+
+
+
+############################
+# Subclasses of Assessment #
+############################
+
+
+
+##########################################
+# Properties of subclasses of Assessment #
+##########################################
+
+
+
+################################
+# Subclasses of KnowledgeClaim #
+################################
+
+
+
+##############################################
+# Properties of subclasses of KnowledgeClaim #
+##############################################
+
+
+
+###############################
+# Subclasses of ValidityClaim #
+###############################
+
+
+
+#############################################
+# Properties of subclasses of ValidityClaim #
+#############################################
+

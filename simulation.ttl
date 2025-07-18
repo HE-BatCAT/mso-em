@@ -18,8 +18,8 @@
    owl:versionIRI <https://batcat.info/semantics/mso-em-2024-12/simulation.ttl>;
    dcterms:title "MSO-EM module 'simulation' (CompleteModel, Simulation, ...)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
-   owl:versionInfo "MSO-EM module 'simulation': Version dated December 2024"^^xs:string;
-   dcterms:issued "2024-12-01"^^dcterms:W3CDTF;
+   owl:versionInfo "MSO-EM module 'simulation': Version dated July 2025"^^xs:string;
+   dcterms:issued "2025-07-18"^^dcterms:W3CDTF;
    dcterms:publisher "BatCAT consortium (Horizon Europe GA no. 101137725)"^^xs:string;
    dcterms:license <https://creativecommons.org/licenses/by-nd/4.0/>;
    dcterms:creator <https://orcid.org/0000-0002-9464-6739>;  # Martin Thomas Horsch
@@ -38,6 +38,7 @@ mso-em:CompleteModel a owl:Class;
    skos:prefLabel "complete model"@en;
    skos:altLabel  "CompleteModel"@en;
    rdfs:subClassOf mso-em:Articulation, dol:non-physical-endurant;
+   owl:disjointWith mso-em:Literal, mso-em:Query, mso-em:Utterance;
    skos:definition "articulation consisting of a complete, determined set of equations that can be evaluated in a simulation without requiring any additional information"@en;
    skos:scopeNote "any endurant can serve as a model of something (typically it will be an articulation); this class is specifically for the finalized, complete set of equations, including the computational representation of the model and any additional information needed"@en.
 
