@@ -15,7 +15,7 @@
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
 <https://www.purl.org/mso-em-semiotics> a owl:Ontology;
-   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-10/semiotics.ttl>;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-12/semiotics.ttl>;
    dcterms:title "MSO-EM module 'semiotics' (Claim, Cognition, Communication)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'semiotics': Version dated December 2024"^^xs:string;

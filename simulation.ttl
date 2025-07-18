@@ -15,7 +15,7 @@
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
 <https://www.purl.org/mso-em-simulation> a owl:Ontology;
-   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-12/simulation.ttl>;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2025-07/simulation.ttl>;
    dcterms:title "MSO-EM module 'simulation' (CompleteModel, Simulation, ...)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'simulation': Version dated July 2025"^^xs:string;

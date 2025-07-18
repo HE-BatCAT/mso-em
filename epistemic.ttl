@@ -15,7 +15,7 @@
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
 <https://www.purl.org/mso-em-epistemic> a owl:Ontology;
-   owl:versionIRI <https://batcat.info/semantics/mso-em-2024-12/epistemic.ttl>;
+   owl:versionIRI <https://batcat.info/semantics/mso-em-2025-07/epistemic.ttl>;
    dcterms:title "MSO-EM module 'epistemic' (Assessment, KnowledgeClaim, ValidityClaim)"^^xs:string;
    dcterms:created "2024"^^dcterms:W3CDTF;
    owl:versionInfo "MSO-EM module 'epistemic': Version dated July 2025"^^xs:string;
