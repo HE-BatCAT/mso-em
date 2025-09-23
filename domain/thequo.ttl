@@ -1,0 +1,157 @@
+@base <https://www.purl.org/mso-em#>.
+@prefix thequo: <https://www.purl.org/mso-em/domain/thequo#>.
+
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix mod: <https://w3id.org/mod#>.
+@prefix ns: <http://www.owl-ontologies.com/ns#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix thequcat: <https://www.purl.org/mso-em/domain/thequcat#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+dc:creator a owl:AnnotationProperty.
+dc:title a owl:AnnotationProperty.
+
+thequo: a owl:Ontology ;
+    dc:creator "Full Name" ;
+    dc:title "Thermodynamic quality ontology";
+    owl:versionInfo "0.1";
+    mod:createdWith <https://chowlk.linkeddata.es/>.
+
+owl:versionInfo a owl:AnnotationProperty .
+
+thequcat:U a owl:NamedIndividual,
+        thequo:ThermodynamicPotentialFundamentalForm ;
+    thequo:hasFundamentalDerivative <https://batcat.info/semantics/example#-p>,
+        thequcat:T ;
+    thequo:hasNaturalVariablesSet thequcat:SV-NaturalVariablesSet ;
+    thequo:hasPartAddendum <https://batcat.info/semantics/example#-pV>,
+        thequcat:TS .
+
+thequcat:dU a owl:NamedIndividual,
+        thequo:TotalDifferential ;
+    thequo:hasPartAddendum <https://batcat.info/semantics/example#-pdV>,
+        thequcat:TdS .
+
+thequcat:hasPart a owl:ObjectProperty ;
+    rdfs:label "has part" .
+
+thequcat:isDirectlyFollowedBy a owl:ObjectProperty ;
+    rdfs:label "is directly followed by" .
+
+
+thequo:Addendum a owl:Class ;
+    rdfs:label "Addendum" .
+
+thequo:Factor a owl:Class ;
+    rdfs:label "Factor" .
+
+thequo:NaturalVariablesSet a owl:Class ;
+    rdfs:label "Natural Variables Set" .
+
+thequo:Product a owl:Class ;
+    rdfs:label "Product" .
+
+thequo:Sum a owl:Class ;
+    rdfs:label "Sum" .
+
+thequo:ThermodynamicPotential a owl:Class ;
+    rdfs:label "Thermodynamic Potential" .
+
+thequo:ThermodynamicSystem a owl:Class ;
+    rdfs:label "Thermodynamic System" .
+
+thequo:hasDecompositionVector a owl:DatatypeProperty ;
+    rdfs:label "has decomposition vector" .
+
+thequo:hasFundamentalDerivative a owl:ObjectProperty ;
+    rdfs:label "has fundamental derivative" .
+
+thequo:hasNaturalVariablesSet a owl:ObjectProperty ;
+    rdfs:label "has natural variables set" .
+
+thequo:hasNumberOfNaturalVariables a owl:DatatypeProperty ;
+    rdfs:label "has number of natural variables" .
+
+thequo:hasPartAddendum a owl:ObjectProperty ;
+    rdfs:label "has part addendum" .
+
+thequo:hasPartFactor a owl:ObjectProperty ;
+    rdfs:label "has part factor" .
+
+thequo:hasPhysicalQuality a owl:ObjectProperty ;
+    rdfs:label "has physical quality" .
+
+<https://batcat.info/semantics/example#-pV> a owl:NamedIndividual ;
+    thequo:hasPartFactor <https://batcat.info/semantics/example#-p>,
+        thequcat:V .
+
+<https://batcat.info/semantics/example#-pdV> a owl:NamedIndividual ;
+    thequo:hasPartFactor <https://batcat.info/semantics/example#-p>,
+        thequcat:dV .
+
+thequcat:SV-NaturalVariablesSet a owl:NamedIndividual ;
+    thequcat:hasPart thequcat:S,
+        thequcat:V .
+
+thequcat:TS a owl:NamedIndividual ;
+    thequo:hasPartFactor thequcat:S,
+        thequcat:T .
+
+thequcat:TdS a owl:NamedIndividual ;
+    thequo:hasPartFactor thequcat:T,
+        thequcat:dS .
+
+thequcat:dS a owl:NamedIndividual .
+
+thequcat:dV a owl:NamedIndividual,
+        thequo:GeneralizedDisplacement .
+
+thequo:ExtensivePhysicalQuality a owl:Class ;
+    rdfs:label "Extensive Physical Quality" ;
+    rdfs:subClassOf thequo:PhysicalQuality ;
+    owl:disjointWith thequo:IntensivePhysicalQuality .
+
+thequo:GeneralizedDisplacement a owl:Class ;
+    rdfs:label "Generalized Displacement" ;
+    rdfs:subClassOf thequo:TotalDifferential .
+
+thequo:GeneralizedForce a owl:Class ;
+    rdfs:label "Generalized Force" ;
+    rdfs:subClassOf thequo:IntensivePhysicalQuality .
+
+thequo:ThermodynamicPotentialExpression a owl:Class ;
+    rdfs:label "Thermodynamic Potential Expression" .
+
+thequo:ThermodynamicPotentialFundamentalForm a owl:Class ;
+    rdfs:label "Thermodynamic Potential Fundamental Form" ;
+    rdfs:subClassOf thequo:ThermodynamicPotentialExpression .
+
+thequcat:S a owl:NamedIndividual ;
+    thequcat:isDirectlyFollowedBy thequcat:V .
+
+thequo:FundamentalDerivative a owl:Class ;
+    rdfs:label "Fundamental Derivative" .
+
+thequo:IntensivePhysicalQuality a owl:Class ;
+    rdfs:label "Intensive Physical Quality" ;
+    rdfs:subClassOf thequo:PhysicalQuality ;
+    owl:disjointWith thequo:ExtensivePhysicalQuality .
+
+thequo:PhysicalQuality a owl:Class ;
+    rdfs:label "Physical Quality" .
+
+thequo:TotalDifferential a owl:Class ;
+    rdfs:label "Total Differential" .
+
+<https://batcat.info/semantics/example#-p> a owl:NamedIndividual,
+        thequo:FundamentalDerivative,
+        thequo:GeneralizedForce ;
+    thequo:hasDecompositionVector "(0,1)"^^xsd:datatype .
+
+thequcat:T a owl:NamedIndividual,
+        thequo:FundamentalDerivative ;
+    thequo:hasDecompositionVector "(1,0)"^^xsd:datatype .
+
+thequcat:V a owl:NamedIndividual .
+
