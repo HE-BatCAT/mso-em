@@ -1,42 +1,42 @@
-@base <https://www.purl.org/mso-em#>.
+@base <https://www.purl.org/mso-em/domain/thequo#>.
 @prefix thequo: <https://www.purl.org/mso-em/domain/thequo#>.
 
-@prefix dc: <http://purl.org/dc/elements/1.1/>.
-@prefix mod: <https://w3id.org/mod#>.
-@prefix ns: <http://www.owl-ontologies.com/ns#>.
+@prefix dcelem: <http://purl.org/dc/elements/1.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix dol: <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#>.
+@prefix mso-em: <https://www.purl.org/mso-em#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix thequcat: <https://www.purl.org/mso-em/domain/thequcat#>.
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix tqc: <https://www.purl.org/mso-em/domain/tqc#>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
-dc:creator a owl:AnnotationProperty.
-dc:title a owl:AnnotationProperty.
+<https://www.purl.org/mso-em/domain/thequo> a owl:Ontology;
+   dcterms:title "Thermodynamic quality ontology"^^xs:string;
+   dcterms:created "2025"^^dcterms:W3CDTF;
+   owl:versionInfo "Version dated October 2025"^^xs:string;
+   dcterms:issued "2025-10-14"^^dcterms:W3CDTF;
+   dcterms:creator
+      <https://orcid.org/0000-0003-0422-7870>,  # Silvia Chiacchiera
+      <https://orcid.org/0000-0002-9464-6739>,  # Martin Thomas Horsch
+      <https://orcid.org/0000-0002-4578-3569>.  # Simon Stephan
 
-thequo: a owl:Ontology ;
-    dc:creator "Full Name" ;
-    dc:title "Thermodynamic quality ontology";
-    owl:versionInfo "0.1";
-    mod:createdWith <https://chowlk.linkeddata.es/>.
-
-owl:versionInfo a owl:AnnotationProperty .
-
-thequcat:U a owl:NamedIndividual,
+tqc:U a owl:NamedIndividual,
         thequo:ThermodynamicPotentialFundamentalForm ;
     thequo:hasFundamentalDerivative <https://batcat.info/semantics/example#-p>,
-        thequcat:T ;
-    thequo:hasNaturalVariablesSet thequcat:SV-NaturalVariablesSet ;
+        tqc:T ;
+    thequo:hasNaturalVariablesSet tqc:SV-NaturalVariablesSet ;
     thequo:hasPartAddendum <https://batcat.info/semantics/example#-pV>,
-        thequcat:TS .
+        tqc:TS .
 
-thequcat:dU a owl:NamedIndividual,
+tqc:dU a owl:NamedIndividual,
         thequo:TotalDifferential ;
     thequo:hasPartAddendum <https://batcat.info/semantics/example#-pdV>,
-        thequcat:TdS .
+        tqc:TdS .
 
-thequcat:hasPart a owl:ObjectProperty ;
+tqc:hasPart a owl:ObjectProperty ;
     rdfs:label "has part" .
 
-thequcat:isDirectlyFollowedBy a owl:ObjectProperty ;
+tqc:isDirectlyFollowedBy a owl:ObjectProperty ;
     rdfs:label "is directly followed by" .
 
 
@@ -84,27 +84,27 @@ thequo:hasPhysicalQuality a owl:ObjectProperty ;
 
 <https://batcat.info/semantics/example#-pV> a owl:NamedIndividual ;
     thequo:hasPartFactor <https://batcat.info/semantics/example#-p>,
-        thequcat:V .
+        tqc:V .
 
 <https://batcat.info/semantics/example#-pdV> a owl:NamedIndividual ;
     thequo:hasPartFactor <https://batcat.info/semantics/example#-p>,
-        thequcat:dV .
+        tqc:dV .
 
-thequcat:SV-NaturalVariablesSet a owl:NamedIndividual ;
-    thequcat:hasPart thequcat:S,
-        thequcat:V .
+tqc:SV-NaturalVariablesSet a owl:NamedIndividual ;
+    tqc:hasPart tqc:S,
+        tqc:V .
 
-thequcat:TS a owl:NamedIndividual ;
-    thequo:hasPartFactor thequcat:S,
-        thequcat:T .
+tqc:TS a owl:NamedIndividual ;
+    thequo:hasPartFactor tqc:S,
+        tqc:T .
 
-thequcat:TdS a owl:NamedIndividual ;
-    thequo:hasPartFactor thequcat:T,
-        thequcat:dS .
+tqc:TdS a owl:NamedIndividual ;
+    thequo:hasPartFactor tqc:T,
+        tqc:dS .
 
-thequcat:dS a owl:NamedIndividual .
+tqc:dS a owl:NamedIndividual .
 
-thequcat:dV a owl:NamedIndividual,
+tqc:dV a owl:NamedIndividual,
         thequo:GeneralizedDisplacement .
 
 thequo:ExtensivePhysicalQuality a owl:Class ;
@@ -127,8 +127,8 @@ thequo:ThermodynamicPotentialFundamentalForm a owl:Class ;
     rdfs:label "Thermodynamic Potential Fundamental Form" ;
     rdfs:subClassOf thequo:ThermodynamicPotentialExpression .
 
-thequcat:S a owl:NamedIndividual ;
-    thequcat:isDirectlyFollowedBy thequcat:V .
+tqc:S a owl:NamedIndividual ;
+    tqc:isDirectlyFollowedBy tqc:V .
 
 thequo:FundamentalDerivative a owl:Class ;
     rdfs:label "Fundamental Derivative" .
@@ -147,11 +147,11 @@ thequo:TotalDifferential a owl:Class ;
 <https://batcat.info/semantics/example#-p> a owl:NamedIndividual,
         thequo:FundamentalDerivative,
         thequo:GeneralizedForce ;
-    thequo:hasDecompositionVector "(0,1)"^^xsd:datatype .
+    thequo:hasDecompositionVector "(0,1)"^^xs:datatype .
 
-thequcat:T a owl:NamedIndividual,
+tqc:T a owl:NamedIndividual,
         thequo:FundamentalDerivative ;
-    thequo:hasDecompositionVector "(1,0)"^^xsd:datatype .
+    thequo:hasDecompositionVector "(1,0)"^^xs:datatype .
 
-thequcat:V a owl:NamedIndividual .
+tqc:V a owl:NamedIndividual .
 
