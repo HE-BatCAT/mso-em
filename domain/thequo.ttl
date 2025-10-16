@@ -7,47 +7,24 @@
 @prefix mso-em: <https://www.purl.org/mso-em#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix tqc: <https://www.purl.org/mso-em/domain/tqc#>.
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
 <https://www.purl.org/mso-em/domain/thequo> a owl:Ontology;
    dcterms:title "Thermodynamic quality ontology"^^xs:string;
    dcterms:created "2025"^^dcterms:W3CDTF;
    owl:versionInfo "Version dated October 2025"^^xs:string;
-   dcterms:issued "2025-10-14"^^dcterms:W3CDTF;
+   dcterms:issued "2025-10-16"^^dcterms:W3CDTF;
    dcterms:creator
       <https://orcid.org/0000-0003-0422-7870>,  # Silvia Chiacchiera
       <https://orcid.org/0000-0002-9464-6739>,  # Martin Thomas Horsch
       <https://orcid.org/0000-0002-4578-3569>.  # Simon Stephan
 
-tqc:U a owl:NamedIndividual,
-        thequo:ThermodynamicPotentialFundamentalForm ;
-    thequo:hasFundamentalDerivative <https://batcat.info/semantics/example#-p>,
-        tqc:T ;
-    thequo:hasNaturalVariablesSet tqc:SV-NaturalVariablesSet ;
-    thequo:hasPartAddendum <https://batcat.info/semantics/example#-pV>,
-        tqc:TS .
+#########################
+# Legacy implementation #
+#########################
 
-tqc:dU a owl:NamedIndividual,
-        thequo:TotalDifferential ;
-    thequo:hasPartAddendum <https://batcat.info/semantics/example#-pdV>,
-        tqc:TdS .
-
-tqc:hasPart a owl:ObjectProperty ;
-    rdfs:label "has part" .
-
-tqc:isDirectlyFollowedBy a owl:ObjectProperty ;
-    rdfs:label "is directly followed by" .
-
-
-thequo:Addendum a owl:Class ;
-    rdfs:label "Addendum" .
-
-thequo:Factor a owl:Class ;
-    rdfs:label "Factor" .
-
-thequo:NaturalVariablesSet a owl:Class ;
-    rdfs:label "Natural Variables Set" .
+thequo:NaturalVariableSet a owl:Class ;
+    rdfs:label "Natural Variable Set" .
 
 thequo:Product a owl:Class ;
     rdfs:label "Product" .
@@ -67,8 +44,8 @@ thequo:hasDecompositionVector a owl:DatatypeProperty ;
 thequo:hasFundamentalDerivative a owl:ObjectProperty ;
     rdfs:label "has fundamental derivative" .
 
-thequo:hasNaturalVariablesSet a owl:ObjectProperty ;
-    rdfs:label "has natural variables set" .
+thequo:hasNaturalVariableSet a owl:ObjectProperty ;
+    rdfs:label "has natural variable set" .
 
 thequo:hasNumberOfNaturalVariables a owl:DatatypeProperty ;
     rdfs:label "has number of natural variables" .
@@ -81,31 +58,6 @@ thequo:hasPartFactor a owl:ObjectProperty ;
 
 thequo:hasPhysicalQuality a owl:ObjectProperty ;
     rdfs:label "has physical quality" .
-
-<https://batcat.info/semantics/example#-pV> a owl:NamedIndividual ;
-    thequo:hasPartFactor <https://batcat.info/semantics/example#-p>,
-        tqc:V .
-
-<https://batcat.info/semantics/example#-pdV> a owl:NamedIndividual ;
-    thequo:hasPartFactor <https://batcat.info/semantics/example#-p>,
-        tqc:dV .
-
-tqc:SV-NaturalVariablesSet a owl:NamedIndividual ;
-    tqc:hasPart tqc:S,
-        tqc:V .
-
-tqc:TS a owl:NamedIndividual ;
-    thequo:hasPartFactor tqc:S,
-        tqc:T .
-
-tqc:TdS a owl:NamedIndividual ;
-    thequo:hasPartFactor tqc:T,
-        tqc:dS .
-
-tqc:dS a owl:NamedIndividual .
-
-tqc:dV a owl:NamedIndividual,
-        thequo:GeneralizedDisplacement .
 
 thequo:ExtensivePhysicalQuality a owl:Class ;
     rdfs:label "Extensive Physical Quality" ;
@@ -127,9 +79,6 @@ thequo:ThermodynamicPotentialFundamentalForm a owl:Class ;
     rdfs:label "Thermodynamic Potential Fundamental Form" ;
     rdfs:subClassOf thequo:ThermodynamicPotentialExpression .
 
-tqc:S a owl:NamedIndividual ;
-    tqc:isDirectlyFollowedBy tqc:V .
-
 thequo:FundamentalDerivative a owl:Class ;
     rdfs:label "Fundamental Derivative" .
 
@@ -143,15 +92,4 @@ thequo:PhysicalQuality a owl:Class ;
 
 thequo:TotalDifferential a owl:Class ;
     rdfs:label "Total Differential" .
-
-<https://batcat.info/semantics/example#-p> a owl:NamedIndividual,
-        thequo:FundamentalDerivative,
-        thequo:GeneralizedForce ;
-    thequo:hasDecompositionVector "(0,1)"^^xs:datatype .
-
-tqc:T a owl:NamedIndividual,
-        thequo:FundamentalDerivative ;
-    thequo:hasDecompositionVector "(1,0)"^^xs:datatype .
-
-tqc:V a owl:NamedIndividual .
 
